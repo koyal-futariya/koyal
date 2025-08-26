@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -39,16 +38,59 @@ export default function FloatingFlag() {
     transform: "translateY(-50%)",
     zIndex: 1500,
     cursor: "pointer",
+    overflow: "hidden",
   };
 
   const imageButtonStyle = {
     display: "block",
-    transition: "transform 0.2s ease, filter 0.2s ease",
+    transition: "transform 0.3s ease, filter 0.3s ease",
+    position: "relative",
     filter: "drop-shadow(2px 2px 8px rgba(0,0,0,0.3))",
+    transformOrigin: "left center",
   };
 
   return (
-    <div style={containerStyle} aria-label="Open registration form">
+    <>
+      <style jsx>{`        
+        @keyframes shine {
+          0% {
+            left: -100%;
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            left: 100%;
+            opacity: 0;
+          }
+        }
+        
+        .floating-flag-container::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.4), 
+            rgba(255, 255, 255, 0.6), 
+            rgba(255, 255, 255, 0.4), 
+            transparent
+          );
+          animation: shine 2.5s ease-in-out infinite;
+          z-index: 1;
+          pointer-events: none;
+        }
+        
+        .floating-flag-container {
+          position: relative;
+          overflow: hidden;
+        }
+      `}</style>
+      <div style={containerStyle} aria-label="Open registration form" className="floating-flag-container">
       <button
         type="button"
         onClick={handleClick}
@@ -89,7 +131,7 @@ export default function FloatingFlag() {
         }}
       >
         <Image
-          src="/HeaderCarousel/Discount.avif" // Replace with your actual image path
+           src="/Headercarousel/Discount.avif" // Replace with your actual image path
           alt="Book For DEMO - Flat 5000 Rs. OFF"
           width={140}
           height={100}
@@ -118,5 +160,6 @@ export default function FloatingFlag() {
         />
       </button>
     </div>
+    </>
   );
 }

@@ -1,11 +1,14 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 
 const LandingPage = () => {
   const toranRef = useRef(null);
   const containerRef = useRef(null);
+  const idleCallback =
+    typeof window !== "undefined" &&
+    (window.requestIdleCallback || ((cb) => setTimeout(cb, 1)));
 
   // JS-measured connectors: compute exact coordinates for each diya
   const [connectorLines, setConnectorLines] = useState([]);
@@ -15,6 +18,19 @@ const LandingPage = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Defer heavy decorations (SVGs, background) until the browser is idle
+  const [deferReady, setDeferReady] = useState(false);
+  useEffect(() => {
+    if (!mounted) return;
+    let cancelled = false;
+    idleCallback(() => {
+      if (!cancelled) setDeferReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [mounted]);
 
   useEffect(() => {
     function computeConnectors() {
@@ -92,8 +108,8 @@ const LandingPage = () => {
       if (raf) cancelAnimationFrame(raf);
       raf = requestAnimationFrame(computeConnectors);
     };
-    window.addEventListener("resize", handler);
-    window.addEventListener("scroll", handler);
+    window.addEventListener("resize", handler, { passive: true });
+    window.addEventListener("scroll", handler, { passive: true });
     return () => {
       window.removeEventListener("resize", handler);
       window.removeEventListener("scroll", handler);
@@ -176,11 +192,224 @@ const LandingPage = () => {
     setOmPositions(generateOmPositions(36));
   }, []);
 
+  // Memoize static large SVG (toran) to avoid re-creating on re-renders
+  const toranMemo = useMemo(() => (
+      <div className="toran-wrapper" ref={toranRef} aria-hidden="true">
+        <div className="relative left-0 right-0 px-0">
+          <svg
+            className="toran-svg"
+            viewBox="0 0 1400 140"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+          >
+            <defs>
+              <linearGradient id="flowerGrad" x1="0" x2="1">
+                <stop offset="0%" stopColor="#ffb300" />
+                <stop offset="50%" stopColor="#ff6a00" />
+                <stop offset="100%" stopColor="#ffd54a" />
+              </linearGradient>
+              <linearGradient id="tasselGrad" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stopColor="#ff4b6b" />
+                <stop offset="100%" stopColor="#ffcc00" />
+              </linearGradient>
+              <linearGradient id="leafGrad" x1="0" x2="1">
+                <stop offset="0%" stopColor="#2f9e44" />
+                <stop offset="100%" stopColor="#71BF54" />
+              </linearGradient>
+
+              <radialGradient id="bulbGrad" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stopColor="#fffbe6" stopOpacity="1" />
+                <stop offset="35%" stopColor="#fff59d" stopOpacity="0.95" />
+                <stop offset="70%" stopColor="#ffb300" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#ff6a00" stopOpacity="0" />
+              </radialGradient>
+
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+
+              <filter
+                id="toranShadow"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
+                <feDropShadow
+                  dx="0"
+                  dy="6"
+                  stdDeviation="6"
+                  floodColor="rgba(0,0,0,0.18)"
+                />
+              </filter>
+            </defs>
+
+            <path
+              d="M0 48 Q100 12 200 48 T400 48 T600 48 T800 48 T1000 48 T1200 48 T1400 48"
+              stroke="#a55e00"
+              strokeWidth="6"
+              fill="none"
+              strokeLinecap="round"
+            />
+
+            {(() => {
+              const elements = [];
+              const totalWidth = 1400;
+              const count = 48;
+              const amplitude = 18;
+              const cycles = 2;
+
+              let d = "";
+              for (let i = 0; i < count; i++) {
+                const t = i / (count - 1);
+                const bx = Math.round(t * totalWidth);
+                const angle = t * Math.PI * 2 * cycles;
+                const by = 48 + Math.round(Math.sin(angle) * amplitude);
+                d += i === 0 ? `M ${bx} ${by}` : ` L ${bx} ${by}`;
+              }
+
+              elements.push(
+                <path
+                  key="toran-string"
+                  d={d}
+                  stroke="#8a4a00"
+                  strokeWidth={1}
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity={0.95}
+                >
+                  <animate attributeName="stroke-opacity" values="0.6;0.98;0.6" dur="3.6s" repeatCount="indefinite" />
+                  <animate attributeName="stroke-width" values="1;1.8;1" dur="3.6s" repeatCount="indefinite" />
+                </path>
+              );
+
+              for (let i = 0; i < count; i++) {
+                const t = i / (count - 1);
+                const bx = Math.round(t * totalWidth);
+                const angle = t * Math.PI * 2 * cycles;
+                const baseBy = 48 + Math.round(Math.sin(angle) * amplitude);
+
+                elements.push(
+                  <g key={`bulb-${i}`} transform={`translate(${bx},${baseBy})`} filter="url(#glow)">
+                    <g>
+                      <circle r="12" fill="url(#bulbGrad)" opacity="0.28" />
+                      <g>
+                        <circle r="6" fill="url(#bulbGrad)" opacity="0.98">
+                          <animate attributeName="opacity" values="0.7;1;0.7" dur={`${2.2 + (i % 4) * 0.18}s`} repeatCount="indefinite" />
+                        </circle>
+                        <animateTransform attributeName="transform" type="scale" values="0.88;1.08;0.88" dur={`${2.2 + (i % 4) * 0.18}s`} begin={`${(i % 6) * 0.06}s`} repeatCount="indefinite" />
+                      </g>
+                      <circle r="2" fill="#fffdf2" cx="-1" cy="-2" opacity="0.95" />
+                    </g>
+                  </g>
+                );
+              }
+
+              return elements;
+            })()}
+
+            {Array.from({ length: 7 }).map((_, i) => {
+              const cx = 100 + i * 200;
+              return (
+                <g key={`cluster-${i}`} transform={`translate(${cx},48)`}>
+                  <g transform="translate(-36,8) rotate(-12)">
+                    <path d="M0 0 C 6 -10 20 -10 36 0 C 20 -2 6 -2 0 0 Z" fill="url(#leafGrad)" opacity="0.95" />
+                  </g>
+                  <g transform="translate(36,8) rotate(12)">
+                    <path d="M0 0 C -6 -10 -20 -10 -36 0 C -20 -2 -6 -2 0 0 Z" fill="url(#leafGrad)" opacity="0.95" />
+                  </g>
+
+                  <g transform="translate(0,26)">
+                    <path d="M0 0 C 4 8 12 16 0 32 C -12 16 -4 8 0 0 Z" fill="url(#tasselGrad)" opacity="0.95" />
+                    <g stroke="#ffb300" strokeWidth="1.5" strokeLinecap="round" opacity="0.95">
+                      <line x1="-6" y1="6" x2="-6" y2="22" />
+                      <line x1="-2" y1="6" x2="-2" y2="26" />
+                      <line x1="2" y1="6" x2="2" y2="26" />
+                      <line x1="6" y1="6" x2="6" y2="22" />
+                    </g>
+                  </g>
+
+                  <g filter="url(#toranShadow)">
+                    {Array.from({ length: 12 }).map((_, p) => (
+                      <ellipse key={`petal-${i}-${p}`} rx="10" ry="22" fill="url(#flowerGrad)" opacity={0.98} transform={`rotate(${p * 30}) translate(0,-6)`} />
+                    ))}
+
+                    {Array.from({ length: 8 }).map((_, p) => (
+                      <ellipse key={`petal2-${i}-${p}`} rx="6" ry="14" fill="#ff8f00" opacity={0.95} transform={`rotate(${p * 45 + 22.5}) translate(0,-4)`} />
+                    ))}
+
+                    <g filter="url(#glow)" transform="translate(0,0)">
+                      <circle r="10" fill="url(#bulbGrad)" opacity="0.22" />
+                      <g>
+                        <circle r="6" fill="url(#bulbGrad)" opacity="0.98">
+                          <animate attributeName="opacity" values="0.7;1;0.7" dur={`${2 + (i % 3) * 0.45}s`} repeatCount="indefinite" />
+                        </circle>
+                        <animateTransform attributeName="transform" type="scale" values="0.9;1.18;0.9" dur={`${2 + (i % 3) * 0.45}s`} begin={`${(i % 6) * 0.06}s`} repeatCount="indefinite" />
+                      </g>
+                      <circle r="2" fill="#fffdf2" cx="-1" cy="-2" opacity="0.95" />
+                    </g>
+                  </g>
+                </g>
+              );
+            })}
+
+            {Array.from({ length: 6 }).map((_, j) => {
+              const x = 200 + j * 200;
+              return (
+                <g key={`loop-${j}`} transform={`translate(${x},48)`}>
+                  <path d="M-28 6 C -12 14 12 14 28 6" stroke="#eaa23a" strokeWidth="4" fill="none" strokeLinecap="round" opacity="0.95" />
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+      </div>
+  ), []);
+
+  // Memoize Om background nodes
+  const omBackgroundMemo = useMemo(() => (
+    <div className="om-bg min-h-screen">
+      {omPositions.length > 0 &&
+        omPositions.map((pos, i) => {
+          if (!pos) return null;
+          const { left, top, sizeClass, delay, duration } = pos;
+          return (
+            <div
+              key={`om-full-${i}`}
+              className={`om-char ${sizeClass}`}
+              style={{
+                left: `${left}%`,
+                top: `${top}%`,
+                color: `rgba(255, ${165 - i * 2}, ${0 + i * 1}, 0.14)`,
+                animation: `om-float ${duration} ease-in-out ${delay} infinite`,
+              }}
+            >
+              ॐ
+            </div>
+          );
+        })}
+    </div>
+  ), [omPositions]);
+
   return (
     <div
       ref={containerRef}
       className="min-h-[700px] pt-50 pb-50 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
     >
+      <Head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      </Head>
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;600&display=swap");
 
@@ -231,41 +460,40 @@ const LandingPage = () => {
           }
         }
         .om-char {
-          position: absolute;
-          color: rgba(255, 255, 255, 0.12);
-          font-size: 64px;
-          transform-origin: center;
-          filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35));
-          mix-blend-mode: normal;
-          pointer-events: none;
-        }
+  position: absolute;
+  font-size: 64px;
+  color: rgba(255, 165, 0, 0.2); /* base orange */
+  filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.6))
+          drop-shadow(0 0 40px rgba(255, 140, 0, 0.4))
+          drop-shadow(0 0 60px rgba(255, 100, 0, 0.2));
+  pointer-events: none;
 
-        @keyframes om-float {
-          0% {
-            transform: translateY(0) scale(1) rotate(0deg);
-            opacity: 0.6;
-          }
-          50% {
-            transform: translateY(-30px) scale(1.08) rotate(6deg);
-            opacity: 0.95;
-          }
-          100% {
-            transform: translateY(0) scale(1) rotate(0deg);
-            opacity: 0.6;
-          }
-        }
+  background: linear-gradient(90deg,
+    rgba(255,140,0,0.2) 0%,
+    rgba(255,180,50,0.9) 50%,
+    rgba(255,140,0,0.2) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-        .om-small {
-          font-size: 32px;
-        }
-        .om-medium {
-          font-size: 56px;
-        }
-        .om-large {
-          font-size: 96px;
-        }
+  animation: om-shine 4s linear infinite;
+}
 
-        /* Toran positioning - adjusted for mobile */
+@keyframes om-shine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.om-small {
+  font-size: 32px;
+}
+.om-medium {
+  font-size: 56px;
+}
+.om-large {
+  font-size: 96px;
+}
+       /* Toran positioning - adjusted for mobile */
         .toran-wrapper {
           position: absolute;
           left: 0;
@@ -476,6 +704,9 @@ const LandingPage = () => {
           height: auto;
           display: block;
           transform: translateY(2%);
+         filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.6)) 
+        drop-shadow(0 0 40px rgba(255, 69, 0, 0.4))
+        drop-shadow(0 0 60px rgba(255, 140, 0, 0.2));
         }
         .ganesh-img {
           width: clamp(260px, 30vw, 520px);
@@ -564,296 +795,10 @@ const LandingPage = () => {
       `}</style>
 
       {/* Om animated background */}
-      <div className="om-bg min-h-screen">
-        {omPositions.length > 0 &&
-          omPositions.map((pos, i) => {
-            if (!pos) return null;
-            const { left, top, sizeClass, delay, duration } = pos;
-            return (
-              <div
-                key={`om-full-${i}`}
-                className={`om-char ${sizeClass}`}
-                style={{
-                  left: `${left}%`,
-                  top: `${top}%`,
-                  color: `rgba(${220 - i * 6}, ${150 - i * 4}, ${80 + i * 3}, 0.14)`,
-                  animation: `om-float ${duration} ease-in-out ${delay} infinite`,
-                }}
-              >
-                ॐ
-              </div>
-            );
-          })}
-      </div>
+      {deferReady && omBackgroundMemo}
 
       {/* Toran Garland at top - now positioned to avoid text overlap on mobile */}
-      <div className="toran-wrapper" ref={toranRef} aria-hidden="true">
-        <div className="relative left-0 right-0 px-0">
-          <svg
-            className="toran-svg"
-            viewBox="0 0 1400 140"
-            preserveAspectRatio="xMidYMid meet"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-          >
-            <defs>
-              <linearGradient id="flowerGrad" x1="0" x2="1">
-                <stop offset="0%" stopColor="#ffb300" />
-                <stop offset="50%" stopColor="#ff6a00" />
-                <stop offset="100%" stopColor="#ffd54a" />
-              </linearGradient>
-              <linearGradient id="tasselGrad" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="#ff4b6b" />
-                <stop offset="100%" stopColor="#ffcc00" />
-              </linearGradient>
-              <linearGradient id="leafGrad" x1="0" x2="1">
-                <stop offset="0%" stopColor="#2f9e44" />
-                <stop offset="100%" stopColor="#71BF54" />
-              </linearGradient>
-
-              <radialGradient id="bulbGrad" cx="50%" cy="40%" r="60%">
-                <stop offset="0%" stopColor="#fffbe6" stopOpacity="1" />
-                <stop offset="35%" stopColor="#fff59d" stopOpacity="0.95" />
-                <stop offset="70%" stopColor="#ffb300" stopOpacity="0.6" />
-                <stop offset="100%" stopColor="#ff6a00" stopOpacity="0" />
-              </radialGradient>
-
-              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="6" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-
-              <filter
-                id="toranShadow"
-                x="-50%"
-                y="-50%"
-                width="200%"
-                height="200%"
-              >
-                <feDropShadow
-                  dx="0"
-                  dy="6"
-                  stdDeviation="6"
-                  floodColor="rgba(0,0,0,0.18)"
-                />
-              </filter>
-            </defs>
-
-            {/* Rope / base line with soft waves */}
-            <path
-              d="M0 48 Q100 12 200 48 T400 48 T600 48 T800 48 T1000 48 T1200 48 T1400 48"
-              stroke="#a55e00"
-              strokeWidth="6"
-              fill="none"
-              strokeLinecap="round"
-            />
-
-            {/* String lights */}
-            {(() => {
-              const elements = [];
-              const totalWidth = 1400;
-              const count = 48;
-              const amplitude = 18;
-              const cycles = 2;
-
-              let d = "";
-              for (let i = 0; i < count; i++) {
-                const t = i / (count - 1);
-                const bx = Math.round(t * totalWidth);
-                const angle = t * Math.PI * 2 * cycles;
-                const by = 48 + Math.round(Math.sin(angle) * amplitude);
-                d += i === 0 ? `M ${bx} ${by}` : ` L ${bx} ${by}`;
-              }
-
-              elements.push(
-                <path
-                  key="toran-string"
-                  d={d}
-                  stroke="#8a4a00"
-                  strokeWidth={1}
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  opacity={0.95}
-                >
-                  <animate
-                    attributeName="stroke-opacity"
-                    values="0.6;0.98;0.6"
-                    dur="3.6s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="stroke-width"
-                    values="1;1.8;1"
-                    dur="3.6s"
-                    repeatCount="indefinite"
-                  />
-                </path>
-              );
-
-              for (let i = 0; i < count; i++) {
-                const t = i / (count - 1);
-                const bx = Math.round(t * totalWidth);
-                const angle = t * Math.PI * 2 * cycles;
-                const baseBy = 48 + Math.round(Math.sin(angle) * amplitude);
-
-                elements.push(
-                  <g
-                    key={`bulb-${i}`}
-                    transform={`translate(${bx},${baseBy})`}
-                    filter="url(#glow)"
-                  >
-                    <g>
-                      <circle r="12" fill="url(#bulbGrad)" opacity="0.28" />
-                      <g>
-                        <circle r="6" fill="url(#bulbGrad)" opacity="0.98">
-                          <animate
-                            attributeName="opacity"
-                            values="0.7;1;0.7"
-                            dur={`${2.2 + (i % 4) * 0.18}s`}
-                            repeatCount="indefinite"
-                          />
-                        </circle>
-                        <animateTransform
-                          attributeName="transform"
-                          type="scale"
-                          values="0.88;1.08;0.88"
-                          dur={`${2.2 + (i % 4) * 0.18}s`}
-                          begin={`${(i % 6) * 0.06}s`}
-                          repeatCount="indefinite"
-                        />
-                      </g>
-                      <circle
-                        r="2"
-                        fill="#fffdf2"
-                        cx="-1"
-                        cy="-2"
-                        opacity="0.95"
-                      />
-                    </g>
-                  </g>
-                );
-              }
-
-              return elements;
-            })()}
-
-            {/* Flower clusters */}
-            {Array.from({ length: 7 }).map((_, i) => {
-              const cx = 100 + i * 200;
-              return (
-                <g key={`cluster-${i}`} transform={`translate(${cx},48)`}>
-                  <g transform="translate(-36,8) rotate(-12)">
-                    <path
-                      d="M0 0 C 6 -10 20 -10 36 0 C 20 -2 6 -2 0 0 Z"
-                      fill="url(#leafGrad)"
-                      opacity="0.95"
-                    />
-                  </g>
-                  <g transform="translate(36,8) rotate(12)">
-                    <path
-                      d="M0 0 C -6 -10 -20 -10 -36 0 C -20 -2 -6 -2 0 0 Z"
-                      fill="url(#leafGrad)"
-                      opacity="0.95"
-                    />
-                  </g>
-
-                  <g transform="translate(0,26)">
-                    <path
-                      d="M0 0 C 4 8 12 16 0 32 C -12 16 -4 8 0 0 Z"
-                      fill="url(#tasselGrad)"
-                      opacity="0.95"
-                    />
-                    <g
-                      stroke="#ffb300"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      opacity="0.95"
-                    >
-                      <line x1="-6" y1="6" x2="-6" y2="22" />
-                      <line x1="-2" y1="6" x2="-2" y2="26" />
-                      <line x1="2" y1="6" x2="2" y2="26" />
-                      <line x1="6" y1="6" x2="6" y2="22" />
-                    </g>
-                  </g>
-
-                  <g filter="url(#toranShadow)">
-                    {Array.from({ length: 12 }).map((_, p) => (
-                      <ellipse
-                        key={`petal-${i}-${p}`}
-                        rx="10"
-                        ry="22"
-                        fill="url(#flowerGrad)"
-                        opacity={0.98}
-                        transform={`rotate(${p * 30}) translate(0,-6)`}
-                      />
-                    ))}
-
-                    {Array.from({ length: 8 }).map((_, p) => (
-                      <ellipse
-                        key={`petal2-${i}-${p}`}
-                        rx="6"
-                        ry="14"
-                        fill="#ff8f00"
-                        opacity={0.95}
-                        transform={`rotate(${p * 45 + 22.5}) translate(0,-4)`}
-                      />
-                    ))}
-
-                    <g filter="url(#glow)" transform="translate(0,0)">
-                      <circle r="10" fill="url(#bulbGrad)" opacity="0.22" />
-                      <g>
-                        <circle r="6" fill="url(#bulbGrad)" opacity="0.98">
-                          <animate
-                            attributeName="opacity"
-                            values="0.7;1;0.7"
-                            dur={`${2 + (i % 3) * 0.45}s`}
-                            repeatCount="indefinite"
-                          />
-                        </circle>
-                        <animateTransform
-                          attributeName="transform"
-                          type="scale"
-                          values="0.9;1.18;0.9"
-                          dur={`${2 + (i % 3) * 0.45}s`}
-                          begin={`${(i % 6) * 0.06}s`}
-                          repeatCount="indefinite"
-                        />
-                      </g>
-                      <circle
-                        r="2"
-                        fill="#fffdf2"
-                        cx="-1"
-                        cy="-2"
-                        opacity="0.95"
-                      />
-                    </g>
-                  </g>
-                </g>
-              );
-            })}
-
-            {Array.from({ length: 6 }).map((_, j) => {
-              const x = 200 + j * 200;
-              return (
-                <g key={`loop-${j}`} transform={`translate(${x},48)`}>
-                  <path
-                    d="M-28 6 C -12 14 12 14 28 6"
-                    stroke="#eaa23a"
-                    strokeWidth="4"
-                    fill="none"
-                    strokeLinecap="round"
-                    opacity="0.95"
-                  />
-                </g>
-              );
-            })}
-          </svg>
-        </div>
-      </div>
+      {deferReady && toranMemo}
 
       <div className="container mx-auto px-6 py-12 flex items-center min-h-* relative z-20">
         {/* Desktop/Laptop Layout (≥1024px) - ORIGINAL STRUCTURE PRESERVED */}
@@ -875,17 +820,21 @@ const LandingPage = () => {
               </div>
 
               {/* Banner Image */}
-              <div className="relative w-full max-w-xl mt-4 mb-8 ml-0 lg:ml-16 overflow-hidden rounded-lg shadow-[0_0_40px_10px_rgba(255,255,255,0.5)]">
-                <Image
-                  src="https://res.cloudinary.com/dujw4np0d/image/upload/v1755863184/Media_kwhvxn.jpg"
-                  alt="Professional Training Programs"
-                  width={1200}
-                  height={600}
-                  className="w-full h-auto object-cover"
-                  priority
-                  unoptimized
-                />
-              </div>
+              <div className="relative w-full max-w-xl mt-4 mb-8 ml-0 lg:ml-16 overflow-hidden rounded-lg">
+  {/* Shining Border */}
+  <div className="absolute inset-0 rounded-lg p-[2px] bg-gradient-to-r from-orange-400 via-yellow-300 to-red-500 animate-shine"></div>
+
+  <Image
+    src="https://res.cloudinary.com/dujw4np0d/image/upload/v1755863184/Media_kwhvxn.jpg"
+    alt="Professional Training Programs"
+    width={1200}
+    height={600}
+    className="relative w-full h-auto object-cover rounded-lg"
+    priority
+    unoptimized
+  />
+</div>
+
 
               <div className="mt-12 flex justify-center lg:justify-start ml-0 lg:ml-16">
                 <p className="hero-subheading text-2xl font-semibold text-center">
@@ -1011,6 +960,7 @@ const LandingPage = () => {
       </div>
 
       {/* JS-drawn connector overlay: now uses absolute positioning */}
+      {deferReady && (
       <svg
         aria-hidden="true"
         className="diya-connector-overlay"
@@ -1031,15 +981,16 @@ const LandingPage = () => {
           </g>
         ))}
       </svg>
+      )}
 
       {/* Hanging Diyas */}
-      <HangingDiyas />
+      {deferReady && <HangingDiyas />}
     </div>
   );
 };
 
 // Hanging Diya Component (unchanged)
-const HangingDiya = ({
+const HangingDiyaBase = ({
   position = "left",
   animationDelay = "0s",
   stringLength = 120,
@@ -1258,7 +1209,9 @@ const HangingDiya = ({
   );
 };
 
-const HangingDiyas = () => {
+const HangingDiya = React.memo(HangingDiyaBase);
+
+const HangingDiyasBase = () => {
   return (
     <>
       <HangingDiya position="left-1" stringLength={100} />
@@ -1268,6 +1221,8 @@ const HangingDiyas = () => {
     </>
   );
 };
+
+const HangingDiyas = React.memo(HangingDiyasBase);
 
 export default LandingPage;
 export { LandingPage, LandingPage as Ganesha };

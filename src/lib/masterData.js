@@ -118,15 +118,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: ' <span class="highlight-span-cards">SAP FICO</span> Syllabus',
-      description: "Industry aligned SAP FICO syllabus with certification",
+      title2: ' <span class="highlight-span-cards">Sap Fico</span> Syllabus',
+      description: "Industry aligned Sap Fico syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP Fico training",
+      noteMaster: "We provide advanced Sap Fico training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -787,15 +786,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP ABAP</span> Syllabus',
-      description: "Industry aligned SAP ABAP syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap Abap</span> Syllabus',
+      description: "Industry aligned Sap Abap syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP ABAP training",
+      noteMaster: "We provide advanced Sap Abap training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -1243,11 +1241,10 @@ export const coursesData = {
       description: "Industry aligned SAP Ariba syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP Ariba training",
+      noteMaster: "We provide advanced Sap Ariba training",
       noteAdvance: "Ariba",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -1701,15 +1698,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP BASIS</span> Syllabus',
-      description: "Industry aligned SAP BASIS syllabus with certification",
+      title2: '<span class="highlight-span-cards">SAP Basis</span> Syllabus',
+      description: "Industry aligned SAP Basis syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP BASIS training",
+      noteMaster: "We provide advanced SAP Basis training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -2168,8 +2164,7 @@ export const coursesData = {
       noteMaster: "We provide advanced SAP BI training",
       noteAdvance: "Advance", // Matches provided
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -2619,15 +2614,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP EWM</span> Syllabus',
-      description: "Industry aligned SAP EWM syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap Ewm</span> Syllabus',
+      description: "Industry aligned Sap Ewm syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP EWM training",
+      noteMaster: "We provide advanced Sap Ewm training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -3089,8 +3083,7 @@ export const coursesData = {
       noteMaster: "We provide advanced SAP S/4 HANA training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -3542,16 +3535,15 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP HR/HCM</span> Syllabus',
+      title2: '<span class="highlight-span-cards">Sap HR/HCM</span> Syllabus',
       description:
-        "Industry-Aligned Syllabus for SAP HR/HCM With Certification",
+        "Industry-Aligned Syllabus for Sap HR/HCM With Certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP HR/HCM training",
+      noteMaster: "We provide advanced Sap HR/HCM training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -4001,15 +3993,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP MM</span> Syllabus',
-      description: "Industry aligned SAP MM syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap MM</span> Syllabus',
+      description: "Industry aligned Sap MM syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP MM training",
+      noteMaster: "We provide advanced Sap MM training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -4459,15 +4450,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP PM</span> Syllabus',
-      description: "Industry aligned SAP PM syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap PM</span> Syllabus',
+      description: "Industry aligned Sap PM syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP PM training",
+      noteMaster: "We provide advanced Sap PM training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -4916,15 +4906,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP PP</span> Syllabus',
-      description: "Industry aligned SAP PP syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap PP</span> Syllabus',
+      description: "Industry aligned Sap PP syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP PP training",
+      noteMaster: "We provide advanced Sap PP training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -5375,15 +5364,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP PS</span> Syllabus',
-      description: "Industry aligned SAP PS syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap PS</span> Syllabus',
+      description: "Industry aligned Sap PS syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP PS traininG",
+      noteMaster: "We provide advanced Sap PS traininG",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -5833,15 +5821,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP QM</span> Syllabus',
-      description: "Industry aligned SAP QM syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap QM</span> Syllabus',
+      description: "Industry aligned Sap QM syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP QM training",
+      noteMaster: "We provide advanced Sap QM training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -6293,15 +6280,15 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP SCM</span> Syllabus',
-      description: "Industry aligned SAP SCM syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap SCM</span> Syllabus',
+      description: "Industry aligned Sap SCM syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP SCM training",
+      noteMaster: "We provide advanced Sap SCM training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
+        
       ],
       overview: {
         title: "Syllabus Overview",
@@ -6754,15 +6741,14 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2: '<span class="highlight-span-cards">SAP SD</span> Syllabus',
-      description: "Industry aligned SAP SD syllabus with certification",
+      title2: '<span class="highlight-span-cards">Sap SD</span> Syllabus',
+      description: "Industry aligned Sap SD syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP SD training",
+      noteMaster: "We provide advanced Sap SD training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -7177,7 +7163,7 @@ export const coursesData = {
 
     // Data for Why Component
     why: {
-      title: "Why SAP SUCCESSFACTOR ?",
+      title: "Why Sap SuccessFactors ?",
       cards: [
         {
           title:
@@ -7213,16 +7199,15 @@ export const coursesData = {
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
       title2:
-        '<span class="highlight-span-cards">SAP SUCCESSFACTOR</span> Syllabus',
+        '<span class="highlight-span-cards">Sap SuccessFactors</span> Syllabus',
       description:
-        "Industry aligned SAP SUCCESSFACTOR syllabus with certification",
+        "Industry aligned Sap SuccessFactors syllabus with certification",
       summary:
         "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced SAP Successfactor training",
+      noteMaster: "We provide advanced Sap SuccessFactors training",
       noteAdvance: "Advance",
       features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
+        { label: "10+", description: "Tools" },
       ],
       overview: {
         title: "Syllabus Overview",
@@ -8522,7 +8507,7 @@ export const coursesData = {
             {
               title: "Tableau + Excel",
               duration: "5 Months",
-              content: [
+               content: [
                 "Data Visualization Fundamentals",
                 "Excel Advanced Functions",
                 "Tableau Desktop Basics",
@@ -8698,7 +8683,7 @@ export const coursesData = {
             {
               title: "Machine Learning Ops",
               duration: "1 Month",
-              content: [
+               content: [
                 "MLOps Fundamentals",
                 "Model Deployment",
                 "CI/CD for ML",
@@ -9041,7 +9026,7 @@ export const coursesData = {
             {
               title: "Data Engineering",
               duration: "3 Months",
-              content: [
+               content: [
                 "Hadoop Ecosystem",
                 "Apache Spark",
                 "Data Lakes & Warehouses",
@@ -9088,7 +9073,7 @@ export const coursesData = {
             {
               title: "Data Structures & Algorithms (DSA)",
               duration: "2 Months",
-              content: [
+               content: [
                 "Arrays & Linked Lists",
                 "Stacks & Queues",
                 "Trees & Graphs",
@@ -9177,7 +9162,7 @@ export const coursesData = {
             {
               title: "Product ML Systems",
               duration: "1.5 Months",
-              content: [
+             content: [
                 "System Design for ML",
                 "Scalable ML APIs",
                 "A/B Testing",
@@ -9560,7 +9545,7 @@ export const coursesData = {
             {
               title: "HTML5 & CSS3 Fundamentals",
               duration: "1.5 Months",
-              content: [
+               content: [
                 "HTML5 semantic elements and structure",
                 "CSS3 styling, layouts, and responsive design",
                 "Flexbox and CSS Grid for modern layouts",
@@ -9748,7 +9733,7 @@ export const coursesData = {
             {
               title: "Industry Best Practices",
               duration: "0.5 Months",
-              content: [
+              ontent: [
                 "Code quality and review processes",
                 "Security best practices for web applications",
                 "Performance monitoring and optimization",
@@ -10091,7 +10076,7 @@ export const coursesData = {
             {
               title: "AI Fundamentals & Python",
               duration: "3 Months",
-              content: [
+               content: [
                 "Introduction to Artificial Intelligence and its applications",
                 "Python programming for AI and data science",
                 "Mathematics for AI: Linear Algebra, Statistics, Calculus",
@@ -10137,7 +10122,7 @@ export const coursesData = {
             {
               title: "Machine Learning Essentials",
               duration: "3 Months",
-              content: [
+               content: [
                 "Supervised learning: Regression and Classification",
                 "Unsupervised learning: Clustering and Dimensionality Reduction",
                 "Model evaluation and cross-validation",
@@ -10275,7 +10260,7 @@ export const coursesData = {
             {
               title: "Computer Vision & AI Applications",
               duration: "3 Months",
-              content: [
+             content: [
                 "Fundamentals of computer vision and image processing",
                 "Object detection using YOLO and SSD",
                 "Image segmentation and classification",
@@ -10637,7 +10622,7 @@ export const coursesData = {
                 },
                 {
                   name: "Eclipse",
-                  icon: "/CourseCurriculum/eclipse.webp",
+                  icon: "https://img.icons8.com/office/500/java-eclipse.png",
                   alt: "Eclipse",
                 },
                 {
@@ -10754,7 +10739,7 @@ export const coursesData = {
             {
               title: "Web Development with Java",
               duration: "1 Month",
-              content: [
+             content: [
                 "Servlets and JSP lifecycle",
                 "Session and cookie management",
                 "HTTP request/response handling",
@@ -12899,7 +12884,6 @@ export const coursesData = {
               duration: "1 Month",
               content: [
                 "End-to-end UX case study development",
-                "Mobile app design project",
                 "Web application redesign challenge",
                 "E-commerce platform UX optimization",
                 "Portfolio creation and presentation skills",
@@ -13208,107 +13192,170 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "DATA VISUALIZATION TRAINING CURRICULUM",
-      tabs: [
+    modulesData : {
+  title: "DATA VISUALIZATION TRAINING CURRICULUM",
+  globalActions: {
+    startLearning: "https://example.com/start-learning-data-visualization",
+    downloadCurriculum: "https://example.com/download-curriculum-data-visualization",
+  },
+  banner: {
+    title: "Master Data Visualization Skills",
+    subtitle: "From fundamentals to advanced tools — build a career in analytics and storytelling.",
+    image: "https://res.cloudinary.com/dudu879kr/image/upload/v1755005000/DataVizBanner.avif",
+    technologies: [
+      "Data Visualization Fundamentals",
+      "Excel & Advanced Analytics",
+      "Introduction to BI Tools",
+      "Tableau Mastery",
+      "Data Storytelling",
+      "Color Theory",
+      "Interactive Dashboards",
+    ],
+  },
+  tabs: [
+    {
+      type: "modules",
+      duration: "5.5 Months",
+      modules: [
         {
-          type: "beginner",
-          duration: "3 Months",
-          modules: [
-            {
-              title: "Data Visualization Fundamentals",
-              duration: "1 Month",
-              content: [
-                "Introduction to data visualization concepts and principles",
-                "Types of charts and when to use them",
-                "Color theory and visual perception in data design",
-                "Data storytelling fundamentals",
-                "Understanding your audience and objectives",
-                "Best practices for effective data communication",
-              ],
-            },
-            {
-              title: "Excel & Advanced Analytics",
-              duration: "1 Month",
-              content: [
-                "Advanced Excel functions and formulas",
-                "Pivot tables and pivot charts mastery",
-                "Data cleaning and preparation techniques",
-                "Statistical analysis in Excel",
-                "Creating interactive dashboards in Excel",
-                "Excel macros for automation",
-              ],
-            },
-            {
-              title: "Introduction to BI Tools",
-              duration: "1 Month",
-              content: [
-                "Overview of Business Intelligence landscape",
-                "Introduction to Tableau Public",
-                "Basic Power BI desktop functionality",
-                "Connecting to data sources",
-                "Creating simple visualizations",
-                "Publishing and sharing reports",
-              ],
-            },
+          title: "Data Visualization Fundamentals",
+          duration: "1 Month",
+          content: [
+            "Introduction to data visualization concepts and principles",
+            "Types of charts and when to use them",
           ],
+          detailedContent: [
+            "Exploring the purpose and impact of data visualization",
+            "Selecting chart types for various business cases",
+          ],
+          toolsAndTechnologies: [
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+            { name: "Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+            { name: "Google Data Studio", icon: "https://img.icons8.com/color/500/google-data-studio.png", alt: "Google Data Studio" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-data-visualization-fundamentals",
+            downloadCurriculum: "https://example.com/download-curriculum-data-visualization-fundamentals",
+          },
         },
         {
-          type: "advanced",
-          duration: "5 Months",
-          modules: [
-            {
-              title: "Tableau Mastery",
-              duration: "2 Months",
-              content: [
-                "Tableau Desktop advanced features and calculations",
-                "Creating complex visualizations and dashboards",
-                "Tableau Server administration and publishing",
-                "Advanced analytics and forecasting in Tableau",
-                "Custom SQL and data blending techniques",
-                "Performance optimization and best practices",
-              ],
-            },
-            {
-              title: "Power BI Development",
-              duration: "1.5 Months",
-              content: [
-                "Power BI Desktop advanced development",
-                "DAX (Data Analysis Expressions) formulas",
-                "Power Query for data transformation",
-                "Custom visuals and R/Python integration",
-                "Power BI Service and collaboration features",
-                "Row-level security and data governance",
-              ],
-            },
-            {
-              title: "SQL for Analytics",
-              duration: "1 Month",
-              content: [
-                "SQL fundamentals for data extraction",
-                "Advanced SQL queries and joins",
-                "Window functions and analytical queries",
-                "Database optimization for reporting",
-                "Working with different database systems",
-                "Integrating SQL with visualization tools",
-              ],
-            },
-            {
-              title: "Industry Projects & Portfolio",
-              duration: "0.5 Months",
-              content: [
-                "End-to-end business intelligence project",
-                "Sales and marketing analytics dashboard",
-                "Financial reporting and KPI tracking",
-                "Healthcare or retail analytics case study",
-                "Portfolio development and presentation",
-                "Interview preparation and career guidance",
-              ],
-            },
+          title: "Excel & Advanced Analytics",
+          duration: "1 Month",
+          content: [
+            "Advanced Excel functions and formulas",
+            "Pivot tables and pivot charts mastery",
+            "Data cleaning and preparation techniques",
+            "Statistical analysis in Excel",
+            "Creating interactive dashboards in Excel",
           ],
+          detailedContent: [
+            "Hands-on with Excel’s most powerful functions",
+            "Building pivot-based reports for insights",
+            "Cleaning and shaping raw data for analysis",
+            "Applying statistical methods in Excel",
+            "Designing dashboards for business reporting",
+          ],
+          toolsAndTechnologies: [
+            { name: "Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+            { name: "Power Query", icon: "https://img.icons8.com/color/500/microsoft-power-query.png", alt: "Power Query" },
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+            { name: "R", icon: "https://img.icons8.com/external-soft-fill-juicy-fish/500/external-r-programming-languages-soft-fill-soft-fill-juicy-fish.png", alt: "R Programming" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-excel-advanced-analytics",
+            downloadCurriculum: "https://example.com/download-curriculum-excel-advanced-analytics",
+          },
+        },
+        {
+          title: "Introduction to BI Tools",
+          duration: "1 Month",
+          content: [
+            "Overview of Business Intelligence landscape",
+            "Introduction to Tableau Public",
+            "Basic Power BI desktop functionality",
+            "Connecting to data sources",
+            "Creating simple visualizations",
+          ],
+          detailedContent: [
+            "Understanding modern BI ecosystem",
+            "Building visuals in Tableau Public",
+            "Using Power BI for basic reporting",
+            "Integrating various data sources",
+            "Publishing and sharing BI reports",
+          ],
+          toolsAndTechnologies: [
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+            { name: "Qlik Sense", icon: "https://img.icons8.com/color/500/qlik.png", alt: "Qlik Sense" },
+            { name: "Looker", icon: "https://img.icons8.com/color/500/looker.png", alt: "Looker" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-bi-tools",
+            downloadCurriculum: "https://example.com/download-curriculum-bi-tools",
+          },
+        },
+        {
+          title: "Tableau Mastery",
+          duration: "2 Months",
+          content: [
+            "Tableau Desktop advanced features and calculations",
+            "Creating complex visualizations and dashboards",
+            "Advanced analytics and forecasting in Tableau",
+            "Custom SQL and data blending techniques",
+            "Performance optimization and best practices",
+          ],
+          detailedContent: [
+            "Advanced formulas and calculated fields in Tableau",
+            "Designing interactive and dynamic dashboards",
+            "Integrating predictive analytics in dashboards",
+            "Combining multiple data sources using custom SQL",
+            "Improving performance and scalability of Tableau reports",
+          ],
+          toolsAndTechnologies: [
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+            { name: "Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+            { name: "PostgreSQL", icon: "https://img.icons8.com/color/500/postgreesql.png", alt: "PostgreSQL" },
+            { name: "R", icon: "https://img.icons8.com/external-soft-fill-juicy-fish/500/external-r-programming-languages-soft-fill-soft-fill-juicy-fish.png", alt: "R Programming" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-tableau-mastery",
+            downloadCurriculum: "https://example.com/download-curriculum-tableau-mastery",
+          },
+        },
+        {
+          title: "SQL for Analytics",
+          duration: "0.5 Months",
+          content: [
+            "SQL fundamentals for data extraction",
+            "Advanced SQL queries and joins",
+            "Window functions and analytical queries",
+            "Database optimization for reporting",
+            "Integrating SQL with visualization tools",
+          ],
+          detailedContent: [
+            "Querying databases for BI reporting",
+            "Using joins and subqueries for insights",
+            "Applying analytical SQL functions",
+            "Optimizing queries for performance",
+            "Connecting SQL outputs with BI platforms",
+          ],
+          toolsAndTechnologies: [
+            { name: "MySQL", icon: "https://img.icons8.com/color/500/mysql-logo.png", alt: "MySQL" },
+            { name: "PostgreSQL", icon: "https://img.icons8.com/color/500/postgreesql.png", alt: "PostgreSQL" },
+            { name: "SQL Server", icon: "https://img.icons8.com/color/500/microsoft-sql-server.png", alt: "SQL Server" },
+            { name: "BigQuery", icon: "https://img.icons8.com/color/500/google-bigquery.png", alt: "Google BigQuery" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-sql-analytics",
+            downloadCurriculum: "https://example.com/download-curriculum-sql-analytics",
+          },
         },
       ],
     },
+  ],
+},
+
 
     // Data for Certificate Component
     certificate: {
@@ -13598,118 +13645,262 @@ export const coursesData = {
 
     // Data for Modules Component (course-specific curriculum)
     modulesData: {
-      title: "POWER BI CURRICULUM",
-      tabs: [
+  title: "POWER BI CURRICULUM",
+  globalActions: {
+    startLearning: "https://example.com/start-learning-power-bi",
+    downloadCurriculum: "https://example.com/download-power-bi-curriculum",
+  },
+  banner: {
+    title: "Master Business Intelligence and Data Analytics with Power BI",
+    subtitle: "Learn to connect, model, visualize, and share data insights effectively using Power BI.",
+    image: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+    technologies: [
+      "Power BI Desktop",
+      "Power Query",
+      "DAX",
+      "Power BI Service",
+      "Data Modeling",
+      "Dashboarding",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "2 Months",
-          modules: [
+          title: "Introduction to Power BI",
+          duration: "2 Weeks",
+          content: [
+            "Overview of Business Intelligence and Power BI ecosystem",
+            "Power BI Desktop installation and interface navigation",
+            "Understanding data sources and connectivity options",
+            "Basic report creation and visualization types",
+            "Introduction to Power BI Service and mobile apps",
+            "Publishing and sharing reports basics",
+          ],
+          detailedContent: [
+            "Understand the fundamentals of Business Intelligence and how Power BI fits in",
+            "Learn to install Power BI Desktop and navigate its interface",
+            "Explore different types of data sources and how to connect them",
+            "Create basic reports and visualize data using built-in charts",
+            "Get introduced to Power BI Service and mobile applications for report consumption",
+            "Learn to publish reports and share them with stakeholders securely",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "Introduction to Power BI",
-              duration: "2 Weeks",
-              content: [
-                "Overview of Business Intelligence and Power BI ecosystem",
-                "Power BI Desktop installation and interface navigation",
-                "Understanding data sources and connectivity options",
-                "Basic report creation and visualization types",
-                "Introduction to Power BI Service and mobile apps",
-                "Publishing and sharing reports basics",
-              ],
+              name: "Power BI Desktop",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power BI Desktop icon",
             },
             {
-              title: "Data Extraction & Connection",
-              duration: "2 Weeks",
-              content: [
-                "Connecting to various data sources (Excel, SQL, Web, Cloud)",
-                "Data import vs DirectQuery vs Live Connection",
-                "Data source authentication and security",
-                "Working with multiple data sources",
-                "Data refresh and scheduling",
-                "Troubleshooting connection issues",
-              ],
+              name: "Microsoft Excel",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png",
+              alt: "Excel logo",
             },
             {
-              title: "Power Query & Data Transformation",
-              duration: "2 Weeks",
-              content: [
-                "Power Query Editor interface and functionality",
-                "Data cleaning and transformation techniques",
-                "Merging and appending queries",
-                "Creating custom columns and conditional logic",
-                "Data type conversions and formatting",
-                "Query optimization and performance",
-              ],
+              name: "Power BI Service",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power BI Service icon",
             },
             {
-              title: "Basic Visualizations & Reports",
-              duration: "2 Weeks",
-              content: [
-                "Creating charts, tables, and matrices",
-                "Formatting and customizing visualizations",
-                "Using filters, slicers, and drill-through",
-                "Report layout and design principles",
-                "Adding images, text boxes, and shapes",
-                "Basic interactivity and cross-filtering",
-              ],
+              name: "Mobile Apps",
+              icon: "https://img.icons8.com/ios-filled/50/000000/smartphone-tablet.png",
+              alt: "Mobile app icon",
             },
           ],
+          actions: {
+            startLearning: "https://example.com/start-learning-power-bi-intro",
+            downloadCurriculum: "https://example.com/download-power-bi-intro",
+          },
         },
         {
-          type: "advanced",
-          duration: "4 Months",
-          modules: [
+          title: "Data Extraction & Connection",
+          duration: "2 Weeks",
+          content: [
+            "Connecting to various data sources (Excel, SQL, Web, Cloud)",
+            "Data import vs DirectQuery vs Live Connection",
+            "Data source authentication and security",
+            "Working with multiple data sources",
+            "Data refresh and scheduling",
+            "Troubleshooting connection issues",
+          ],
+          detailedContent: [
+            "Learn how to connect Power BI to a wide range of data sources",
+            "Understand differences between Import, DirectQuery, and Live Connection",
+            "Manage data source credentials and secure access",
+            "Work effectively with multiple combined data sources",
+            "Set up data refresh schedules to keep reports up-to-date",
+            "Troubleshoot common connection and refresh issues",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "Advanced Data Modeling",
-              duration: "1 Month",
-              content: [
-                "Star schema and snowflake schema design",
-                "Creating and managing relationships",
-                "Calculated columns vs measures",
-                "Row-level security implementation",
-                "Hierarchies and drill-down functionality",
-                "Data model optimization techniques",
-              ],
+              name: "Power BI Desktop",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power BI Desktop icon",
             },
             {
-              title: "DAX (Data Analysis Expressions)",
-              duration: "1.5 Months",
-              content: [
-                "DAX syntax and function categories",
-                "Time intelligence functions and calculations",
-                "Filter context and row context understanding",
-                "Advanced DAX functions (CALCULATE, FILTER, ALL)",
-                "Creating complex measures and KPIs",
-                "DAX optimization and performance tuning",
-              ],
+              name: "SQL Server",
+              icon: "https://img.icons8.com/color/48/000000/sql.png",
+              alt: "SQL Server icon",
             },
             {
-              title: "Advanced Visualizations & Dashboards",
-              duration: "1 Month",
-              content: [
-                "Custom visuals from AppSource marketplace",
-                "Advanced chart types and formatting",
-                "Creating interactive dashboards",
-                "Bookmarks and navigation techniques",
-                "Mobile-optimized report design",
-                "Accessibility and design best practices",
-              ],
+              name: "Web APIs",
+              icon: "https://img.icons8.com/ios-filled/50/000000/api.png",
+              alt: "API icon",
             },
             {
-              title: "Power BI Service & Administration",
-              duration: "0.5 Months",
-              content: [
-                "Power BI Service workspace management",
-                "Content sharing and collaboration",
-                "Data gateway configuration",
-                "Security and governance policies",
-                "Monitoring and usage analytics",
-                "Power BI Premium and licensing options",
-              ],
+              name: "Cloud Data Sources",
+              icon: "https://img.icons8.com/fluency/48/000000/cloud.png",
+              alt: "Cloud icon",
             },
           ],
+          actions: {
+            startLearning: "https://example.com/start-learning-data-extraction-connection",
+            downloadCurriculum: "https://example.com/download-data-extraction-connection",
+          },
+        },
+        {
+          title: "Power Query & Data Transformation",
+          duration: "2 Weeks",
+          content: [
+            "Power Query Editor interface and functionality",
+            "Data cleaning and transformation techniques",
+            "Merging and appending queries",
+            "Creating custom columns and conditional logic",
+            "Data type conversions and formatting",
+            "Query optimization and performance",
+          ],
+          detailedContent: [
+            "Master Power Query Editor for transforming raw data",
+            "Apply cleaning techniques like removing errors and duplicates",
+            "Combine data through merging and appending queries",
+            "Create custom columns using conditional logic and formulas",
+            "Manage data types and formatting for analysis readiness",
+            "Optimize queries to improve report performance",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "Power Query Editor",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power Query icon",
+            },
+            {
+              name: "M Language",
+              icon: "https://img.icons8.com/ios-filled/50/000000/code.png",
+              alt: "M language icon",
+            },
+            {
+              name: "Microsoft Excel",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png",
+              alt: "Excel logo",
+            },
+            {
+              name: "Power BI Desktop",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power BI Desktop icon",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-power-query-transformation",
+            downloadCurriculum: "https://example.com/download-power-query-transformation",
+          },
+        },
+        {
+          title: "Basic Visualizations & Reports",
+          duration: "2 Weeks",
+          content: [
+            "Creating charts, tables, and matrices",
+            "Formatting and customizing visualizations",
+            "Using filters, slicers, and drill-through",
+            "Report layout and design principles",
+            "Adding images, text boxes, and shapes",
+            "Basic interactivity and cross-filtering",
+          ],
+          detailedContent: [
+            "Build charts like bar, column, and pie charts",
+            "Customize visualizations with colors, labels, and tooltips",
+            "Add slicers and filters for interactive reports",
+            "Design reports with user-friendly layouts and themes",
+            "Embed images and text for context and storytelling",
+            "Enable interactivity with cross-filtering and drill-through",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "Power BI Desktop",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power BI Desktop icon",
+            },
+            {
+              name: "Custom Visuals",
+              icon: "https://img.icons8.com/ios-filled/50/000000/graph-report.png",
+              alt: "Custom visuals icon",
+            },
+            {
+              name: "Microsoft Excel",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png",
+              alt: "Excel logo",
+            },
+            {
+              name: "Power BI Service",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power BI Service icon",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-basic-visualizations-reports",
+            downloadCurriculum: "https://example.com/download-basic-visualizations-reports",
+          },
+        },
+        {
+          title: "Advanced Data Modeling",
+          duration: "1 Month",
+          content: [
+            "Star schema and snowflake schema design",
+            "Creating and managing relationships",
+            "Calculated columns vs measures",
+            "Row-level security implementation",
+            "Hierarchies and drill-down functionality",
+            "Data model optimization techniques",
+          ],
+          detailedContent: [
+            "Design efficient star and snowflake schemas for BI models",
+            "Create and maintain relationships between tables",
+            "Understand when to use calculated columns versus measures",
+            "Implement row-level security to restrict data access",
+            "Build hierarchies to enable drill-down analysis",
+            "Optimize data models for performance and scalability",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "Power BI Desktop",
+              icon: "https://cdn-icons-png.flaticon.com/512/5968/5968350.png",
+              alt: "Power BI Desktop icon",
+            },
+            {
+              name: "SQL Server",
+              icon: "https://img.icons8.com/color/48/000000/sql.png",
+              alt: "SQL Server icon",
+            },
+            {
+              name: "DAX",
+              icon: "https://img.icons8.com/color/48/000000/dax.png",
+              alt: "DAX icon",
+            },
+            {
+              name: "Azure Analysis Services",
+              icon: "https://img.icons8.com/color/48/000000/azure.png",
+              alt: "Azure icon",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-advanced-data-modeling",
+            downloadCurriculum: "https://example.com/download-advanced-data-modeling",
+          },
         },
       ],
     },
+  ],
+},
+
 
     // Data for Certificate Component
     certificate: {
@@ -13973,106 +14164,262 @@ export const coursesData = {
 
     // Data for Modules Component (course-specific curriculum)
     modulesData: {
-      title: "SQL CURRICULUM",
-      tabs: [
+  title: "SQL CURRICULUM",
+  globalActions: {
+    startLearning: "https://example.com/start-learning-sql",
+    downloadCurriculum: "https://example.com/download-sql-curriculum",
+  },
+  banner: {
+    title: "Master SQL for Database Management and Data Analysis",
+    subtitle: "Learn SQL from basics to advanced concepts to manage and query relational databases effectively.",
+    image: "https://img.icons8.com/color/96/000000/sql.png",
+    technologies: [
+      "SQL",
+      "RDBMS",
+      "Data Querying",
+      "Database Design",
+      "Stored Procedures",
+      "Database Administration",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "1.5 Months",
-          modules: [
+          title: "SQL Fundamentals",
+          duration: "2 Weeks",
+          content: [
+            "Introduction to databases and RDBMS concepts",
+            "SQL syntax and basic commands (SELECT, INSERT, UPDATE, DELETE)",
+            "Understanding data types and table structures",
+            "Basic filtering with WHERE clause",
+            "Sorting data with ORDER BY",
+            "Working with NULL values and basic operators",
+          ],
+          detailedContent: [
+            "Understand core database concepts and the relational model",
+            "Learn essential SQL commands for data manipulation",
+            "Explore different data types and how tables are structured",
+            "Filter query results using WHERE clause effectively",
+            "Sort query results using ORDER BY clause",
+            "Handle NULL values and use basic SQL operators",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "SQL Fundamentals",
-              duration: "2 Weeks",
-              content: [
-                "Introduction to databases and RDBMS concepts",
-                "SQL syntax and basic commands (SELECT, INSERT, UPDATE, DELETE)",
-                "Understanding data types and table structures",
-                "Basic filtering with WHERE clause",
-                "Sorting data with ORDER BY",
-                "Working with NULL values and basic operators",
-              ],
+              name: "MySQL",
+              icon: "https://img.icons8.com/color/48/000000/mysql-logo.png",
+              alt: "MySQL logo",
             },
             {
-              title: "Data Retrieval & Filtering",
-              duration: "2 Weeks",
-              content: [
-                "Advanced SELECT statements and aliases",
-                "Pattern matching with LIKE and wildcards",
-                "Working with date and time functions",
-                "Aggregate functions (COUNT, SUM, AVG, MIN, MAX)",
-                "GROUP BY and HAVING clauses",
-                "DISTINCT and TOP/LIMIT clauses",
-              ],
+              name: "PostgreSQL",
+              icon: "https://img.icons8.com/color/48/000000/postgreesql.png",
+              alt: "PostgreSQL logo",
             },
             {
-              title: "Basic Joins & Relationships",
-              duration: "2 Weeks",
-              content: [
-                "Understanding table relationships and foreign keys",
-                "INNER JOIN and its applications",
-                "LEFT JOIN and RIGHT JOIN",
-                "FULL OUTER JOIN concepts",
-                "Self-joins and cross joins",
-                "Basic subqueries and nested queries",
-              ],
+              name: "SQL Server",
+              icon: "https://img.icons8.com/color/48/000000/sql.png",
+              alt: "SQL Server logo",
+            },
+            {
+              name: "DBeaver",
+              icon: "https://img.icons8.com/ios-filled/50/000000/database.png",
+              alt: "Database tool icon",
             },
           ],
+          actions: {
+            startLearning: "https://example.com/start-learning-sql-fundamentals",
+            downloadCurriculum: "https://example.com/download-sql-fundamentals",
+          },
         },
         {
-          type: "advanced",
-          duration: "3 Months",
-          modules: [
+          title: "Data Retrieval & Filtering",
+          duration: "2 Weeks",
+          content: [
+            "Advanced SELECT statements and aliases",
+            "Pattern matching with LIKE and wildcards",
+            "Working with date and time functions",
+            "Aggregate functions (COUNT, SUM, AVG, MIN, MAX)",
+            "GROUP BY and HAVING clauses",
+            "DISTINCT and TOP/LIMIT clauses",
+          ],
+          detailedContent: [
+            "Master advanced SELECT queries with column aliases",
+            "Use LIKE and wildcards for flexible pattern matching",
+            "Manipulate date and time values in SQL queries",
+            "Apply aggregate functions to summarize data",
+            "Group data and filter groups with GROUP BY and HAVING",
+            "Use DISTINCT to remove duplicates and LIMIT to restrict results",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "Advanced SQL Queries",
-              duration: "1 Month",
-              content: [
-                "Complex subqueries and correlated subqueries",
-                "Common Table Expressions (CTEs)",
-                "Window functions and analytical queries",
-                "CASE statements and conditional logic",
-                "UNION, INTERSECT, and EXCEPT operations",
-                "Advanced string and mathematical functions",
-              ],
+              name: "MySQL",
+              icon: "https://img.icons8.com/fluency/100/my-sql.png",
+              alt: "MySQL logo",
             },
             {
-              title: "Database Design & Optimization",
-              duration: "1 Month",
-              content: [
-                "Database normalization and denormalization",
-                "Creating and managing indexes",
-                "Query optimization techniques",
-                "Execution plans and performance analysis",
-                "Database constraints and data integrity",
-                "Partitioning and sharding concepts",
-              ],
+              name: "SQL Server",
+              icon: "https://img.icons8.com/color/48/microsoft-sql-server.png",
+              alt: "SQL Server logo",
             },
             {
-              title: "Stored Procedures & Advanced Features",
-              duration: "0.5 Months",
-              content: [
-                "Creating and managing stored procedures",
-                "Functions and user-defined functions",
-                "Triggers and their applications",
-                "Views and materialized views",
-                "Transaction management and ACID properties",
-                "Error handling and exception management",
-              ],
+              name: "PgAdmin",
+              icon: "https://img.icons8.com/clouds/100/administrator-male.png",
+              alt: "PgAdmin icon",
             },
             {
-              title: "Database Administration & Projects",
-              duration: "0.5 Months",
-              content: [
-                "User management and security",
-                "Backup and recovery strategies",
-                "Database monitoring and maintenance",
-                "Working with different database systems (MySQL, PostgreSQL, SQL Server)",
-                "Real-world database projects",
-                "Integration with programming languages",
-              ],
+              name: "Azure Data Studio",
+              icon: "https://img.icons8.com/color/48/azure-1.png",
+              alt: "Azure Data Studio icon",
             },
           ],
+          actions: {
+            startLearning: "https://example.com/start-learning-data-retrieval-filtering",
+            downloadCurriculum: "https://example.com/download-data-retrieval-filtering",
+          },
+        },
+        {
+          title: "Basic Joins & Relationships",
+          duration: "2 Weeks",
+          content: [
+            "Understanding table relationships and foreign keys",
+            "INNER JOIN and its applications",
+            "LEFT JOIN and RIGHT JOIN",
+            "FULL OUTER JOIN concepts",
+            "Self-joins and cross joins",
+            "Basic subqueries and nested queries",
+          ],
+          detailedContent: [
+            "Learn how tables relate via foreign keys",
+            "Use INNER JOIN to combine matching rows",
+            "Apply LEFT JOIN and RIGHT JOIN for partial matches",
+            "Understand FULL OUTER JOIN for complete datasets",
+            "Explore self-joins and cross joins",
+            "Write subqueries and nested queries for complex filtering",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "MySQL",
+              icon: "https://img.icons8.com/color/48/000000/mysql-logo.png",
+              alt: "MySQL logo",
+            },
+            {
+              name: "PostgreSQL",
+              icon: "https://img.icons8.com/color/48/000000/postgreesql.png",
+              alt: "PostgreSQL logo",
+            },
+            {
+              name: "SQL Server",
+              icon: "https://img.icons8.com/color/48/000000/sql.png",
+              alt: "SQL Server logo",
+            },
+            {
+              name: "DataGrip",
+              icon: "https://img.icons8.com/color/48/000000/database.png",
+              alt: "DataGrip icon",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-basic-joins-relationships",
+            downloadCurriculum: "https://example.com/download-basic-joins-relationships",
+          },
+        },
+        {
+          title: "Advanced SQL Queries",
+          duration: "1 Month",
+          content: [
+            "Complex subqueries and correlated subqueries",
+            "Common Table Expressions (CTEs)",
+            "Window functions and analytical queries",
+            "CASE statements and conditional logic",
+            "UNION, INTERSECT, and EXCEPT operations",
+            "Advanced string and mathematical functions",
+          ],
+          detailedContent: [
+            "Write and optimize complex and correlated subqueries",
+            "Use CTEs to organize complex queries",
+            "Apply window functions for advanced analytics",
+            "Use CASE statements for conditional logic within queries",
+            "Combine result sets with UNION, INTERSECT, and EXCEPT",
+            "Leverage advanced string and math functions",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "PostgreSQL",
+              icon: "https://img.icons8.com/color/48/000000/postgreesql.png",
+              alt: "PostgreSQL logo",
+            },
+            {
+              name: "SQL Server",
+              icon: "https://img.icons8.com/color/48/000000/sql.png",
+              alt: "SQL Server logo",
+            },
+            {
+              name: "Oracle SQL",
+              icon: "https://img.icons8.com/color/48/000000/oracle-logo.png",
+              alt: "Oracle logo",
+            },
+            {
+              name: "DBeaver",
+              icon: "https://img.icons8.com/ios-filled/50/000000/database.png",
+              alt: "Database tool icon",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-advanced-sql-queries",
+            downloadCurriculum: "https://example.com/download-advanced-sql-queries",
+          },
+        },
+        {
+          title: "Database Design & Optimization",
+          duration: "1 Month",
+          content: [
+            "Database normalization and denormalization",
+            "Creating and managing indexes",
+            "Query optimization techniques",
+            "Execution plans and performance analysis",
+            "Database constraints and data integrity",
+            "Partitioning and sharding concepts",
+          ],
+          detailedContent: [
+            "Understand normalization forms and apply denormalization when needed",
+            "Create indexes to improve query performance",
+            "Learn query optimization best practices",
+            "Analyze execution plans to find bottlenecks",
+            "Implement database constraints for integrity",
+            "Explore partitioning and sharding for scalability",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "SQL Server",
+              icon: "https://img.icons8.com/color/48/000000/sql.png",
+              alt: "SQL Server logo",
+            },
+            {
+              name: "MySQL",
+              icon: "https://img.icons8.com/color/48/000000/mysql-logo.png",
+              alt: "MySQL logo",
+            },
+            {
+              name: "PostgreSQL",
+              icon: "https://img.icons8.com/color/48/000000/postgreesql.png",
+              alt: "PostgreSQL logo",
+            },
+            {
+              name: "Oracle SQL",
+              icon: "https://img.icons8.com/color/48/000000/oracle-logo.png",
+              alt: "Oracle logo",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-database-design-optimization",
+            downloadCurriculum: "https://example.com/download-database-design-optimization",
+          },
         },
       ],
     },
+  ],
+},
+
 
     // Data for Certificate Component
     certificate: {
@@ -14337,119 +14684,263 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "TABLEAU CURRICULUM",
-      tabs: [
+ modulesData: {
+  title: "TABLEAU BUSINESS ANALYTICS CURRICULUM",
+  globalActions: {
+    startLearning: "https://example.com/start-learning-tableau-business-analytics",
+    downloadCurriculum: "https://example.com/download-curriculum-tableau-business-analytics",
+  },
+  banner: {
+    title: "Master Data Visualization and Analytics with Tableau",
+    subtitle: "From beginner to advanced Tableau skills to drive impactful business insights.",
+    image: "https://res.cloudinary.com/dudu879kr/image/upload/v1752485069/TableauBanner.webp",
+    technologies: [
+      "Tableau",
+      "Data Visualization",
+      "Business Intelligence",
+      "Data Analytics",
+      "Dashboarding",
+      "Advanced Analytics",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "2 Months",
-          modules: [
+          title: "Tableau Desktop Fundamentals",
+          duration: "2 Weeks",
+          content: [
+            "Introduction to Tableau and data visualization concepts",
+            "Tableau interface navigation and workspace setup",
+            "Connecting to various data sources (Excel, CSV, databases)",
+            "Basic chart types and visualization creation",
+            "Understanding dimensions and measures",
+            "Sorting, filtering, and grouping data",
+          ],
+          detailedContent: [
+            "Understand Tableau basics and interface",
+            "Learn to connect Tableau to multiple data sources",
+            "Create simple visualizations like bar charts and pie charts",
+            "Gain foundational skills for data analysis using Tableau",
+            "Explore dimension vs measure concepts for effective data slicing",
+            "Apply sorting, filtering, and grouping techniques to refine views",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "Tableau Desktop Fundamentals",
-              duration: "2 Weeks",
-              content: [
-                "Introduction to Tableau and data visualization concepts",
-                "Tableau interface navigation and workspace setup",
-                "Connecting to various data sources (Excel, CSV, databases)",
-                "Basic chart types and visualization creation",
-                "Understanding dimensions and measures",
-                "Sorting, filtering, and grouping data",
-              ],
+              name: "Tableau Desktop",
+              icon: "https://img.icons8.com/color/500/tableau-software.png",
+              alt: "Tableau Desktop logo",
             },
             {
-              title: "Data Connections & Preparation",
-              duration: "2 Weeks",
-              content: [
-                "Advanced data source connections and management",
-                "Data interpreter and pivot functionality",
-                "Data cleaning and preparation techniques",
-                "Working with multiple data sources",
-                "Understanding live connections vs extracts",
-                "Data refresh and scheduling basics",
-              ],
+              name: "Microsoft Excel",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png",
+              alt: "Excel logo",
             },
             {
-              title: "Basic Visualizations & Charts",
-              duration: "2 Weeks",
-              content: [
-                "Creating bar charts, line graphs, and scatter plots",
-                "Pie charts, treemaps, and heat maps",
-                "Geographic mapping and spatial analysis",
-                "Text tables and crosstabs",
-                "Formatting and customizing visualizations",
-                "Show Me feature and chart recommendations",
-              ],
+              name: "CSV Files",
+              icon: "https://img.icons8.com/ios-filled/50/000000/csv.png",
+              alt: "CSV file icon",
             },
             {
-              title: "Dashboard Basics & Sharing",
-              duration: "2 Weeks",
-              content: [
-                "Creating basic dashboards and layouts",
-                "Adding interactivity with filters and actions",
-                "Dashboard formatting and design principles",
-                "Publishing to Tableau Public",
-                "Exporting and sharing visualizations",
-                "Basic storytelling with data",
-              ],
+              name: "Databases",
+              icon: "https://img.icons8.com/color/48/000000/database.png",
+              alt: "Database icon",
             },
           ],
+          actions: {
+            startLearning: "https://example.com/start-learning-tableau-desktop-fundamentals",
+            downloadCurriculum: "https://example.com/download-tableau-desktop-fundamentals",
+          },
         },
         {
-          type: "advanced",
-          duration: "4 Months",
-          modules: [
+          title: "Data Connections & Preparation",
+          duration: "2 Weeks",
+          content: [
+            "Advanced data source connections and management",
+            "Data interpreter and pivot functionality",
+            "Data cleaning and preparation techniques",
+            "Working with multiple data sources",
+            "Understanding live connections vs extracts",
+            "Data refresh and scheduling basics",
+          ],
+          detailedContent: [
+            "Master connecting Tableau to diverse and complex data sources",
+            "Use Tableau Data Interpreter and pivot features to prep data",
+            "Apply best practices for cleaning and preparing data in Tableau",
+            "Blend and join multiple data sources effectively",
+            "Understand when to use live connections or extract data sources",
+            "Learn basics of data refresh schedules for up-to-date reporting",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "Advanced Calculations & Analytics",
-              duration: "1 Month",
-              content: [
-                "Calculated fields and advanced formulas",
-                "Table calculations and quick table calculations",
-                "Level of Detail (LOD) expressions",
-                "Parameters and dynamic calculations",
-                "Statistical functions and trend analysis",
-                "Forecasting and predictive analytics",
-              ],
+              name: "Tableau Prep",
+              icon: "https://img.icons8.com/color/500/tableau-software.png",
+              alt: "Tableau Prep logo",
             },
             {
-              title: "Data Blending & Relationships",
-              duration: "1 Month",
-              content: [
-                "Data blending concepts and best practices",
-                "Creating relationships between data sources",
-                "Primary and secondary data sources",
-                "Joins vs blending vs relationships",
-                "Cross-database joins and unions",
-                "Data modeling in Tableau",
-              ],
+              name: "SQL",
+              icon: "https://img.icons8.com/color/48/000000/sql.png",
+              alt: "SQL logo",
             },
             {
-              title: "Advanced Dashboards & Interactivity",
-              duration: "1 Month",
-              content: [
-                "Advanced dashboard design and layout",
-                "Dashboard actions (filter, highlight, URL)",
-                "Parameter controls and dynamic dashboards",
-                "Mobile dashboard optimization",
-                "Performance optimization techniques",
-                "Advanced formatting and custom styling",
-              ],
+              name: "Microsoft Excel",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png",
+              alt: "Excel logo",
             },
             {
-              title: "Tableau Server & Enterprise Features",
-              duration: "1 Month",
-              content: [
-                "Tableau Server architecture and administration",
-                "Publishing and permissions management",
-                "Data source management and security",
-                "Collaboration and commenting features",
-                "Tableau Prep for data preparation",
-                "Integration with other BI tools and APIs",
-              ],
+              name: "CSV Files",
+              icon: "https://img.icons8.com/ios-filled/50/000000/csv.png",
+              alt: "CSV file icon",
             },
           ],
+          actions: {
+            startLearning: "https://example.com/start-learning-data-connections-preparation",
+            downloadCurriculum: "https://example.com/download-data-connections-preparation",
+          },
+        },
+        {
+          title: "Basic Visualizations & Charts",
+          duration: "2 Weeks",
+          content: [
+            "Creating bar charts, line graphs, and scatter plots",
+            "Pie charts, treemaps, and heat maps",
+            "Geographic mapping and spatial analysis",
+            "Text tables and crosstabs",
+            "Formatting and customizing visualizations",
+            "Show Me feature and chart recommendations",
+          ],
+          detailedContent: [
+            "Learn to create core visualization types in Tableau",
+            "Use maps for geographic and spatial data analysis",
+            "Design and format dashboards with effective visuals",
+            "Utilize Show Me to quickly explore chart options",
+            "Understand best practices for chart selection and formatting",
+            "Create advanced tables and crosstabs for detailed analysis",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "Tableau Desktop",
+              icon: "https://img.icons8.com/color/500/tableau-software.png",
+              alt: "Tableau Desktop logo",
+            },
+            {
+              name: "Mapbox",
+              icon: "https://img.icons8.com/ios-filled/50/000000/map.png",
+              alt: "Map icon",
+            },
+            {
+              name: "Microsoft Excel",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png",
+              alt: "Excel logo",
+            },
+            {
+              name: "CSV Files",
+              icon: "https://img.icons8.com/ios-filled/50/000000/csv.png",
+              alt: "CSV file icon",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-basic-visualizations-charts",
+            downloadCurriculum: "https://example.com/download-basic-visualizations-charts",
+          },
+        },
+        {
+          title: "Dashboard Basics & Sharing",
+          duration: "2 Weeks",
+          content: [
+            "Creating basic dashboards and layouts",
+            "Adding interactivity with filters and actions",
+            "Dashboard formatting and design principles",
+            "Publishing to Tableau Public",
+            "Exporting and sharing visualizations",
+            "Basic storytelling with data",
+          ],
+          detailedContent: [
+            "Build dashboards combining multiple visualizations",
+            "Add interactivity like filters and highlight actions",
+            "Design dashboards with clean formatting and UX focus",
+            "Publish dashboards on Tableau Public for sharing",
+            "Learn export options for sharing outside Tableau",
+            "Tell data stories effectively through dashboards",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "Tableau Public",
+              icon: "https://img.icons8.com/fluency/100/public.png",
+              alt: "Tableau Public logo",
+            },
+            {
+              name: "Microsoft PowerPoint",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-powerpoint-2019--v1.png",
+              alt: "PowerPoint logo",
+            },
+            {
+              name: "PDF",
+              icon: "https://img.icons8.com/ios-filled/50/000000/pdf.png",
+              alt: "PDF icon",
+            },
+            {
+              name: "Microsoft Excel",
+              icon: "https://img.icons8.com/color/48/000000/microsoft-excel-2019--v1.png",
+              alt: "Excel logo",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-dashboard-basics-sharing",
+            downloadCurriculum: "https://example.com/download-dashboard-basics-sharing",
+          },
+        },
+        {
+          title: "Advanced Calculations & Analytics",
+          duration: "1 Month",
+          content: [
+            "Calculated fields and advanced formulas",
+            "Table calculations and quick table calculations",
+            "Level of Detail (LOD) expressions",
+            "Parameters and dynamic calculations",
+            "Statistical functions and trend analysis",
+            "Forecasting and predictive analytics",
+          ],
+          detailedContent: [
+            "Master complex calculated fields and formulas",
+            "Use table calculations for advanced data manipulations",
+            "Understand and implement LOD expressions",
+            "Create dynamic dashboards with parameters",
+            "Apply statistical analysis and trends to data",
+            "Explore forecasting techniques in Tableau",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "Tableau Desktop",
+              icon: "https://img.icons8.com/color/500/tableau-software.png",
+              alt: "Tableau Desktop logo",
+            },
+            {
+              name: "R",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755329127/R_Programming_rfp5gs.webp",
+              alt: "R logo",
+            },
+            {
+              name: "Python",
+              icon: "https://img.icons8.com/color/48/000000/python.png",
+              alt: "Python logo"
+            },
+            {
+              name: "Alteryx",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755328950/alteryx_final_qokpep.webp",
+              alt: "Alteryx logo",
+            },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-advanced-calculations-analytics",
+            downloadCurriculum: "https://example.com/download-advanced-calculations-analytics",
+          },
         },
       ],
     },
+  ],
+},
+
 
     // Data for Certificate Component
     certificate: {
@@ -14712,36 +15203,138 @@ export const coursesData = {
 
     // Data for SapModComponent (course-specific syllabus)
     sapMod: {
-      title2:
-        '<span class="highlight-span-cards">DIGITAL MARKETING</span> Syllabus',
-      description:
-        "Industry aligned Digital Marketing syllabus with certification",
-      summary:
-        "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
-      noteMaster: "We provide advanced Digital Marketing training",
-      noteAdvance: "Advance",
-      features: [
-        { label: "10+", description: "Languages & Tools" },
-        { label: "280+", description: "Live Sessions Hours" },
-      ],
-      overview: {
-        title: "Syllabus Overview",
-        modules: [
-          { name: "Digital Marketing Overview", duration: "2 Weeks" },
-          { name: "AI in Digital Marketing", duration: "2 Weeks" },
-          { name: "Blog Creation", duration: "2.4 Weeks" },
-          { name: "Business Website Creation", duration: "2.4 Weeks" },
-          { name: "E-Commerce Creation", duration: "1.2 Weeks" },
-          { name: "Graphic Creation", duration: "3 Weeks" },
-          { name: "Video Creation", duration: "1.8 Weeks" },
-          { name: "Reels Mastery Program", duration: "4.4 Weeks" },
-          { name: "Search Engine Fundamentals", duration: "9 Weeks" },
-        ],
+  title2: "<span class=\"highlight-span-cards\">Digital Marketing</span> Syllabus",
+  description: "Industry aligned Digital Marketing syllabus with certification",
+  summary: "An exhaustive Syllabus designed by our industry experts which will help you to get placed in your dream IT company",
+  noteMaster: "We provide advanced Digital Marketing training",
+  features: [
+    { label: "10+", description: "Tools" }
+  ],
+  overview: {
+    title: "Syllabus Overview",
+    modules: [
+      {
+        name: "Digital Marketing Overview",
+        subtopics: [
+          "Introduction to Digital Marketing Ecosystem",
+          "Understanding Online Consumer Behaviour",
+          "Channels of Digital Marketing",
+          "Traditional vs Digital Marketing",
+          "Key Metrics & KPIs in Digital Marketing",
+          "Digital Campaign Planning Process",
+          "Latest Trends & Industry Insights",
+          "Career Opportunities in Digital Marketing"
+        ]
       },
-      videoUrl: "https://i.imgur.com/8wkvVyH.mp4",
-      downloadLink:
-        "https://drive.google.com/uc?export=download&id=1H5Wuu3AwsOanOgl5JFIOmC2vR555F2he",
-    },
+      {
+        name: "AI in Digital Marketing",
+        subtopics: [
+          "AI-powered Content Creation Tools",
+          "Chatbots & Customer Interaction",
+          "Predictive Analytics for Campaigns",
+          "Personalization with Machine Learning",
+          "AI-driven Ad Targeting",
+          "Voice Search Optimization",
+          "Image & Video Recognition Applications",
+          "Future of AI in Marketing"
+        ]
+      },
+      {
+        name: "Blog Creation",
+        subtopics: [
+          "Choosing a Blogging Platform",
+          "Setting up a Blog Website",
+          "Keyword Research for Blogs",
+          "Writing SEO-friendly Blog Posts",
+          "Optimizing Blog Layout & Design",
+          "Internal & External Linking Strategies",
+          "Promoting Blogs on Social Media",
+          "Tracking Blog Performance with Analytics"
+        ]
+      },
+      {
+        name: "Business Website Creation",
+        subtopics: [
+          "Introduction to Website Builders & CMS",
+          "Domain & Hosting Setup",
+          "Designing a Professional Layout",
+          "Adding Business Information & Pages",
+          "Integrating Contact Forms & Chat Widgets",
+          "Basic SEO Setup for Business Websites",
+          "Mobile Optimization Techniques",
+          "Website Security Essentials"
+        ]
+      },
+      {
+        name: "E-Commerce Creation",
+        subtopics: [
+          "E-Commerce Business Models",
+          "Setting up an Online Store",
+          "Product Listing & Categorization",
+          "Payment Gateway Integration",
+          "Shipping & Inventory Management",
+          "Creating Promotions & Discounts",
+          "Customer Review & Feedback Systems",
+          "E-Commerce SEO & Analytics"
+        ]
+      },
+      {
+        name: "Graphic Creation",
+        subtopics: [
+          "Introduction to Graphic Design Principles",
+          "Using Canva & Photoshop Basics",
+          "Creating Social Media Graphics",
+          "Designing Banners & Posters",
+          "Typography & Color Theory",
+          "Branding Elements in Graphics",
+          "Image Optimization for Web",
+          "Trends in Visual Content"
+        ]
+      },
+      {
+        name: "Video Creation",
+        subtopics: [
+          "Basics of Video Production",
+          "Scriptwriting for Videos",
+          "Shooting Techniques & Lighting",
+          "Editing Videos with Tools (Premiere Pro, CapCut)",
+          "Adding Music & Voiceovers",
+          "Creating Animated Explainers",
+          "Video SEO & Thumbnail Design",
+          "Publishing & Promoting Videos"
+        ]
+      },
+      {
+        name: "Reels Mastery Program",
+        subtopics: [
+          "Understanding Instagram & Facebook Reels",
+          "Trending Reels Content Ideas",
+          "Editing Reels on Mobile",
+          "Using Effects, Filters & Transitions",
+          "Reel SEO & Hashtag Strategy",
+          "Collaborations & Cross-Promotion",
+          "Analyzing Reel Insights",
+          "Monetizing Short-form Video Content"
+        ]
+      },
+      {
+        name: "Search Engine Fundamentals",
+        subtopics: [
+          "How Search Engines Work",
+          "Understanding SERP Features",
+          "Keyword Research Techniques",
+          "On-page SEO Fundamentals",
+          "Off-page SEO Strategies",
+          "Technical SEO Basics",
+          "SEO Tools Overview",
+          "Measuring SEO Performance"
+        ]
+      }
+    ]
+  },
+  videoUrl: "https://i.imgur.com/8wkvVyH.mp4",
+  downloadLink: "https://drive.google.com/uc?export=download&id=1H5Wuu3AwsOanOgl5JFIOmC2vR555F2he"
+},
 
     // Data for Certificate Component
     certificate: {
@@ -15135,107 +15728,175 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "HR TRAINING CURRICULUM",
-      tabs: [
+modulesData: {
+  title: "HR TRAINING CURRICULUM",
+  globalActions: {
+    startLearning: "https://example.com/start-learning-hr-training",
+    downloadCurriculum: "https://example.com/download-curriculum-hr-training",
+  },
+  banner: {
+    title: "Looking for HR Courses?",
+    subtitle: "No need to Google 10 tabs — everything's listed right here.",
+    image: "https://res.cloudinary.com/dudu879kr/image/upload/v1755005000/HRBanner_td8q4e.avif",
+    technologies: [
+      "HR Fundamentals",
+      "Recruitment",
+      "Employee Relations",
+      "Compliance",
+      "Performance Management",
+      "HRIS",
+      "Analytics",
+    ],
+  },
+  tabs: [
+    {
+      type: "modules", // Added this missing property
+      duration: "5.5 Months", // Added this missing property (total duration)
+      modules: [
         {
-          type: "beginner",
-          duration: "3 Months",
-          modules: [
-            {
-              title: "HR Fundamentals",
-              duration: "1 Month",
-              content: [
-                "Introduction to Human Resources and its role in organizations",
-                "HR functions and organizational structure",
-                "Employment law basics and compliance requirements",
-                "HR ethics and professional standards",
-                "Understanding organizational behavior and culture",
-                "HR metrics and key performance indicators",
-              ],
-            },
-            {
-              title: "Recruitment & Selection",
-              duration: "1 Month",
-              content: [
-                "Job analysis and job description creation",
-                "Recruitment strategies and sourcing techniques",
-                "Interview techniques and selection methods",
-                "Background verification and reference checks",
-                "Onboarding processes and orientation programs",
-                "Diversity and inclusion in hiring practices",
-              ],
-            },
-            {
-              title: "Employee Relations & Communication",
-              duration: "1 Month",
-              content: [
-                "Employee engagement and satisfaction surveys",
-                "Conflict resolution and mediation techniques",
-                "Grievance handling and disciplinary procedures",
-                "Internal communication strategies",
-                "Employee feedback and performance discussions",
-                "Workplace policies and procedure development",
-              ],
-            },
+          title: "HR Fundamentals",
+          duration: "1 Month",
+          content: [
+            "Role of HR in aligning workforce with company goals",
+            "Core HR functions like recruitment, payroll, and training",
+            "Basics of labor laws and compliance",
+            "Importance of ethics in HR operations",
+            "Understanding workplace culture and employee behavior",
           ],
+          detailedContent: [
+            "In-depth overview of HR responsibilities",
+            "Impact of HR functions on business growth",
+            "Compliance requirements and their implications",
+            "Ethical practices in hiring and employee management",
+            "Link between HR strategies and organizational culture",
+          ],
+          toolsAndTechnologies: [
+            { name: "BambooHR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1754997923/bamboo_HR_yb7hqs.webp", alt: "BambooHR" },
+            { name: "Zoho People", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755000268/zohopeople_r6psyf.webp", alt: "Zoho People" },
+            { name: "Microsoft Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+            { name: "SAP SuccessFactors", icon: "https://img.icons8.com/color/500/sap.png", alt: "SAP SuccessFactors" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-hr-fundamentals",
+            downloadCurriculum: "https://example.com/download-curriculum-hr-fundamentals",
+          },
         },
         {
-          type: "advanced",
-          duration: "6 Months",
-          modules: [
-            {
-              title: "Performance Management Systems",
-              duration: "1.5 Months",
-              content: [
-                "Performance appraisal methods and techniques",
-                "Goal setting and performance planning",
-                "360-degree feedback systems",
-                "Performance improvement plans",
-                "Career development and succession planning",
-                "Performance management software and tools",
-              ],
-            },
-            {
-              title: "Compensation & Benefits",
-              duration: "1.5 Months",
-              content: [
-                "Salary structure design and job evaluation",
-                "Market research and compensation benchmarking",
-                "Incentive and bonus program development",
-                "Benefits administration and management",
-                "Payroll processing and compliance",
-                "Total rewards strategy and communication",
-              ],
-            },
-            {
-              title: "Training & Development",
-              duration: "1.5 Months",
-              content: [
-                "Training needs analysis and assessment",
-                "Learning and development program design",
-                "Training delivery methods and techniques",
-                "E-learning and digital training platforms",
-                "Training evaluation and ROI measurement",
-                "Leadership development and mentoring programs",
-              ],
-            },
-            {
-              title: "HR Analytics & Strategic HR",
-              duration: "1.5 Months",
-              content: [
-                "HR data analysis and reporting",
-                "Workforce planning and forecasting",
-                "HR technology and HRIS systems",
-                "Strategic HR planning and alignment",
-                "Change management and organizational development",
-                "HR project management and implementation",
-              ],
-            },
+          title: "Recruitment & Selection",
+          duration: "1 Month",
+          content: [
+            "Conducting job analysis for role clarity",
+            "Creating accurate job descriptions",
+            "Effective sourcing strategies",
+            "Interviewing techniques for better selection",
+            "Onboarding new hires smoothly",
           ],
+          detailedContent: [
+            "Steps to analyze job roles effectively",
+            "Best practices for writing job descriptions",
+            "Finding candidates through multiple channels",
+            "Evaluating candidates with structured interviews",
+            "Building onboarding programs for retention",
+          ],
+          toolsAndTechnologies: [
+            { name: "LinkedIn Recruiter", icon: "https://img.icons8.com/color/500/linkedin.png", alt: "LinkedIn Recruiter" },
+            { name: "Indeed Hiring Platform", icon: "https://img.icons8.com/pulsar-line/480/indeed.png", alt: "Indeed Hiring Platform" },
+            { name: "Naukri RMS", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755001358/naukri.com_rms_piivxp.webp", alt: "Naukri RMS" },
+            { name: "Zoho Recruit", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755001539/zoho_recruit_sxfbl5.webp", alt: "Zoho Recruit" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-recruitment-selection",
+            downloadCurriculum: "https://example.com/download-curriculum-recruitment-selection",
+          },
+        },
+        {
+          title: "Employee Relations & Communication",
+          duration: "1 Month",
+          content: [
+            "Building employee engagement strategies",
+            "Conducting effective satisfaction surveys",
+            "Resolving workplace conflicts",
+            "Facilitating feedback sessions",
+            "Designing internal communication channels",
+          ],
+          detailedContent: [
+            "Importance of engagement in productivity",
+            "Survey creation and analysis",
+            "Conflict resolution models for HR",
+            "Using feedback to improve performance",
+            "Communication tools for team alignment",
+          ],
+          toolsAndTechnologies: [
+            { name: "Culture Amp", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755001766/culture_amp_xaony6.webp", alt: "Culture Amp" },
+            { name: "SurveyMonkey", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002146/surveymonkeyfinal_lwycel.webp", alt: "SurveyMonkey" },
+            { name: "Office 365", icon: "https://img.icons8.com/color/500/office-365.png", alt: "Office 365" },
+            { name: "Slack", icon: "https://img.icons8.com/color/500/slack-new.png", alt: "Slack" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-employee-relations",
+            downloadCurriculum: "https://example.com/download-curriculum-employee-relations",
+          },
+        },
+        {
+          title: "HR Ethics & Compliance",
+          duration: "1 Month",
+          content: [
+            "Understanding core employment laws",
+            "Monitoring compliance within HR processes",
+            "Designing policies to ensure compliance",
+            "Managing compliance audits effectively",
+            "Educating employees on legal requirements",
+          ],
+          detailedContent: [
+            "Key labor laws and their applications",
+            "Compliance frameworks for HR",
+            "Policy creation to meet legal standards",
+            "Steps in conducting compliance audits",
+            "Training staff on compliance awareness",
+          ],
+          toolsAndTechnologies: [
+            { name: "India Code Portal", icon: "https://img.icons8.com/color/500/law.png", alt: "India Code Portal" },
+            { name: "Tally ERP", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002296/tallyerp_jtv9cd.webp", alt: "Tally ERP" },
+            { name: "Microsoft Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+            { name: "Zoho People", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755000268/zohopeople_r6psyf.webp", alt: "Zoho People" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-hr-compliance",
+            downloadCurriculum: "https://example.com/download-curriculum-hr-compliance",
+          },
+        },
+        {
+          title: "Performance Management Systems",
+          duration: "1.5 Months",
+          content: [
+            "Creating structured appraisal methods",
+            "Defining measurable KPIs and OKRs",
+            "Conducting effective performance reviews",
+            "Implementing improvement plans",
+            "Integrating career development with performance",
+          ],
+          detailedContent: [
+            "Steps for building appraisal frameworks",
+            "Setting and tracking performance metrics",
+            "Techniques for unbiased performance reviews",
+            "How to design PIPs for underperformance",
+            "Career growth plans linked to performance data",
+          ],
+          toolsAndTechnologies: [
+            { name: "Keka HR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002620/keka_suvbot.webp", alt: "Keka HR" },
+            { name: "BambooHR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1754997923/bamboo_HR_yb7hqs.webp", alt: "BambooHR" },
+            { name: "Zoho People", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755000268/zohopeople_r6psyf.webp", alt: "Zoho People" },
+            { name: "Microsoft Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-performance-management",
+            downloadCurriculum: "https://example.com/download-curriculum-performance-management",
+          },
         },
       ],
     },
+  ],
+},
 
     // Data for Certificate Component
     certificate: {
@@ -15453,107 +16114,182 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "CORE HR CURRICULUM",
-      tabs: [
+  modulesData : {
+  title: "CORE HR CURRICULUM",
+  globalActions: {
+    startLearning: "https://connectingdotserp.com/enquiry",
+    downloadCurriculum: "/Curriculum/core-hr.pdf",
+  },
+  banner: {
+    title: "Master Core HR Skills",
+    subtitle: "From fundamentals to advanced HR operations — all in one course.",
+    image: "https://res.cloudinary.com/dudu879kr/image/upload/v1755005000/HRBanner_td8q4e.avif",
+    technologies: [
+      "HR Fundamentals",
+      "Recruitment & Selection",
+      "Payroll Management",
+      "Employee Relations",
+      "HR Operations & Analytics",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "2 Months",
-          modules: [
-            {
-              title: "HR Fundamentals & Policies",
-              duration: "2 Weeks",
-              content: [
-                "Introduction to Human Resources and organizational structure",
-                "HR roles and responsibilities in modern organizations",
-                "Understanding employment law basics and compliance",
-                "HR policy development and implementation",
-                "Employee handbook creation and management",
-                "Workplace ethics and professional standards",
-              ],
-            },
-            {
-              title: "Recruitment & Selection Process",
-              duration: "3 Weeks",
-              content: [
-                "Job analysis and job description writing",
-                "Recruitment strategies and sourcing techniques",
-                "Interview planning and conducting effective interviews",
-                "Selection methods and assessment techniques",
-                "Background verification and reference checking",
-                "Offer negotiation and onboarding preparation",
-              ],
-            },
-            {
-              title: "Payroll Management & Processing",
-              duration: "3 Weeks",
-              content: [
-                "Payroll fundamentals and statutory compliance",
-                "Salary structure design and components",
-                "Tax calculations and deductions",
-                "Payroll software and processing systems",
-                "Leave management and attendance tracking",
-                "Payroll reporting and documentation",
-              ],
-            },
+          title: "HR Fundamentals & Policies",
+          duration: "2 Weeks",
+          content: [
+            "Introduction to Human Resources and organizational structure",
+            "HR roles and responsibilities",
+            "Employment law basics",
+            "HR policy development",
+            "Employee handbook management",
+            "Workplace ethics",
           ],
+          detailedContent: [
+            "Understanding the structure and role of HR in modern organizations.",
+            "Exploring the core responsibilities of HR professionals.",
+            "Introduction to labor laws and compliance essentials.",
+            "Steps to create and implement effective HR policies.",
+            "Guidelines for maintaining an employee handbook.",
+            "Promoting workplace ethics and professional standards.",
+          ],
+          toolsAndTechnologies: [
+            { name: "MS Word", icon: "https://img.icons8.com/color/500/microsoft-word-2019--v1.png", alt: "MS Word" },
+            { name: "Google Docs", icon: "https://img.icons8.com/color/500/google-docs.png", alt: "Google Docs" },
+            { name: "HRMS", icon: "https://img.icons8.com/color/500/group.png", alt: "HRMS" },
+            { name: "Compliance Tools", icon: "https://img.icons8.com/color/500/checklist.png", alt: "Compliance Tools" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/core-hr.pdf",
+          },
         },
         {
-          type: "advanced",
-          duration: "4 Months",
-          modules: [
-            {
-              title: "Employee Relations & Engagement",
-              duration: "1 Month",
-              content: [
-                "Employee engagement strategies and measurement",
-                "Conflict resolution and mediation techniques",
-                "Grievance handling and disciplinary procedures",
-                "Employee communication and feedback systems",
-                "Workplace culture development",
-                "Employee retention strategies",
-              ],
-            },
-            {
-              title: "Labor Law & Compliance",
-              duration: "1 Month",
-              content: [
-                "Employment laws and regulations overview",
-                "Contract management and employment agreements",
-                "Workplace safety and health compliance",
-                "Anti-discrimination and harassment policies",
-                "Labor relations and union management",
-                "Legal documentation and record keeping",
-              ],
-            },
-            {
-              title: "Performance Management & Development",
-              duration: "1 Month",
-              content: [
-                "Performance appraisal systems and methods",
-                "Goal setting and performance planning",
-                "Performance improvement plans and coaching",
-                "Career development and succession planning",
-                "Training needs assessment and planning",
-                "Employee development programs",
-              ],
-            },
-            {
-              title: "HR Operations & Analytics",
-              duration: "1 Month",
-              content: [
-                "HR information systems (HRIS) and technology",
-                "HR metrics and key performance indicators",
-                "Data analysis and reporting for HR decisions",
-                "Workforce planning and forecasting",
-                "HR project management and implementation",
-                "Continuous improvement in HR processes",
-              ],
-            },
+          title: "Recruitment & Selection Process",
+          duration: "3 Weeks",
+          content: [
+            "Job analysis and description writing",
+            "Recruitment strategies",
+            "Interview planning",
+            "Selection and assessment",
+            "Background checks",
+            "Onboarding preparation",
           ],
+          detailedContent: [
+            "Steps to perform job analysis and craft clear job descriptions.",
+            "Modern recruitment strategies and sourcing techniques.",
+            "Planning and conducting structured interviews.",
+            "Assessment methods for effective candidate selection.",
+            "Background verification and reference checks.",
+            "Creating a smooth onboarding experience.",
+          ],
+          toolsAndTechnologies: [
+            { name: "LinkedIn Recruiter", icon: "https://img.icons8.com/color/500/linkedin.png", alt: "LinkedIn Recruiter" },
+            { name: "Google Sheets", icon: "https://img.icons8.com/color/500/google-sheets.png", alt: "Google Sheets" },
+            { name: "ATS Software", icon: "https://img.icons8.com/color/500/task.png", alt: "ATS Software" },
+            { name: "Zoom/Meet", icon: "https://img.icons8.com/color/500/video-call.png", alt: "Zoom/Meet" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/core-hr.pdf",
+          },
+        },
+        {
+          title: "Payroll Management & Processing",
+          duration: "3 Weeks",
+          content: [
+            "Payroll fundamentals",
+            "Salary structure design",
+            "Tax calculations",
+            "Payroll software usage",
+            "Leave and attendance tracking",
+            "Payroll reporting",
+          ],
+          detailedContent: [
+            "Key concepts of payroll and statutory compliance.",
+            "Designing salary structures and components.",
+            "Calculating taxes, deductions, and contributions.",
+            "Using payroll management software efficiently.",
+            "Tracking employee leaves and attendance.",
+            "Generating payroll reports and documentation.",
+          ],
+          toolsAndTechnologies: [
+            { name: "Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Excel" },
+            { name: "Tally Payroll", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002296/tallyerp_jtv9cd.webp", alt: "Tally Payroll" },
+            { name: "Zoho Payroll", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755003164/zohopayroll_i6rygv.webp", alt: "Zoho Payroll" },
+            { name: "HRMS Attendance", icon: "https://img.icons8.com/color/500/group.png", alt: "HRMS Attendance" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/core-hr.pdf",
+          },
+        },
+        {
+          title: "Employee Relations & Engagement",
+          duration: "1 Month",
+          content: [
+            "Engagement strategies",
+            "Conflict resolution",
+            "Grievance handling",
+            "Employee communication",
+            "Workplace culture",
+            "Retention strategies",
+          ],
+          detailedContent: [
+            "Methods to enhance employee engagement and satisfaction.",
+            "Conflict resolution approaches and mediation techniques.",
+            "Processes for grievance handling and discipline.",
+            "Improving communication between HR and employees.",
+            "Building a positive workplace culture.",
+            "Strategies to retain top talent.",
+          ],
+          toolsAndTechnologies: [
+            { name: "SurveyMonkey", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002146/surveymonkeyfinal_lwycel.webp", alt: "SurveyMonkey" },
+            { name: "Slack", icon: "https://img.icons8.com/color/500/slack.png", alt: "Slack" },
+            { name: "Google Forms", icon: "https://img.icons8.com/color/500/google-forms.png", alt: "Google Forms" },
+            { name: "Engagement Tools", icon: "https://img.icons8.com/color/500/handshake.png", alt: "Engagement Tools" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/core-hr.pdf",
+          },
+        },
+        {
+          title: "HR Operations & Analytics",
+          duration: "1 Month",
+          content: [
+            "HRIS and technology",
+            "HR metrics and KPIs",
+            "Data analysis in HR",
+            "Workforce planning",
+            "Project management",
+            "Continuous improvement",
+          ],
+          detailedContent: [
+            "Using HR information systems for operational efficiency.",
+            "Tracking and analyzing HR metrics for decision-making.",
+            "Data analysis methods to improve HR functions.",
+            "Forecasting workforce needs and planning resources.",
+            "Managing HR projects from initiation to completion.",
+            "Ongoing process improvements in HR operations.",
+          ],
+          toolsAndTechnologies: [
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+            { name: "BambooHR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1754997923/bamboo_HR_yb7hqs.webp", alt: "BambooHR" },
+            { name: "MS Project", icon: "https://img.icons8.com/color/500/project.png", alt: "MS Project" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/core-hr.pdf",
+          },
         },
       ],
     },
+  ],
+},
+
 
     // Data for Certificate Component
     certificate: {
@@ -15753,107 +16489,173 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "HR GENERALIST CURRICULUM",
-      tabs: [
+ modulesData : {
+  title: "HR Generalist Curriculum",
+  globalActions: {
+    startLearning: "https://example.com/start-learning-hr-generalist",
+    downloadCurriculum: "https://example.com/download-curriculum-hr-generalist",
+  },
+  banner: {
+    title: "Become an HR Generalist Expert",
+    subtitle: "Master recruitment, employee engagement, payroll, compliance, and performance management.",
+    image: "https://res.cloudinary.com/dudu879kr/image/upload/v1755005000/HRBanner_td8q4e.avif",
+    technologies: [
+      "HR Fundamentals",
+      "Recruitment",
+      "Employee Engagement",
+      "Payroll Management",
+      "Performance Management",
+      "Labor Law",
+      "HR Analytics",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "2 Months",
-          modules: [
-            {
-              title: "HR Fundamentals & Organization",
-              duration: "2 Weeks",
-              content: [
-                "Introduction to Human Resources and organizational structure",
-                "HR roles and responsibilities in modern organizations",
-                "Understanding employment law basics and compliance requirements",
-                "HR ethics and professional standards",
-                "Organizational behavior and workplace culture",
-                "HR metrics and performance indicators",
-              ],
-            },
-            {
-              title: "Recruitment & Talent Acquisition",
-              duration: "3 Weeks",
-              content: [
-                "Job analysis and competency-based job descriptions",
-                "Recruitment strategies and multi-channel sourcing",
-                "Interview techniques and behavioral assessment",
-                "Selection methods and candidate evaluation",
-                "Background verification and reference checking",
-                "Offer negotiation and candidate experience management",
-              ],
-            },
-            {
-              title: "Employee Relations & Engagement",
-              duration: "3 Weeks",
-              content: [
-                "Employee engagement strategies and measurement tools",
-                "Conflict resolution and mediation techniques",
-                "Grievance handling and disciplinary procedures",
-                "Employee communication and feedback systems",
-                "Workplace culture development and team building",
-                "Employee retention strategies and exit interviews",
-              ],
-            },
+          title: "HR Fundamentals & Organization",
+          duration: "2 Weeks",
+          content: [
+            "Introduction to HR and organizational structure",
+            "Roles and responsibilities in HR",
+            "Basics of employment law and compliance",
+            "HR ethics and workplace professionalism",
+            "Understanding organizational behavior",
           ],
+          detailedContent: [
+            "History and evolution of HR functions",
+            "Core HR responsibilities and impact on business",
+            "Compliance essentials for HR processes",
+            "Professional ethics in HR decision making",
+            "Influence of culture on organizational performance",
+          ],
+          toolsAndTechnologies: [
+            { name: "BambooHR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1754997923/bamboo_HR_yb7hqs.webp", alt: "BambooHR" },
+            { name: "Zoho People", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755000268/zohopeople_r6psyf.webp", alt: "Zoho People" },
+            { name: "Microsoft Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+            { name: "SAP SuccessFactors", icon: "https://img.icons8.com/color/500/sap.png", alt: "SAP SuccessFactors" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-hr-fundamentals-organization",
+            downloadCurriculum: "https://example.com/download-curriculum-hr-fundamentals-organization",
+          },
         },
         {
-          type: "advanced",
-          duration: "4 Months",
-          modules: [
-            {
-              title: "Performance Management & Development",
-              duration: "1 Month",
-              content: [
-                "Performance appraisal systems and methodologies",
-                "Goal setting and performance planning frameworks",
-                "Performance improvement plans and coaching techniques",
-                "Career development and succession planning",
-                "Training needs assessment and learning programs",
-                "360-degree feedback and continuous performance management",
-              ],
-            },
-            {
-              title: "Payroll & Compensation Management",
-              duration: "1 Month",
-              content: [
-                "Payroll processing and statutory compliance",
-                "Salary structure design and job evaluation",
-                "Benefits administration and total rewards",
-                "Tax calculations and statutory deductions",
-                "Payroll software and HRIS systems",
-                "Compensation benchmarking and market analysis",
-              ],
-            },
-            {
-              title: "Labor Law & Compliance",
-              duration: "1 Month",
-              content: [
-                "Employment laws and regulatory compliance",
-                "Contract management and employment agreements",
-                "Workplace safety and health regulations",
-                "Anti-discrimination and harassment policies",
-                "Labor relations and union management",
-                "Legal documentation and audit preparation",
-              ],
-            },
-            {
-              title: "HR Analytics & Strategic Planning",
-              duration: "1 Month",
-              content: [
-                "HR information systems and technology tools",
-                "HR metrics, KPIs, and dashboard creation",
-                "Workforce planning and forecasting",
-                "Data analysis for HR decision making",
-                "Strategic HR planning and business alignment",
-                "Change management and organizational development",
-              ],
-            },
+          title: "Recruitment & Talent Acquisition",
+          duration: "3 Weeks",
+          content: [
+            "Job analysis and competency mapping",
+            "Multi-channel sourcing strategies",
+            "Interview planning and execution",
+            "Candidate assessment and selection",
+            "Offer negotiation and onboarding",
           ],
+          detailedContent: [
+            "Creating effective job descriptions",
+            "Optimizing recruitment channels",
+            "Behavioral and situational interviewing",
+            "Evaluation methods for candidate fit",
+            "Smooth onboarding for retention",
+          ],
+          toolsAndTechnologies: [
+            { name: "LinkedIn Recruiter", icon: "https://img.icons8.com/color/500/linkedin.png", alt: "LinkedIn Recruiter" },
+            { name: "Indeed", icon: "https://img.icons8.com/pulsar-line/480/indeed.png", alt: "Indeed" },
+            { name: "Naukri RMS", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755001358/naukri.com_rms_piivxp.webp", alt: "Naukri RMS" },
+            { name: "Zoho Recruit", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755001539/zoho_recruit_sxfbl5.webp", alt: "Zoho Recruit" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-recruitment-talent-acquisition",
+            downloadCurriculum: "https://example.com/download-curriculum-recruitment-talent-acquisition",
+          },
+        },
+        {
+          title: "Employee Relations & Engagement",
+          duration: "3 Weeks",
+          content: [
+            "Employee engagement strategies",
+            "Conflict resolution techniques",
+            "Grievance and disciplinary handling",
+            "Team building and workplace culture",
+            "Employee retention initiatives",
+          ],
+          detailedContent: [
+            "Methods to measure engagement",
+            "Practical conflict resolution approaches",
+            "Establishing grievance redressal systems",
+            "Building high-performance workplace cultures",
+            "Retention programs and exit interviews",
+          ],
+          toolsAndTechnologies: [
+            { name: "Officevibe", icon: "https://img.icons8.com/color/500/feedback.png", alt: "Officevibe" },
+            { name: "SurveyMonkey", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002146/surveymonkeyfinal_lwycel.webp", alt: "SurveyMonkey" },
+            { name: "Slack", icon: "https://img.icons8.com/color/500/slack.png", alt: "Slack" },
+            { name: "Zoho People", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755000268/zohopeople_r6psyf.webp", alt: "Zoho People" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-employee-relations-engagement",
+            downloadCurriculum: "https://example.com/download-curriculum-employee-relations-engagement",
+          },
+        },
+        {
+          title: "Payroll & Compensation Management",
+          duration: "1 Month",
+          content: [
+            "Payroll processing and compliance",
+            "Salary structure and job evaluation",
+            "Benefits administration",
+            "Tax calculation and deductions",
+            "Compensation benchmarking",
+          ],
+          detailedContent: [
+            "End-to-end payroll process management",
+            "Designing competitive salary structures",
+            "Administering benefits and perks",
+            "Statutory deductions and compliance",
+            "Analyzing market compensation trends",
+          ],
+          toolsAndTechnologies: [
+            { name: "GreytHR", icon: "https://img.icons8.com/color/500/payroll.png", alt: "GreytHR" },
+            { name: "Keka HR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002620/keka_suvbot.webp", alt: "Keka HR" },
+            { name: "Tally ERP", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002296/tallyerp_jtv9cd.webp", alt: "Tally ERP" },
+            { name: "Microsoft Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-payroll-compensation-management",
+            downloadCurriculum: "https://example.com/download-curriculum-payroll-compensation-management",
+          },
+        },
+        {
+          title: "Performance Management & Development",
+          duration: "1 Month",
+          content: [
+            "Performance appraisals",
+            "Goal setting and tracking",
+            "Performance improvement plans",
+            "Career development",
+            "Training needs assessment",
+          ],
+          detailedContent: [
+            "Designing appraisal systems",
+            "Setting SMART goals and KPIs",
+            "Coaching for performance improvement",
+            "Succession planning methods",
+            "Identifying learning needs for growth",
+          ],
+          toolsAndTechnologies: [
+            { name: "Keka HR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002620/keka_suvbot.webp", alt: "Keka HR" },
+            { name: "BambooHR", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1754997923/bamboo_HR_yb7hqs.webp", alt: "BambooHR" },
+            { name: "Zoho People", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755000268/zohopeople_r6psyf.webp", alt: "Zoho People" },
+            { name: "Microsoft Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Microsoft Excel" },
+          ],
+          actions: {
+            startLearning: "https://example.com/start-learning-performance-management-development",
+            downloadCurriculum: "https://example.com/download-curriculum-performance-management-development",
+          },
         },
       ],
     },
+  ],
+},
 
     // Data for Certificate Component
     certificate: {
@@ -16054,107 +16856,172 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "HR ANALYTICS CURRICULUM",
-      tabs: [
+ modulesData : {
+  title: "HR ANALYTICS CURRICULUM",
+  globalActions: {
+    startLearning: "https://connectingdotserp.com/enquiry",
+    downloadCurriculum: "/Curriculum/hr-analytics.pdf",
+  },
+  banner: {
+    title: "Master HR Analytics Skills",
+    subtitle: "From data collection to predictive modeling — all in one course.",
+    image: "https://res.cloudinary.com/dudu879kr/image/upload/v1755005000/HRBanner_td8q4e.avif",
+    technologies: [
+      "HR Analytics Fundamentals",
+      "Data Collection & Management",
+      "HR Metrics & KPIs",
+      "Workforce Planning",
+      "Predictive HR Analytics",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "3 Months",
-          modules: [
-            {
-              title: "HR Analytics Fundamentals",
-              duration: "1 Month",
-              content: [
-                "Introduction to HR Analytics and its business impact",
-                "Understanding HR data types and sources",
-                "Key HR metrics and KPIs for analysis",
-                "Data collection methods and best practices",
-                "Statistical concepts for HR professionals",
-                "Introduction to HR analytics tools and software",
-              ],
-            },
-            {
-              title: "Data Analysis Tools & Techniques",
-              duration: "1 Month",
-              content: [
-                "Excel for HR data analysis and visualization",
-                "Introduction to SQL for HR databases",
-                "Statistical analysis using R or Python basics",
-                "Data cleaning and preparation techniques",
-                "Creating charts and graphs for HR insights",
-                "Basic predictive modeling concepts",
-              ],
-            },
-            {
-              title: "HR Metrics & Reporting",
-              duration: "1 Month",
-              content: [
-                "Employee turnover analysis and prediction",
-                "Recruitment metrics and efficiency analysis",
-                "Performance management analytics",
-                "Employee engagement measurement",
-                "Compensation and benefits analysis",
-                "Creating HR dashboards and reports",
-              ],
-            },
+          title: "Introduction to HR Analytics",
+          duration: "2 Weeks",
+          content: [
+            "Overview of HR Analytics concepts",
+            "Role of analytics in strategic HR decisions",
+            "Applications in recruitment, retention, and performance",
+            "Importance of data-driven decision making",
+            "HR analytics career opportunities",
           ],
+          detailedContent: [
+            "Foundational understanding of HR Analytics and its purpose",
+            "How analytics improves decision-making in HR",
+            "Case studies of HR analytics in action",
+            "Core concepts and terminology",
+            "Trends shaping the future of HR analytics",
+          ],
+          toolsAndTechnologies: [
+            { name: "Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Excel" },
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+            { name: "Google Data Studio", icon: "https://img.icons8.com/color/500/google-data-studio.png", alt: "Google Data Studio" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-analytics.pdf",
+          },
         },
         {
-          type: "advanced",
-          duration: "5 Months",
-          modules: [
-            {
-              title: "Advanced Workforce Analytics",
-              duration: "1.5 Months",
-              content: [
-                "Advanced statistical methods for HR data",
-                "Predictive modeling for employee retention",
-                "Talent acquisition analytics and optimization",
-                "Workforce planning and forecasting models",
-                "Employee lifecycle analytics",
-                "Advanced data visualization techniques",
-              ],
-            },
-            {
-              title: "People Analytics Tools Mastery",
-              duration: "1.5 Months",
-              content: [
-                "Advanced Excel and Power BI for HR analytics",
-                "Tableau for HR dashboard development",
-                "Python/R for advanced HR data science",
-                "HRIS data extraction and analysis",
-                "Machine learning applications in HR",
-                "Automated reporting and alert systems",
-              ],
-            },
-            {
-              title: "Strategic HR Analytics",
-              duration: "1 Month",
-              content: [
-                "Business impact measurement of HR initiatives",
-                "ROI analysis for HR programs and investments",
-                "Diversity and inclusion analytics",
-                "Employee experience and journey mapping",
-                "Organizational network analysis",
-                "Change management through data insights",
-              ],
-            },
-            {
-              title: "Industry Projects & Case Studies",
-              duration: "1 Month",
-              content: [
-                "Real-world HR analytics projects",
-                "Industry-specific case study analysis",
-                "Building comprehensive HR analytics solutions",
-                "Presenting insights to stakeholders",
-                "Creating actionable recommendations from data",
-                "Portfolio development and career preparation",
-              ],
-            },
+          title: "Data Collection & Management",
+          duration: "3 Weeks",
+          content: [
+            "Collecting HR data from multiple sources",
+            "Cleaning and validating data",
+            "Data integration from HRMS and surveys",
+            "Ensuring data accuracy and consistency",
+            "Building a central HR data repository",
           ],
+          detailedContent: [
+            "Data collection techniques from HRMS, surveys, and performance tools",
+            "Data cleaning and preprocessing methods",
+            "Handling missing or inconsistent data",
+            "Data storage and management strategies",
+            "Best practices for ensuring reliable HR analytics",
+          ],
+          toolsAndTechnologies: [
+            { name: "MS Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "MS Excel" },
+            { name: "SQL", icon: "https://img.icons8.com/color/500/sql.png", alt: "SQL" },
+            { name: "HRMS Software", icon: "https://img.icons8.com/color/500/group.png", alt: "HRMS Software" },
+            { name: "Python", icon: "https://img.icons8.com/color/500/python.png", alt: "Python" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-analytics.pdf",
+          },
+        },
+        {
+          title: "HR Metrics & KPIs",
+          duration: "2 Weeks",
+          content: [
+            "Defining key HR metrics",
+            "Tracking employee turnover and retention",
+            "Measuring training ROI",
+            "Analyzing recruitment efficiency",
+            "Aligning KPIs with organizational goals",
+          ],
+          detailedContent: [
+            "Understanding turnover rate, employee satisfaction, cost per hire, and training ROI",
+            "Choosing the right KPIs for HR goals",
+            "Creating dashboards for HR metrics",
+            "Interpreting HR data for better decisions",
+            "Using metrics to forecast HR needs",
+          ],
+          toolsAndTechnologies: [
+            { name: "Excel Dashboards", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "Excel Dashboards" },
+            { name: "Google Sheets", icon: "https://img.icons8.com/color/500/google-sheets.png", alt: "Google Sheets" },
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-analytics.pdf",
+          },
+        },
+        {
+          title: "Workforce Planning & Optimization",
+          duration: "3 Weeks",
+          content: [
+            "Forecasting staffing needs",
+            "Identifying skill gaps",
+            "Optimizing headcount",
+            "Enhancing talent acquisition strategies",
+            "Reducing workforce risks",
+          ],
+          detailedContent: [
+            "How to forecast staffing needs using analytics",
+            "Strategies for identifying and filling skill gaps",
+            "Data-driven headcount optimization",
+            "Improving hiring efficiency through analytics",
+            "Mitigating HR-related risks with proactive planning",
+          ],
+          toolsAndTechnologies: [
+            { name: "MS Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "MS Excel" },
+            { name: "SPSS", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755003970/spss_y94w3k.webp", alt: "SPSS" },
+            { name: "Python", icon: "https://img.icons8.com/color/500/python.png", alt: "Python" },
+            { name: "Workforce Planning Tools", icon: "https://img.icons8.com/color/500/group.png", alt: "Workforce Planning Tools" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-analytics.pdf",
+          },
+        },
+        {
+          title: "Predictive HR Analytics",
+          duration: "1 Month",
+          content: [
+            "Introduction to predictive modeling",
+            "Forecasting employee turnover",
+            "Predicting hiring needs",
+            "Using machine learning in HR",
+            "Improving decision-making with predictions",
+          ],
+          detailedContent: [
+            "Overview of predictive analytics in HR",
+            "Techniques for predicting turnover, hiring needs, and performance trends",
+            "How machine learning enhances HR decisions",
+            "Statistical models for HR analytics",
+            "Case studies of predictive HR analytics applications",
+          ],
+          toolsAndTechnologies: [
+            { name: "Python", icon: "https://img.icons8.com/color/500/python.png", alt: "Python" },
+            { name: "R", icon: "https://img.icons8.com/fluency/500/r-project.png", alt: "R" },
+            { name: "SPSS", icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755003970/spss_y94w3k.webp", alt: "SPSS" },
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-analytics.pdf",
+          },
         },
       ],
     },
+  ],
+},
+
 
     // Data for Certificate Component
     certificate: {
@@ -16353,107 +17220,172 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "HR MANAGEMENT CURRICULUM",
-      tabs: [
+   modulesData : {
+  title: "HR MANAGEMENT CURRICULUM",
+  globalActions: {
+    startLearning: "https://connectingdotserp.com/enquiry",
+    downloadCurriculum: "/Curriculum/hr-management.pdf",
+  },
+  banner: {
+    title: "Become an Expert in HR Management",
+    subtitle: "From fundamentals to advanced strategy — all in one course.",
+    image: "https://res.cloudinary.com/dudu879kr/image/upload/v1755005000/HRBanner_td8q4e.avif",
+    technologies: [
+      "HR Fundamentals",
+      "Talent Management",
+      "Performance Management",
+      "Strategic HR Leadership",
+      "HR Analytics & Compliance",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "3 Months",
-          modules: [
-            {
-              title: "HR Fundamentals & Strategic Planning",
-              duration: "1 Month",
-              content: [
-                "Introduction to Human Resource Management and its strategic role",
-                "HR planning and workforce forecasting techniques",
-                "Organizational structure and HR's role in business strategy",
-                "HR metrics and key performance indicators",
-                "Understanding employment law and compliance requirements",
-                "HR ethics and professional standards in management",
-              ],
-            },
-            {
-              title: "Talent Management & Development",
-              duration: "1 Month",
-              content: [
-                "Talent acquisition strategies and recruitment planning",
-                "Employee onboarding and orientation programs",
-                "Training and development program design",
-                "Career development and succession planning",
-                "Leadership development and mentoring programs",
-                "Employee engagement and retention strategies",
-              ],
-            },
-            {
-              title: "Performance & Employee Relations",
-              duration: "1 Month",
-              content: [
-                "Performance management systems and appraisal methods",
-                "Goal setting and performance improvement planning",
-                "Employee relations and conflict resolution",
-                "Disciplinary procedures and grievance handling",
-                "Team building and organizational culture development",
-                "Communication strategies and feedback systems",
-              ],
-            },
+          title: "HR Fundamentals & Strategic Planning",
+          duration: "1 Month",
+          content: [
+            "Introduction to HRM and its strategic role",
+            "HR planning and workforce forecasting",
+            "Organizational structure and HR alignment",
+            "Key HR metrics and KPIs",
+            "Employment law basics and compliance",
           ],
+          detailedContent: [
+            "Understanding HR's contribution to organizational goals",
+            "Methods for workforce planning and forecasting",
+            "Designing organizational structures for efficiency",
+            "Identifying and tracking core HR KPIs",
+            "Ensuring HR compliance with legal requirements",
+          ],
+          toolsAndTechnologies: [
+            { name: "MS Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "MS Excel" },
+            { name: "Google Sheets", icon: "https://img.icons8.com/color/500/google-sheets.png", alt: "Google Sheets" },
+            { name: "HRMS Software", icon: "https://img.icons8.com/color/500/group.png", alt: "HRMS" },
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-management.pdf",
+          },
         },
         {
-          type: "advanced",
-          duration: "6 Months",
-          modules: [
-            {
-              title: "Strategic HR Leadership",
-              duration: "1.5 Months",
-              content: [
-                "Strategic HR planning and business alignment",
-                "Change management and organizational transformation",
-                "Leadership styles and management effectiveness",
-                "Decision-making and problem-solving in HR",
-                "Building high-performance teams and culture",
-                "Executive coaching and leadership development",
-              ],
-            },
-            {
-              title: "Compensation & Benefits Management",
-              duration: "1.5 Months",
-              content: [
-                "Compensation strategy and salary structure design",
-                "Job evaluation and market benchmarking",
-                "Benefits administration and total rewards programs",
-                "Incentive and bonus program development",
-                "Equity and fairness in compensation practices",
-                "Cost management and budget planning for HR",
-              ],
-            },
-            {
-              title: "HR Analytics & Technology",
-              duration: "1.5 Months",
-              content: [
-                "HR information systems and technology implementation",
-                "Data analytics for HR decision making",
-                "Workforce analytics and predictive modeling",
-                "HR dashboard creation and reporting",
-                "Digital transformation in HR processes",
-                "Automation and AI applications in HR",
-              ],
-            },
-            {
-              title: "Advanced HR Strategy & Compliance",
-              duration: "1.5 Months",
-              content: [
-                "Advanced employment law and regulatory compliance",
-                "Risk management and HR audit processes",
-                "Diversity, equity, and inclusion strategies",
-                "Global HR management and cross-cultural considerations",
-                "Mergers, acquisitions, and organizational restructuring",
-                "Strategic HR consulting and advisory skills",
-              ],
-            },
+          title: "Talent Management & Development",
+          duration: "1 Month",
+          content: [
+            "Talent acquisition and recruitment planning",
+            "Employee onboarding processes",
+            "Training and development design",
+            "Career and succession planning",
+            "Employee engagement strategies",
           ],
+          detailedContent: [
+            "Sourcing and selecting the right talent",
+            "Designing smooth onboarding experiences",
+            "Developing training programs for skill growth",
+            "Building succession pipelines for key roles",
+            "Improving retention through engagement initiatives",
+          ],
+          toolsAndTechnologies: [
+            { name: "LinkedIn Recruiter", icon: "https://img.icons8.com/color/500/linkedin.png", alt: "LinkedIn Recruiter" },
+            { name: "MS Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "MS Excel" },
+            { name: "LMS Platforms", icon: "https://img.icons8.com/color/500/training.png", alt: "LMS Platforms" },
+            { name: "Google Forms", icon: "https://img.icons8.com/color/500/google-forms.png", alt: "Google Forms" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-management.pdf",
+          },
+        },
+        {
+          title: "Performance & Employee Relations",
+          duration: "1 Month",
+          content: [
+            "Performance appraisal systems",
+            "Goal setting and performance planning",
+            "Conflict resolution in workplace",
+            "Grievance handling procedures",
+            "Team building and culture development",
+          ],
+          detailedContent: [
+            "Creating fair and measurable performance systems",
+            "Using SMART goals for performance planning",
+            "Mediation techniques for resolving disputes",
+            "Steps for handling grievances effectively",
+            "Developing a strong and positive work culture",
+          ],
+          toolsAndTechnologies: [
+            { name: "MS Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "MS Excel" },
+            { name: "Slack", icon: "https://img.icons8.com/color/500/slack-new.png", alt: "Slack" },
+            { name: "HRMS", icon: "https://img.icons8.com/color/500/group.png", alt: "HRMS" },
+            { name: "Google Workspace", icon: "https://img.icons8.com/color/500/google-logo.png", alt: "Google Workspace" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-management.pdf",
+          },
+        },
+        {
+          title: "Strategic HR Leadership",
+          duration: "1.5 Months",
+          content: [
+            "Strategic HR alignment with business goals",
+            "Change management strategies",
+            "Leadership styles in HR",
+            "Problem-solving in HR operations",
+            "Building high-performance cultures",
+          ],
+          detailedContent: [
+            "Aligning HR strategy with company objectives",
+            "Managing change with minimal disruption",
+            "Adapting leadership styles for different teams",
+            "Decision-making frameworks for HR challenges",
+            "Fostering productivity through culture building",
+          ],
+          toolsAndTechnologies: [
+            { name: "MS Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "MS Excel" },
+            { name: "Trello", icon: "https://img.icons8.com/color/500/trello.png", alt: "Trello" },
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+            { name: "Google Slides", icon: "https://img.icons8.com/color/500/google-slides.png", alt: "Google Slides" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-management.pdf",
+          },
+        },
+        {
+          title: "HR Analytics & Compliance",
+          duration: "1.5 Months",
+          content: [
+            "Advanced employment law compliance",
+            "Risk management in HR",
+            "Diversity and inclusion strategies",
+            "Global HR management",
+            "Mergers and restructuring in HR",
+          ],
+          detailedContent: [
+            "Keeping HR practices compliant with regulations",
+            "Identifying and mitigating HR risks",
+            "Implementing DEI programs effectively",
+            "Managing HR across multiple countries",
+            "Handling HR in mergers and acquisitions",
+          ],
+          toolsAndTechnologies: [
+            { name: "Power BI", icon: "https://img.icons8.com/color/500/power-bi.png", alt: "Power BI" },
+            { name: "MS Excel", icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png", alt: "MS Excel" },
+            { name: "HRMS", icon: "https://img.icons8.com/color/500/group.png", alt: "HRMS" },
+            { name: "Tableau", icon: "https://img.icons8.com/color/500/tableau-software.png", alt: "Tableau" },
+          ],
+          actions: {
+            startLearning: "https://connectingdotserp.com/enquiry",
+            downloadCurriculum: "/Curriculum/hr-management.pdf",
+          },
         },
       ],
     },
+  ],
+},
+
 
     // Data for Certificate Component
     certificate: {
@@ -16654,107 +17586,275 @@ export const coursesData = {
     },
 
     // Data for Modules Component (course-specific curriculum)
-    modulesData: {
-      title: "HR PAYROLL CURRICULUM",
-      tabs: [
+   modulesData : {
+  title: "HR PAYROLL CURRICULUM",
+  globalActions: {
+    startLearning: "https://example.com/start-learning-hr-payroll",
+    downloadCurriculum:
+      "https://example.com/download-curriculum-hr-payroll",
+  },
+  banner: {
+    title: "Looking for HR Courses?",
+    subtitle: "No need to Google 10 tabs — everything's listed right here.",
+    image:
+      "https://res.cloudinary.com/dudu879kr/image/upload/v1755005000/HRBanner_td8q4e.avif",
+    technologies: [
+      "Payroll",
+      "Tax Compliance",
+      "Benefits",
+      "HRIS",
+      "SAP",
+      "Oracle",
+      "QuickBooks",
+    ],
+  },
+  tabs: [
+    {
+      modules: [
         {
-          type: "beginner",
-          duration: "3 Months",
-          modules: [
+          title: "Payroll Fundamentals & Processing",
+          duration: "1 Month",
+          content: [
+            "Introduction to payroll management and its importance in HR",
+            "Understanding payroll cycles and processing timelines",
+            "Employee data collection and verification procedures",
+            "Basic salary calculations and wage structures",
+            "Time and attendance tracking systems",
+            "Payroll documentation and record keeping requirements",
+          ],
+          detailedContent: [
+            "Overview of payroll management concepts",
+            "Detailed payroll cycle steps and process mapping",
+            "HR data management best practices",
+            "Salary breakup structures with examples",
+            "Integration of time tracking with payroll",
+            "Legal requirements for payroll documentation",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "Payroll Fundamentals & Processing",
-              duration: "1 Month",
-              content: [
-                "Introduction to payroll management and its importance in HR",
-                "Understanding payroll cycles and processing timelines",
-                "Employee data collection and verification procedures",
-                "Basic salary calculations and wage structures",
-                "Time and attendance tracking systems",
-                "Payroll documentation and record keeping requirements",
-              ],
+              name: "SAP SuccessFactors Payroll",
+              icon: "https://img.icons8.com/color/500/sap.png",
+              alt: "SAP SuccessFactors Payroll",
             },
             {
-              title: "Tax Compliance & Statutory Deductions",
-              duration: "1 Month",
-              content: [
-                "Income tax calculations and TDS procedures",
-                "Provident Fund (PF) and Employee State Insurance (ESI) compliance",
-                "Professional tax and other statutory deductions",
-                "Form 16 generation and tax filing procedures",
-                "Annual tax planning and investment declarations",
-                "Compliance with labor laws and tax regulations",
-              ],
+              name: "Oracle PeopleSoft HCM",
+              icon: "https://img.icons8.com/color/500/oracle-logo.png",
+              alt: "Oracle PeopleSoft HCM",
             },
             {
-              title: "Benefits Administration & Reporting",
-              duration: "1 Month",
-              content: [
-                "Employee benefits management and administration",
-                "Leave management and leave encashment calculations",
-                "Bonus and incentive calculations",
-                "Reimbursement processing and expense management",
-                "Payroll reporting and MIS generation",
-                "Basic payroll software operations and data entry",
-              ],
+              name: "ADP Workforce Now",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755003316/adp_ga50a9.webp",
+              alt: "ADP Workforce Now",
+            },
+            {
+              name: "QuickBooks Payroll",
+              icon: "https://img.icons8.com/dusk/100/quickbooks.png",
+              alt: "QuickBooks Payroll",
             },
           ],
+          actions: {
+            startLearning:
+              "https://example.com/start-learning-payroll-fundamentals",
+            downloadCurriculum:
+              "https://example.com/download-curriculum-payroll-fundamentals",
+          },
         },
         {
-          type: "advanced",
-          duration: "5 Months",
-          modules: [
+          title: "Tax Compliance & Statutory Deductions",
+          duration: "1 Month",
+          content: [
+            "Income tax calculations and TDS procedures",
+            "Provident Fund (PF) and Employee State Insurance (ESI) compliance",
+            "Professional tax and other statutory deductions",
+            "Form 16 generation and tax filing procedures",
+            "Annual tax planning and investment declarations",
+            "Compliance with labor laws and tax regulations",
+          ],
+          detailedContent: [
+            "Step-by-step TDS deduction process",
+            "PF & ESI registration and filing",
+            "Professional tax compliance for different states",
+            "Form 16 generation workflow",
+            "Year-end tax reconciliation",
+            "Audit readiness for payroll taxes",
+          ],
+          toolsAndTechnologies: [
             {
-              title: "Advanced Payroll Systems & Software",
-              duration: "1.5 Months",
-              content: [
-                "Advanced HRIS and payroll software management",
-                "Payroll system configuration and customization",
-                "Integration of payroll with other HR modules",
-                "Automated payroll processing and workflow management",
-                "Data migration and system implementation",
-                "Troubleshooting and system maintenance procedures",
-              ],
+              name: "ClearTax",
+              icon: "https://img.icons8.com/color/500/tax.png",
+              alt: "ClearTax",
             },
             {
-              title: "Compensation Design & Structure",
-              duration: "1.5 Months",
-              content: [
-                "Salary structure design and job evaluation methods",
-                "Variable pay and performance-based compensation",
-                "Executive compensation and stock option plans",
-                "Cost-to-company (CTC) calculations and breakdowns",
-                "Compensation benchmarking and market analysis",
-                "Total rewards strategy and implementation",
-              ],
+              name: "Tally ERP",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002296/tallyerp_jtv9cd.webp",
+              alt: "Tally ERP",
             },
             {
-              title: "Payroll Compliance & Risk Management",
-              duration: "1 Month",
-              content: [
-                "Advanced labor law compliance and regulatory updates",
-                "Payroll audit procedures and internal controls",
-                "Risk assessment and mitigation strategies",
-                "Handling payroll disputes and grievances",
-                "Data security and confidentiality in payroll",
-                "Multi-location and multi-state payroll compliance",
-              ],
+              name: "Excel",
+              icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png",
+              alt: "Excel",
             },
             {
-              title: "Analytics & Strategic Payroll Management",
-              duration: "1 Month",
-              content: [
-                "Payroll analytics and cost analysis",
-                "Budgeting and forecasting for payroll expenses",
-                "ROI analysis for payroll investments",
-                "Strategic payroll planning and optimization",
-                "Vendor management for payroll outsourcing",
-                "Change management in payroll processes",
-              ],
+              name: "QuickBooks Payroll",
+              icon: "https://img.icons8.com/dusk/100/quickbooks.png",
+              alt: "QuickBooks Payroll",
             },
           ],
+          actions: {
+            startLearning:
+              "https://example.com/start-learning-tax-compliance",
+            downloadCurriculum:
+              "https://example.com/download-curriculum-tax-compliance",
+          },
+        },
+        {
+          title: "Benefits Administration & Reporting",
+          duration: "1 Month",
+          content: [
+            "Employee benefits management and administration",
+            "Leave management and leave encashment calculations",
+            "Bonus and incentive calculations",
+            "Reimbursement processing and expense management",
+            "Payroll reporting and MIS generation",
+            "Basic payroll software operations and data entry",
+          ],
+          detailedContent: [
+            "Defining benefits policies",
+            "Leave balance tracking",
+            "Annual bonus computation",
+            "Expense reimbursement workflow",
+            "Generating payroll MIS reports",
+            "Hands-on payroll software usage",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "Zoho People",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755000268/zohopeople_r6psyf.webp",
+              alt: "Zoho People",
+            },
+            {
+              name: "BambooHR",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1754997923/bamboo_HR_yb7hqs.webp",
+              alt: "BambooHR",
+            },
+            {
+              name: "Excel",
+              icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png",
+              alt: "Excel",
+            },
+            {
+              name: "QuickBooks Payroll",
+              icon: "https://img.icons8.com/dusk/100/quickbooks.png",
+              alt: "QuickBooks Payroll",
+            },
+          ],
+          actions: {
+            startLearning:
+              "https://example.com/start-learning-benefits-admin",
+            downloadCurriculum:
+              "https://example.com/download-curriculum-benefits-admin",
+          },
+        },
+        {
+          title: "Compliance with Labor Laws",
+          duration: "1 Month",
+          content: [
+            "Understanding key labor laws affecting payroll",
+            "Minimum Wages Act and compliance",
+            "Payment of Wages Act procedures",
+            "Gratuity calculation and compliance",
+            "Maternity and paternity benefits",
+            "ESI and PF related inspections",
+          ],
+          detailedContent: [
+            "Overview of labor law requirements",
+            "Handling compliance audits",
+            "Gratuity eligibility & payout process",
+            "Mandatory benefits under law",
+            "Dealing with inspectors and notices",
+            "Maintaining compliance records",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "India Code Portal",
+              icon: "https://img.icons8.com/color/500/law.png",
+              alt: "India Code Portal",
+            },
+            {
+              name: "Excel",
+              icon: "https://img.icons8.com/color/500/microsoft-excel-2019--v1.png",
+              alt: "Excel",
+            },
+            {
+              name: "Tally ERP",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755002296/tallyerp_jtv9cd.webp",
+              alt: "Tally ERP",
+            },
+            {
+              name: "QuickBooks Payroll",
+              icon: "https://img.icons8.com/dusk/100/quickbooks.png",
+              alt: "QuickBooks Payroll",
+            },
+          ],
+          actions: {
+            startLearning:
+              "https://example.com/start-learning-labor-laws",
+            downloadCurriculum:
+              "https://example.com/download-curriculum-labor-laws",
+          },
+        },
+        {
+          title: "Advanced Payroll Systems & Software",
+          duration: "1.5 Months",
+          content: [
+            "Advanced HRIS and payroll software management",
+            "Payroll system configuration and customization",
+            "Integration of payroll with other HR modules",
+            "Automated payroll processing and workflow management",
+            "Data migration and system implementation",
+            "Troubleshooting and system maintenance procedures",
+          ],
+          detailedContent: [
+            "Advanced payroll software features",
+            "Customization for organizational needs",
+            "System integration best practices",
+            "Automation scripts for payroll processing",
+            "Migrating data securely",
+            "Preventive maintenance for payroll systems",
+          ],
+          toolsAndTechnologies: [
+            {
+              name: "SAP SuccessFactors Payroll",
+              icon: "https://img.icons8.com/color/500/sap.png",
+              alt: "SAP SuccessFactors Payroll",
+            },
+            {
+              name: "Oracle PeopleSoft HCM",
+              icon: "https://img.icons8.com/color/500/oracle-logo.png",
+              alt: "Oracle PeopleSoft HCM",
+            },
+            {
+              name: "ADP Workforce Now",
+              icon: "https://res.cloudinary.com/dudu879kr/image/upload/v1755003316/adp_ga50a9.webp",
+              alt: "ADP Workforce Now",
+            },
+            {
+              name: "QuickBooks Payroll",
+              icon: "https://img.icons8.com/dusk/100/quickbooks.png",
+              alt: "QuickBooks Payroll",
+            },
+          ],
+          actions: {
+            startLearning:
+              "https://example.com/start-learning-advanced-payroll",
+            downloadCurriculum:
+              "https://example.com/download-curriculum-advanced-payroll",
+          },
         },
       ],
     },
+  ],
+},
 
     // Data for Certificate Component
     certificate: {

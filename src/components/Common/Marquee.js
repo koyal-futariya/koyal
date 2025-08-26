@@ -41,7 +41,7 @@ const formatDate = (date) => {
 
 // Helper function to calculate the next target date
 const getNextTargetDate = () => {
-  const targetDays = [5, 10, 15, 20, 25, 30];
+  const targetDays = [5, 10, 15, 20, 25, 27]; // Changed from 30 to 27
   const today = new Date();
   const currentDay = today.getDate();
   const currentMonth = today.getMonth();
@@ -128,4 +128,3 @@ const Marquee = () => {
 };
 
 export default Marquee;
- 

@@ -18,4 +18,3 @@ const ChatbotIcon = ({ onClick }) => {
   };
   
   export default ChatbotIcon;
-  

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Btnform from "@/components/HomePage/Btnform";
+import BackgroundAnimation from "@/components/Common/BackgroundAnimation";
 
 // SapModComponent receives data prop directly from parent
 const SapModComponent = ({ data }) => {
@@ -12,57 +13,140 @@ const SapModComponent = ({ data }) => {
   const [hoveredModuleIdx, setHoveredModuleIdx] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [courseImage, setCourseImage] = useState("");
+  const [isTouch, setIsTouch] = useState(false);
+
+  // Detect if device supports touch
+  useEffect(() => {
+    const checkTouch = () => {
+      setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    
+    checkTouch();
+    window.addEventListener('touchstart', checkTouch, { once: true });
+    
+    return () => {
+      window.removeEventListener('touchstart', checkTouch);
+    };
+  }, []);
+
+  // Define course images
+  const courseImages = {
+    sap: "https://res.cloudinary.com/dudu879kr/image/upload/v1752142527/SAP_cderp_bperso.webp",
+    digitalMarketing: "https://res.cloudinary.com/drvug594q/image/upload/v1754983203/Digital_marketing_bnmku7.webp",
+    default: "https://res.cloudinary.com/dudu879kr/image/upload/v1752142527/SAP_cderp_bperso.webp"
+  };
+
+  // Function to determine course type and set appropriate image
+  const setCourseImageBasedOnType = (courseData) => {
+    if (!courseData) return;
+
+    const rawTitle = courseData.title || courseData.title2 || "";
+    const cleanTitle = rawTitle.replace(/<[^>]*>/g, "").toLowerCase();
+    const title = cleanTitle;
+    const description = (courseData.description || "").toLowerCase();
+    const courseType = courseData.courseType?.toLowerCase() || "";
+    const slug = courseData.slug?.toLowerCase() || "";
+    const summary = (courseData.summary || "").toLowerCase();
+
+    console.log('=== COURSE DETECTION DEBUG ===');
+    console.log('Raw Course Data:', courseData);
+    console.log('Processed Values:', {
+      rawTitle: courseData.title || courseData.title2,
+      cleanTitle: title,
+      description,
+      courseType,
+      slug,
+      summary
+    });
+
+    // Check for Digital Marketing courses first (more specific)
+    if (
+      title.includes('digital marketing') || 
+      title.includes('digital') || 
+      title.includes('marketing') || 
+      description.includes('digital marketing') || 
+      description.includes('digital') ||
+      description.includes('marketing') ||
+      summary.includes('digital marketing') ||
+      summary.includes('digital') ||
+      summary.includes('marketing') ||
+      courseType.includes('marketing') ||
+      courseType.includes('digital') ||
+      slug.includes('marketing') ||
+      slug.includes('digital')
+    ) {
+      console.log('✅ DETECTED: Digital Marketing Course');
+      setCourseImage(courseImages.digitalMarketing);
+    }
+    // Check for SAP courses
+    else if (title.includes('sap') || description.includes('sap') || courseType.includes('sap') || slug.includes('sap')) {
+      console.log('✅ DETECTED: SAP Course');
+      setCourseImage(courseImages.sap);
+    }
+    // Add more conditions for other course types
+    else {
+      console.log('⚠️ NO MATCH: Using Default Image');
+      setCourseImage(courseImages.default);
+    }
+    console.log('=== END DEBUG ===');
+  };
 
   // Transform data when the data prop changes
   useEffect(() => {
     if (!data) return;
 
-    // Transform curriculum data
+    // Set course image based on course type
+    setCourseImageBasedOnType(data);
+
+    // Transform curriculum data - FIXED LOGIC
     let transformedCurriculum = [];
+
+    console.log('=== CURRICULUM TRANSFORMATION DEBUG ===');
+    console.log('Input data structure:', data);
 
     // Check different data structures for curriculum
     if (data.overview?.modules && Array.isArray(data.overview.modules)) {
-      // Standard sapMod structure
-      transformedCurriculum = data.overview.modules.map((mod) => ({
-        title: mod.name,
-        labelColor: "bg-lime-300",
-        duration: mod.duration || "1-2 weeks",
-        topics: mod.subtopics || [], // Changed from topics to subtopics
-      }));
+      console.log('Using overview.modules structure');
+      transformedCurriculum = data.overview.modules.map((mod, index) => {
+        console.log(`Module ${index}:`, mod);
+        return {
+          title: mod.title || mod.name, // Check both title and name
+          labelColor: "bg-lime-300",
+          duration: mod.duration || "1-2 weeks",
+          topics: Array.isArray(mod.subtopics) ? mod.subtopics : [], // Ensure it's an array
+        };
+      });
     } else if (data.modules && Array.isArray(data.modules)) {
-      // Direct modules structure (your JSON format)
-      transformedCurriculum = data.modules.map((mod) => ({
-        title: mod.name,
-        labelColor: "bg-lime-300",
-        duration: mod.duration || "1-2 weeks",
-        topics: mod.subtopics || [], // Use subtopics from your JSON
-      }));
-    } else if (
-      data.modules &&
-      Array.isArray(data.modules) &&
-      data.modules[0]?.title &&
-      Array.isArray(data.modules[0]?.subtopics)
-    ) {
-      // Alternative modules structure with subtopics
-      transformedCurriculum = data.modules.map((mod) => ({
-        title: mod.title,
-        labelColor: "bg-lime-300",
-        duration: mod.duration || "1-2 weeks",
-        topics: Array.isArray(mod.subtopics) ? mod.subtopics : [],
-      }));
-    } else if (
-      data.modules &&
-      Array.isArray(data.modules) &&
-      typeof data.modules[0] === "string"
-    ) {
-      // Simple string modules
-      transformedCurriculum = data.modules.map((title) => ({
-        title,
-        labelColor: "bg-lime-300",
-        duration: "1-2 weeks",
-        topics: [],
-      }));
+      console.log('Using direct modules structure');
+      transformedCurriculum = data.modules.map((mod, index) => {
+        console.log(`Module ${index}:`, mod);
+        return {
+          title: mod.title || mod.name, // Check both title and name
+          labelColor: "bg-lime-300",
+          duration: mod.duration || "1-2 weeks",
+          topics: Array.isArray(mod.subtopics) ? mod.subtopics : [], // Ensure it's an array
+        };
+      });
+    } else if (typeof data.modules === 'object' && data.modules !== null) {
+      // Handle case where modules is an object with string keys
+      console.log('Using modules object structure');
+      const moduleKeys = Object.keys(data.modules);
+      transformedCurriculum = moduleKeys.map((key, index) => {
+        const mod = data.modules[key];
+        console.log(`Module ${index} (${key}):`, mod);
+        return {
+          title: mod.title || mod.name || key,
+          labelColor: "bg-lime-300", 
+          duration: mod.duration || "1-2 weeks",
+          topics: Array.isArray(mod.subtopics) ? mod.subtopics : 
+                   Array.isArray(mod.topics) ? mod.topics : [],
+        };
+      });
     }
+
+    console.log('Final transformed curriculum:', transformedCurriculum);
+    console.log('=== END CURRICULUM DEBUG ===');
 
     setCurriculum(transformedCurriculum);
 
@@ -118,7 +202,7 @@ const SapModComponent = ({ data }) => {
     }
   }, [curriculum]);
 
-  // Form handling (simplified like Counselor component)
+  // Form handling
   const handleDownloadBrochureClick = () => {
     setShowForm(true);
   };
@@ -131,7 +215,6 @@ const SapModComponent = ({ data }) => {
     setFormSubmitted(true);
     setShowForm(false);
 
-    // After form submission, download file
     setTimeout(() => {
       if (data && data.downloadLink) {
         const link = document.createElement("a");
@@ -144,6 +227,32 @@ const SapModComponent = ({ data }) => {
         alert("Download link is not available.");
       }
     }, 1000);
+  };
+
+  // Function to get alt text based on course type
+  const getImageAltText = () => {
+    const title = (data?.title || data?.title2 || "").toLowerCase();
+    if (title.includes('sap')) return "SAP Course";
+    if (title.includes('marketing')) return "Digital Marketing Course";
+    return "Course Image";
+  };
+
+  // Handle module interaction - separated for touch vs mouse
+  const handleModuleInteraction = (idx, isHover = false) => {
+    if (isTouch && isHover) return; // Skip hover events on touch devices
+    
+    if (isHover) {
+      setOpenIdx(idx);
+      setHoveredModuleIdx(idx);
+    } else {
+      // Click/tap handler
+      setOpenIdx(openIdx === idx ? -1 : idx);
+    }
+  };
+
+  const handleModuleLeave = () => {
+    if (isTouch) return; // Skip mouse leave on touch devices
+    setHoveredModuleIdx(null);
   };
 
   // No data state
@@ -160,19 +269,32 @@ const SapModComponent = ({ data }) => {
   }
 
   return (
-    <div className="w-full bg-[#2d2d2d] mb-4 sm:mb-4 lg:mb-4">
-      <div className="bg-[#2d2d2d] flex flex-col items-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 min-h-[600px]">
+    <div className="w-full mb-4 sm:mb-4 lg:mb-4 relative">
+      <BackgroundAnimation />
+      <div className="flex flex-col items-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 min-h-[600px] relative z-10">
         {/* Header */}
         <div className="w-full max-w-6xl mb-6 sm:mb-8">
           <h1
-            className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white text-center"
+            className="text-4xl font-extrabold tracking-wider mb-3 text-white text-center"
             style={{
-              fontFamily: "Inter, Segoe UI, Roboto, Arial, sans-serif",
-              letterSpacing: "-0.5px",
+              textShadow: '0 0 16px #fff, 0 0 32px #80d8ff',
+              fontFamily: 'Montserrat, Quicksand, Arial, sans-serif',
+              letterSpacing: '0.12em',
+              lineHeight: 1.1
             }}
           >
             SYLLABUS
           </h1>
+          <div 
+            style={{
+              width: '80px',
+              height: '4px',
+              background: 'linear-gradient(90deg, #a76b2e, #f18436)',
+              margin: '5px auto 10px',
+              borderRadius: '2px',
+              marginBottom: '1rem'
+            }}
+          />
         </div>
 
         <div className="flex flex-col md:flex-row gap-6 sm:gap-8 w-full max-w-6xl items-start">
@@ -245,14 +367,26 @@ const SapModComponent = ({ data }) => {
                   ))}
               </div>
 
-              {/* SAP Course Image */}
+              {/* Dynamic Course Image */}
               <div className="mt-4 flex justify-center">
-                <img
-                  src="https://res.cloudinary.com/dudu879kr/image/upload/v1752142527/SAP_cderp_bperso.webp"
-                  alt="SAP Course"
-                  className="w-full max-w-xs rounded-lg shadow-lg"
-                  style={{ maxWidth: "100%" }}
-                />
+                {courseImage && (
+                  <img
+                    src={courseImage}
+                    alt={getImageAltText()}
+                    className="w-full max-w-xs rounded-lg shadow-lg transition-opacity duration-300"
+                    style={{ maxWidth: "100%" }}
+                    onLoad={() => {
+                      console.log('🖼️ Image loaded successfully:', courseImage);
+                    }}
+                    onError={(e) => {
+                      console.log('❌ Image failed to load:', courseImage);
+                      console.log('🔄 Falling back to default image');
+                      if (e.target.src !== courseImages.default) {
+                        e.target.src = courseImages.default;
+                      }
+                    }}
+                  />
+                )}
               </div>
 
               {/* Download Brochure button for desktop */}
@@ -261,7 +395,7 @@ const SapModComponent = ({ data }) => {
                 className="mt-4 font-bold rounded-full py-2 px-6 transition-all duration-200 items-center justify-center gap-2 text-base hidden sm:flex shadow-lg border-0 bg-[#091327] text-white"
                 style={{ boxShadow: "0 4px 16px 0 rgba(0,0,0,0.18)" }}
               >
-                Download Brochure
+                Download Syllabus
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="22"
@@ -291,15 +425,15 @@ const SapModComponent = ({ data }) => {
 
               {/* Note master */}
               {data.noteMaster && (
-                <p className="text-red-300 text-center text-sm mt-2">
+                <p className="text-white text-center text-sm mt-2">
                   {data.noteMaster}
                 </p>
               )}
             </div>
           </div>
 
-          {/* Progress Bar - Hidden on mobile */}
-          <div className="hidden md:flex flex-col items-center justify-center px-4 mt-2">
+          {/* Progress Bar - Hidden on mobile and tablet */}
+          <div className="hidden lg:flex flex-col items-center justify-center px-4 mt-2">
             <ProgressBar steps={curriculum.length} activeStep={openIdx} />
           </div>
 
@@ -320,14 +454,12 @@ const SapModComponent = ({ data }) => {
                     position: "relative",
                     transitionDelay: `${idx * 80}ms`,
                   }}
-                  onMouseEnter={() => {
-                    setOpenIdx(idx);
-                    setHoveredModuleIdx(idx);
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredModuleIdx(null);
-                  }}
-                  onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
+                  // Only add mouse events for non-touch devices
+                  {...(!isTouch && {
+                    onMouseEnter: () => handleModuleInteraction(idx, true),
+                    onMouseLeave: handleModuleLeave
+                  })}
+                  onClick={() => handleModuleInteraction(idx, false)}
                 >
                   {/* Blue card background */}
                   <div
@@ -356,8 +488,9 @@ const SapModComponent = ({ data }) => {
                         </span>
                         <span className="font-semibold text-gray-900 text-sm sm:text-base truncate relative">
                           {mod.title}
-                          {/* Hover tooltip for subtopics */}
-                          {hoveredModuleIdx === idx &&
+                          {/* Hover tooltip for subtopics - Only show on desktop non-touch devices */}
+                          {!isTouch &&
+                            hoveredModuleIdx === idx &&
                             mod.topics &&
                             mod.topics.length > 0 && (
                               <div
@@ -367,15 +500,13 @@ const SapModComponent = ({ data }) => {
                                 <div className="text-sm font-semibold mb-2 text-blue-600">
                                   Module Topics:
                                 </div>
-                                <ul className="space-y-1">
+                                <ul className="space-y-1 text-xs text-gray-700">
                                   {mod.topics.map((topic, topicIdx) => (
                                     <li
                                       key={topicIdx}
-                                      className="text-xs text-gray-700 flex items-start"
+                                      className="leading-snug flex items-start"
                                     >
-                                      <span className="text-lime-500 mr-2">
-                                        •
-                                      </span>
+                                      <span className="text-lime-400 mr-2 flex-shrink-0">•</span>
                                       <span>{topic}</span>
                                     </li>
                                   ))}
@@ -417,17 +548,27 @@ const SapModComponent = ({ data }) => {
                       </div>
                     </div>
 
-                    {/* Expanded content for subtopics (click to expand) */}
+                    {/* Expanded content for subtopics (click to expand) - IMPROVED */}
                     {openIdx === idx && mod.topics && mod.topics.length > 0 && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 px-4 sm:px-8 pb-4 pt-2 text-sm text-gray-800">
-                        {mod.topics.map((topic, topicIdx) => (
-                          <li
-                            key={`${topic}-${topicIdx}`}
-                            className="list-none before:content-['•'] before:mr-2 before:text-lime-400"
-                          >
-                            {topic}
-                          </li>
-                        ))}
+                      <div className="px-4 sm:px-8 pb-4 pt-2">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 text-sm text-gray-800">
+                          {mod.topics.map((topic, topicIdx) => (
+                            <div
+                              key={`${topic}-${topicIdx}`}
+                              className="flex items-start py-1"
+                            >
+                              <span className="text-lime-400 mr-2 flex-shrink-0 mt-1">•</span>
+                              <span className="leading-relaxed">{topic}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Show message if no topics available - ADDED */}
+                    {openIdx === idx && (!mod.topics || mod.topics.length === 0) && (
+                      <div className="px-4 sm:px-8 pb-4 pt-2 text-sm text-gray-500 italic">
+                        No detailed topics available for this module.
                       </div>
                     )}
                   </div>
@@ -494,7 +635,7 @@ const SapModComponent = ({ data }) => {
         )}
       </div>
 
-      {/* Simple Form Connection (same as Counselor component) */}
+      {/* Simple Form Connection */}
       {showForm && (
         <Btnform onClose={handleCloseForm} onSubmit={handleFormSubmit} />
       )}

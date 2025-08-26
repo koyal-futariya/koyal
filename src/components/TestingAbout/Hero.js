@@ -2,17 +2,16 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 
-// Dynamically import IconCloud with no SSR and improved loading
+// Optimized dynamic imports with better loading states
 const IconCloud = dynamic(() => import("./IconCloud"), {
   ssr: false,
   loading: () => (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-center justify-center h-full min-h-[200px]">
       <div className="animate-spin rounded-full h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 border-b-2 border-yellow-400"></div>
     </div>
   ),
 });
 
-// Dynamically import Btnform to prevent SSR-related issues
 const Btnform = dynamic(() => import("../HomePage/Btnform"), {
   ssr: false,
 });
@@ -29,10 +28,10 @@ export default function Hero() {
 
   // Form state management
   const [showForm, setShowForm] = useState(false);
-  const handleButtonClick = () => setShowForm(true);
-  const handleCloseForm = () => setShowForm(false);
+  const handleButtonClick = useCallback(() => setShowForm(true), []);
+  const handleCloseForm = useCallback(() => setShowForm(false), []);
 
-  // Enhanced screen size detection for better responsive handling
+  // Enhanced screen size detection with more precise tablet breakpoints
   const checkScreenSize = useCallback(() => {
     const width = window.innerWidth;
     let newSize;
@@ -47,7 +46,7 @@ export default function Hero() {
     setScreenSize((prev) => (prev !== newSize ? newSize : prev));
   }, []);
 
-  // Enhanced Vanta configuration based on screen size
+  // Optimized Vanta configuration with better tablet settings
   const vantaConfig = useMemo(() => {
     const isMobile = ["mobile", "sm"].includes(screenSize);
     const isTablet = screenSize === "tablet";
@@ -57,27 +56,19 @@ export default function Hero() {
       mouseControls: !isMobile,
       touchControls: true,
       gyroControls: false,
-      minHeight: isMobile
-        ? Math.min(window.innerHeight, 500)
-        : isTablet
-          ? 400
-          : 200,
-      minWidth: isMobile
-        ? Math.min(window.innerWidth, 400)
-        : isTablet
-          ? 600
-          : 200,
-      scale: isMobile ? 0.6 : isTablet ? 0.8 : 1.0,
+      minHeight: isMobile ? 400 : isTablet ? 500 : 200,
+      minWidth: isMobile ? 320 : isTablet ? 768 : 200,
+      scale: isMobile ? 0.6 : isTablet ? 0.75 : 1.0,
       scaleMobile: 0.6,
       color: 0x60707,
-      shininess: isMobile ? 15 : isTablet ? 25 : 30,
-      waveHeight: isMobile ? 8 : isTablet ? 15 : 20,
-      waveSpeed: isMobile ? 0.7 : isTablet ? 0.85 : 1.0,
-      zoom: isMobile ? 0.5 : isTablet ? 0.6 : 0.65,
+      shininess: isMobile ? 15 : isTablet ? 20 : 30,
+      waveHeight: isMobile ? 8 : isTablet ? 12 : 20,
+      waveSpeed: isMobile ? 0.7 : isTablet ? 0.8 : 1.0,
+      zoom: isMobile ? 0.5 : isTablet ? 0.55 : 0.65,
     };
   }, [screenSize]);
 
-  // Optimized script loading with caching and error handling
+  // Optimized script loading with better caching
   const loadScript = useCallback(
     (src, name) => {
       return new Promise((resolve, reject) => {
@@ -88,7 +79,7 @@ export default function Hero() {
 
         const existingScript = document.querySelector(`script[src="${src}"]`);
         if (existingScript) {
-          if (existingScript.dataset.loaded) {
+          if (existingScript.dataset.loaded === "true") {
             setScriptsLoaded((prev) => ({ ...prev, [name]: true }));
             resolve();
           } else {
@@ -122,12 +113,12 @@ export default function Hero() {
     [scriptsLoaded]
   );
 
-  // Debounced resize handler
+  // Debounced resize handler with better performance
   useEffect(() => {
     let timeoutId;
     const debouncedResize = () => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(checkScreenSize, 150);
+      timeoutId = setTimeout(checkScreenSize, 100);
     };
 
     checkScreenSize();
@@ -139,27 +130,29 @@ export default function Hero() {
     };
   }, [checkScreenSize]);
 
-  // Vanta initialization with cleanup
+  // Optimized Vanta initialization with better error handling
   useEffect(() => {
     let mounted = true;
     let loadTimeout;
 
     const initializeVanta = async () => {
       const isMobile = ["mobile", "sm"].includes(screenSize);
-
+      
+      // Skip Vanta on slow connections
       if (isMobile && window.navigator?.connection?.effectiveType === "2g") {
         setVantaLoaded(true);
         return;
       }
 
       try {
+        // Load scripts with timeout
         await Promise.race([
           loadScript(
             "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js",
             "three"
           ),
           new Promise((_, reject) =>
-            setTimeout(() => reject(new Error("Timeout")), 10000)
+            setTimeout(() => reject(new Error("Timeout")), 8000)
           ),
         ]);
 
@@ -171,16 +164,18 @@ export default function Hero() {
             "vanta"
           ),
           new Promise((_, reject) =>
-            setTimeout(() => reject(new Error("Timeout")), 10000)
+            setTimeout(() => reject(new Error("Timeout")), 8000)
           ),
         ]);
 
         if (!mounted || !window.VANTA || !vantaRef.current) return;
 
+        // Clean up existing effect
         if (vantaEffect.current) {
           vantaEffect.current.destroy();
         }
 
+        // Initialize Vanta with optimized settings
         vantaEffect.current = window.VANTA.WAVES({
           ...vantaConfig,
           el: vantaRef.current,
@@ -197,10 +192,11 @@ export default function Hero() {
       }
     };
 
+    // Use requestIdleCallback for better performance
     if ("requestIdleCallback" in window) {
-      loadTimeout = requestIdleCallback(initializeVanta, { timeout: 2000 });
+      loadTimeout = requestIdleCallback(initializeVanta, { timeout: 3000 });
     } else {
-      loadTimeout = setTimeout(initializeVanta, 100);
+      loadTimeout = setTimeout(initializeVanta, 200);
     }
 
     return () => {
@@ -217,45 +213,45 @@ export default function Hero() {
     };
   }, [vantaConfig, loadScript]);
 
-  // Dynamic icon cloud props based on screen size - SIGNIFICANTLY INCREASED MOBILE SIZES
+  // Enhanced icon cloud props with better tablet optimization
   const getIconCloudProps = useMemo(() => {
     const props = {
       mobile: {
-        size: 25, // Increased from 35 to 65 (85% increase)
-        height: 220, // Increased from 280 to 350
+        size: 28,
+        height: 240,
         rotationSpeed: 0.6,
-        radius: 180, // Added radius for better control
-        maxSpeed: 0.05, // Added for smoother animation
-        initialSpeed: 0.02, // Added for initial animation speed
+        radius: 160,
+        maxSpeed: 0.04,
+        initialSpeed: 0.015,
       },
       sm: {
-        size: 30, // Increased from 40 to 70 (75% increase)
-        height: 260, // Increased from 320 to 380
+        size: 32,
+        height: 280,
         rotationSpeed: 0.65,
-        radius: 190,
-        maxSpeed: 0.05,
-        initialSpeed: 0.02,
+        radius: 170,
+        maxSpeed: 0.04,
+        initialSpeed: 0.015,
       },
       tablet: {
-        size: 45,
-        height: 300,
-        rotationSpeed: 0.75,
-        radius: 150,
+        size: 40, // Optimized for tablet
+        height: 320, // Better height for tablet
+        rotationSpeed: 0.7,
+        radius: 180, // Better radius for tablet
         maxSpeed: 0.04,
         initialSpeed: 0.02,
       },
       laptop: {
         size: 42,
         height: 350,
-        rotationSpeed: 0.8,
-        radius: 170,
+        rotationSpeed: 0.75,
+        radius: 190,
         maxSpeed: 0.04,
         initialSpeed: 0.02,
       },
       desktop: {
         size: 48,
         height: 400,
-        rotationSpeed: 0.85,
+        rotationSpeed: 0.8,
         radius: 200,
         maxSpeed: 0.04,
         initialSpeed: 0.02,
@@ -263,8 +259,8 @@ export default function Hero() {
       xl: {
         size: 55,
         height: 450,
-        rotationSpeed: 0.9,
-        radius: 225,
+        rotationSpeed: 0.85,
+        radius: 220,
         maxSpeed: 0.04,
         initialSpeed: 0.02,
       },
@@ -274,56 +270,55 @@ export default function Hero() {
       ...props[screenSize],
       bgColor: "transparent",
       glowEffect: true,
-      // Additional props for better visibility
       iconOpacity: 0.9,
-      cloudRadius: props[screenSize].radius || 180,
-      minDistance: 50,
-      maxDistance: props[screenSize].radius || 180,
+      cloudRadius: props[screenSize].radius,
+      minDistance: 40,
+      maxDistance: props[screenSize].radius,
     };
   }, [screenSize]);
 
   return (
-    <div className="relative overflow-hidden bg-[#1a1f36] min-h-screen">
-      {/* Vanta.js WAVES Background */}
+    <div className="relative overflow-hidden bg-[#1a1f36] max-w-[1800px] mx-auto">
+      {/* Vanta.js Background with optimized loading */}
       <div
         ref={vantaRef}
-        className={`absolute inset-0 z-0 transition-opacity duration-500 ${
+        className={`absolute inset-0 z-0 transition-opacity duration-700 ${
           vantaLoaded ? "opacity-100" : "opacity-0"
         } w-full h-full`}
-        style={{ willChange: "opacity" }}
+        style={{ 
+          willChange: "opacity",
+          minHeight: "100vh"
+        }}
       />
 
-      {/* Fallback gradient background */}
+      {/* Optimized fallback gradient */}
       <div
-        className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1f36] via-[#2a2d47] to-[#1a1f36] w-full h-full transition-opacity duration-500 ${
+        className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1f36] via-[#2a2d47] to-[#1a1f36] w-full h-full transition-opacity duration-700 ${
           vantaLoaded ? "opacity-0" : "opacity-100"
         }`}
-        style={{ willChange: "opacity" }}
       />
 
-      {/* Floating particles for enhanced visual effect */}
+      {/* Reduced floating particles for better performance */}
       <div className="absolute inset-0 z-5 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-400/30 rounded-full animate-ping"></div>
-        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400/40 rounded-full animate-pulse"></div>
-        <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-purple-400/30 rounded-full animate-bounce"></div>
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-400/20 rounded-full animate-ping animation-delay-0"></div>
+        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400/30 rounded-full animate-pulse animation-delay-1000"></div>
+        <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-purple-400/20 rounded-full animate-bounce animation-delay-2000"></div>
       </div>
 
-      {/* Desktop/Laptop Icon Cloud */}
-      <div className="absolute right-18 sm:right-20 md:right-24 lg:right-28 xl:right-32 top-72 transform -translate-y-1/2 w-1/3 sm:w-1/4 md:w-1/3 lg:w-2/5 xl:w-1/3 z-10 opacity-90 hidden lg:block">
-        <div
-          className="flex items-center justify-center h-full"
-          style={{ transform: "translateZ(0)" }}
-        >
+      {/* Desktop Icon Cloud - Optimized positioning */}
+      <div className="absolute right-16 md:right-20 lg:right-24 xl:right-28 top-1/2 transform -translate-y-1/2 w-1/3 lg:w-2/5 xl:w-1/3 z-10 opacity-90 hidden lg:block">
+        <div className="flex items-center justify-center h-full">
           <div className="w-full max-w-sm lg:max-w-md xl:max-w-lg">
             <IconCloud {...getIconCloudProps} />
           </div>
         </div>
       </div>
 
-      <main className="relative z-20 flex items-center justify-center min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-12">
+      {/* Main Content with better responsive spacing */}
+      <main className="relative z-20 flex items-center justify-center min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="w-full max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
-            {/* Left Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
+            {/* Left Content with improved tablet spacing */}
             <div className="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8">
               {/* Brand Badge */}
               <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-yellow-400/10 border border-yellow-400/20 backdrop-blur-sm">
@@ -332,9 +327,9 @@ export default function Hero() {
                 </span>
               </div>
 
-              {/* Main Heading */}
+              {/* Main Heading with better tablet typography */}
               <div className="space-y-2 sm:space-y-3">
-                <h1 className="text-3xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight">
                   <span className="mr-2">Connecting</span>
                   <span className="text-yellow-400">Dots ERP</span>
                 </h1>
@@ -346,8 +341,8 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Description */}
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-2xl">
+              {/* Description with better tablet sizing */}
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-300 leading-relaxed max-w-2xl">
                 Transform your career with industry-leading SAP training.
                 <span className="text-yellow-400 font-semibold">
                   {" "}
@@ -361,14 +356,14 @@ export default function Hero() {
                 to excel in the ERP industry.
               </p>
 
-              {/* Mobile/Tablet Icon Cloud - Much larger container for better visibility */}
-              <div className="block pt-16 lg:hidden">
+              {/* Mobile/Tablet Icon Cloud with better positioning */}
+              <div className="block py-6 md:py-8 lg:hidden">
                 <div className="flex justify-center">
                   <div
                     className="relative"
                     style={{
-                      width: `${Math.min(getIconCloudProps.height * 1.4, 400)}px`, // Even larger container
-                      height: `${getIconCloudProps.height + 40}px`, // Added extra padding
+                      width: `${Math.min(getIconCloudProps.height * 1.2, 380)}px`,
+                      height: `${getIconCloudProps.height + 20}px`,
                       transform: "translateZ(0)",
                     }}
                   >
@@ -377,10 +372,10 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Stats Section - Enhanced and Compact */}
-              <div className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 py-4 sm:py-6">
+              {/* Stats Section with better tablet layout */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 py-4 sm:py-6">
                 <div className="text-center group">
-                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mb-1 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-400 mb-1 group-hover:scale-110 transition-transform duration-300">
                     No.1
                   </div>
                   <div className="text-xs sm:text-sm md:text-base text-gray-400 leading-tight">
@@ -389,7 +384,7 @@ export default function Hero() {
                 </div>
 
                 <div className="text-center group">
-                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mb-1 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-400 mb-1 group-hover:scale-110 transition-transform duration-300">
                     5K+
                   </div>
                   <div className="text-xs sm:text-sm md:text-base text-gray-400 leading-tight">
@@ -398,7 +393,7 @@ export default function Hero() {
                 </div>
 
                 <div className="text-center group">
-                  <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mb-1 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-400 mb-1 group-hover:scale-110 transition-transform duration-300">
                     10+
                   </div>
                   <div className="text-xs sm:text-sm md:text-base text-gray-400 leading-tight">
@@ -407,10 +402,10 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* CTA Button - Enhanced */}
-              <div className="flex justify-center md:justify-end lg:justify-end xl:justify-end sm:flex-row gap-4 pt-2">
+              {/* CTA Button with better responsive sizing */}
+              <div className="flex justify-center md:justify-start lg:justify-start xl:justify-start pt-2">
                 <button
-                  className="group relative bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 text-base sm:text-lg shadow-2xl shadow-yellow-500/25 hover:shadow-yellow-500/40 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
+                  className="group relative bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 text-black font-bold px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base md:text-lg shadow-2xl shadow-yellow-500/25 hover:shadow-yellow-500/40 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
                   onClick={handleButtonClick}
                 >
                   {/* Animated background */}
@@ -421,7 +416,7 @@ export default function Hero() {
                   </span>
 
                   <svg
-                    className="w-5 h-5 relative z-10 transform transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110"
+                    className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transform transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -439,8 +434,8 @@ export default function Hero() {
                 </button>
               </div>
 
-              {/* Trust indicators */}
-              <div className="flex flex-wrap items-center gap-4 pt-4 text-sm text-gray-400">
+              {/* Trust indicators with better tablet layout */}
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4 pt-4 text-xs sm:text-sm text-gray-400">
                 <div className="flex items-center gap-1">
                   <span className="text-green-400">✓</span>
                   <span>100% Placement Support</span>
@@ -464,7 +459,7 @@ export default function Hero() {
         </div>
       </main>
 
-      {/* Form Modal with proper z-index and backdrop */}
+      {/* Optimized Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
           {/* Backdrop */}
@@ -479,6 +474,19 @@ export default function Hero() {
           </div>
         </div>
       )}
+
+      {/* Custom CSS for animation delays */}
+      <style jsx>{`
+        .animation-delay-0 {
+          animation-delay: 0s;
+        }
+        .animation-delay-1000 {
+          animation-delay: 1s;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+      `}</style>
     </div>
   );
 }

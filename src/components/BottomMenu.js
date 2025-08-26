@@ -42,11 +42,11 @@ const BottomMenu = () => {
   const menuItems = [
     {
       id: "chatbot",
-      href: "https://embed.tawk.to/65d9cf218d261e1b5f64d05b/1hndd28n8",
+      href: "#", // Changed from the Tawk.to embed URL to "#"
       icon: <ChatbotIcon onClick={toggleChat} />,
       label: "Chat",
       color: "#7B61FF",
-      // onClick: toggleChat
+      isChatbot: true // Add this flag to identify the chatbot item
     },
     {
       id: "whatsapp",
@@ -91,6 +91,12 @@ const BottomMenu = () => {
               key={item.id}
               className={`${styles.menuItem} ${activeItem === item.id ? styles.active : ''}`}
               onClick={(e) => {
+                // For chatbot, prevent default navigation and let the ChatbotIcon handle the click
+                if (item.isChatbot) {
+                  e.preventDefault();
+                  return; // Let the ChatbotIcon's onClick handle it
+                }
+                
                 if (item.onClick) {
                   e.preventDefault();
                   item.onClick();
