@@ -899,7 +899,7 @@ const PopupForm = ({ onSubmitData }) => {
                   and
                   <a href="/privacy" target="_blank" rel="noopener noreferrer">
                     {" "}
-                    privacy policy
+                    privacy policyy
                   </a>{" "}
                   of Connecting Dots ERP.
                 </label>
