@@ -14,7 +14,15 @@ const AnimatedLogo = dynamic(() => import("../AnimatedLogo"), {
 });
 
 // Custom component definitions
-const Navbar = ({ expand, className, children, ref }) => (
+const Navbar = ({ expand, className, children, ref }) => {
+  const pathname = usePathname();
+  
+  // Hide navbar on blog admin pages
+  if (pathname && pathname.startsWith('/blog-admin')) {
+    return null;
+  }
+  
+  return (
   <nav
     className={`${styles.navbar} ${
       expand
@@ -27,7 +35,8 @@ const Navbar = ({ expand, className, children, ref }) => (
   >
     {children}
   </nav>
-);
+  );
+};
 
 const Container = ({ fluid, className, children }) => (
   <div

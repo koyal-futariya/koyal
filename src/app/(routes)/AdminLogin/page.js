@@ -326,13 +326,7 @@ const AdminLogin = () => {
             <p>Permissions are managed inside the system</p>
           </div>
 
-          {/* Connection Status (Development Only) */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="mt-2 text-xs text-yellow-200 opacity-50 text-center">
-              <div>Dashboard API: {API_BASE_URL_MAIN}</div>
-              <div>Blogs API: {API_BASE_URL}</div>
-            </div>
-          )}
+          
         </form>
       </div>
     </section>

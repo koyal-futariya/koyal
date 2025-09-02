@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaPlus, FaTrash, FaEdit, FaUserShield, FaUserPlus, FaSpinner, FaExclamationTriangle } from 'react-icons/fa';
+import { FaPlus, FaTrash, FaEdit, FaUserShield, FaUserPlus, FaSpinner, FaExclamationTriangle, FaTimes } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchWithAuth } from '@/utils/auth';
@@ -278,47 +278,12 @@ const UserManagement = () => {
     }
   };
 
-  const handleUpdatePassword = async (e) => {
-    e.preventDefault();
-    if (!canEditUsers) {
-      toast.error('You do not have permission to edit users', { autoClose: 3000 });
-      return;
-    }
-    if (editUser.password !== editUser.confirmPassword) {
-      toast.error('Passwords do not match', { autoClose: 3000 });
-      return;
-    }
-    if (!editUser.password || editUser.password.length < 6) {
-      toast.error('Password must be at least 6 characters', { autoClose: 3000 });
-      return;
-    }
-    setActionLoading(true);
-    try {
-      const res = await fetchWithAuth(`/api/auth/users/${editUser.id}/password`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: editUser.password })
-      });
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || `HTTP ${res.status}: Failed to update password`);
-      }
-      const data = await res.json();
-      toast.success(data.message || 'Password updated successfully', { autoClose: 3000 });
-      setEditUser(prev => ({ ...prev, password: '', confirmPassword: '' }));
-      await fetchUsers();
-    } catch (err) {
-      toast.error(err.message || 'Failed to update password', { autoClose: 5000 });
-    } finally {
-      setActionLoading(false);
-    }
-  };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[50vh] px-4">
         <div className="text-center">
-          <FaSpinner className="animate-spin h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-blue-500 mx-auto mb-4" />
+          <FaSpinner className="animate-spin h-8 w-8 sm:h-10 sm:w-10 text-blue-500 mx-auto mb-4" />
           <p className="text-gray-600 text-sm sm:text-base">Loading users from Express backend...</p>
         </div>
       </div>
@@ -326,91 +291,64 @@ const UserManagement = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-3 sm:p-4 lg:p-8">
-      {/* ✅ Enhanced Responsive Container */}
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+      {/* Mobile-Optimized Container */}
       <div className="max-w-7xl mx-auto">
         
-        {/* ✅ Enhanced Responsive Header Section */}
-        <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row sm:justify-between sm:items-start lg:items-center mb-6 lg:mb-8">
-          <div className="flex-1">
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-1 sm:mb-2">
-              User Management
-            </h1>
-            <p className="text-sm sm:text-base lg:text-base text-gray-600 leading-relaxed">
-              Manage blog admin users and their roles via Express backend
-            </p>
-          </div>
-          
-          {/* ✅ Enhanced Responsive Add User Button */}
-          {canCreateUsers && (
-            <div className="flex-shrink-0 w-full sm:w-auto sm:ml-4">
-              <button
-                onClick={() => setShowAddUser(true)}
-                disabled={actionLoading}
-                className="flex items-center justify-center w-full sm:w-auto px-4 sm:px-6 lg:px-4 py-3 sm:py-2 lg:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base font-medium shadow-sm hover:shadow-md"
-              >
-                {actionLoading ? (
-                  <FaSpinner className="animate-spin mr-2 h-4 w-4" />
-                ) : (
-                  <FaUserPlus className="mr-2 h-4 w-4" />
-                )}
-                <span>Add New User</span>
-              </button>
+        {/* Mobile-First Header Section */}
+        <div className="mb-6">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:items-start sm:space-y-0">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
+                User Management
+              </h1>
+              <p className="text-sm sm:text-base text-gray-600">
+                Manage blog admin users and their roles via Express backend
+              </p>
             </div>
-          )}
-        </div>
-
-        {/* ✅ Enhanced Responsive Connection Status */}
-        <div className="mb-6 lg:mb-8">
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 sm:p-5 lg:p-4">
-            <div className="flex items-start space-x-3">
-              <div className="flex-shrink-0 mt-0.5">
-                <FaUserShield className="h-5 w-5 sm:h-6 sm:w-6 lg:h-5 lg:w-5 text-blue-600" />
+            
+            {/* Mobile-Optimized Add User Button */}
+            {canCreateUsers && (
+              <div className="w-full sm:w-auto">
+                <button
+                  onClick={() => setShowAddUser(true)}
+                  disabled={actionLoading}
+                  className="flex items-center justify-center w-full sm:w-auto px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium shadow-sm"
+                >
+                  {actionLoading ? (
+                    <FaSpinner className="animate-spin mr-2 h-4 w-4" />
+                  ) : (
+                    <FaUserPlus className="mr-2 h-4 w-4" />
+                  )}
+                  <span>Add New User</span>
+                </button>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm sm:text-base lg:text-sm font-medium text-blue-800 mb-1 sm:mb-2 lg:mb-1">
-                  Connected to Express Backend
-                </p>
-                <p className="text-xs sm:text-sm lg:text-xs text-blue-600 break-all mb-2 sm:mb-3 lg:mb-2">
-                  {API_BASE_URL}
-                </p>
-                <div className="bg-blue-100 rounded-lg px-3 py-2 inline-block">
-                  <p className="text-xs sm:text-sm lg:text-xs text-blue-700 font-medium">
-                    Your Access Level: <span className="font-bold">{user?.role?.toUpperCase()}</span>
-                  </p>
-                  <p className="text-xs text-blue-600 mt-1">
-                    {user?.role?.toLowerCase() === 'superadmin' 
-                      ? 'Full access to all user management features'
-                      : 'Admin access to user management'
-                    }
-                  </p>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
-        {/* ✅ Enhanced Responsive Add User Modal */}
+        {/* Enhanced Add User Modal - Fully Responsive */}
         {showAddUser && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4 lg:p-0">
-            <div className="bg-white rounded-xl w-full max-w-md mx-auto max-h-[90vh] overflow-y-auto shadow-2xl">
-              <div className="p-4 sm:p-6 lg:p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl sm:text-2xl lg:text-xl font-bold text-gray-800">Add New User</h2>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4 lg:p-6">
+            <div className="bg-white rounded-xl w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl max-h-[95vh] overflow-y-auto shadow-2xl border-0 sm:border">
+              <div className="p-4 sm:p-6 lg:p-8">
+                {/* Modal Header */}
+                <div className="flex justify-between items-center mb-6 lg:mb-8">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Add New User</h2>
                   <button
                     onClick={() => setShowAddUser(false)}
                     disabled={actionLoading}
                     className="text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed p-2 hover:bg-gray-100 rounded-full transition-colors"
                   >
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <FaTimes className="w-5 h-5 lg:w-6 lg:h-6" />
                   </button>
                 </div>
 
-                <form onSubmit={handleAddUser} className="space-y-5 sm:space-y-6 lg:space-y-4">
+                {/* Form */}
+                <form onSubmit={handleAddUser} className="space-y-4 lg:space-y-6">
+                  {/* Username Field */}
                   <div>
-                    <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
                       Username <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -419,7 +357,7 @@ const UserManagement = () => {
                       value={newUser.username}
                       onChange={handleInputChange}
                       disabled={actionLoading}
-                      className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
+                      className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
                       required
                       placeholder="johndoe"
                       minLength={3}
@@ -427,8 +365,9 @@ const UserManagement = () => {
                     />
                   </div>
 
+                  {/* Email Field */}
                   <div>
-                    <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
                       Email (optional)
                     </label>
                     <input
@@ -437,13 +376,14 @@ const UserManagement = () => {
                       value={newUser.email}
                       onChange={handleInputChange}
                       disabled={actionLoading}
-                      className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
+                      className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
                       placeholder="user@example.com"
                     />
                   </div>
 
+                  {/* Role Field */}
                   <div>
-                    <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
+                    <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
                       Role <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -451,7 +391,7 @@ const UserManagement = () => {
                       value={newUser.role}
                       onChange={handleInputChange}
                       disabled={actionLoading}
-                      className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
+                      className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
                       required
                     >
                       <option value="user">User</option>
@@ -462,227 +402,196 @@ const UserManagement = () => {
                     </select>
                   </div>
 
-                  <div>
-                    <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
-                      Password <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      value={newUser.password}
-                      onChange={handleInputChange}
-                      disabled={actionLoading}
-                      className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
-                      required
-                      minLength={6}
-                      placeholder="Minimum 6 characters"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
-                      Confirm Password <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      value={newUser.confirmPassword}
-                      onChange={handleInputChange}
-                      disabled={actionLoading}
-                      className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
-                      required
-                      minLength={6}
-                    />
-                  </div>
-
-                  <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:space-x-3 pt-4 sm:pt-6 lg:pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setShowAddUser(false)}
-                      disabled={actionLoading}
-                      className="w-full sm:w-auto px-6 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 disabled:cursor-not-allowed disabled:opacity-50 text-sm sm:text-base lg:text-sm font-medium transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={actionLoading}
-                      className="w-full sm:w-auto px-6 py-3 sm:py-4 lg:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center text-sm sm:text-base lg:text-sm font-medium transition-colors"
-                    >
-                      {actionLoading ? (
-                        <>
-                          <FaSpinner className="animate-spin mr-2 h-4 w-4" />
-                          Creating...
-                        </>
-                      ) : (
-                        'Create User'
-                      )}
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ✅ Enhanced Responsive Edit User Modal */}
-        {showEdit && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4 lg:p-0">
-            <div className="bg-white rounded-xl w-full max-w-md mx-auto max-h-[90vh] overflow-y-auto shadow-2xl">
-              <div className="p-4 sm:p-6 lg:p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl sm:text-2xl lg:text-xl font-bold text-gray-800">Edit User</h2>
-                  <button
-                    onClick={() => setShowEdit(false)}
-                    disabled={actionLoading}
-                    className="text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  >
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Identity & Role Form */}
-                <form onSubmit={handleUpdateUser} className="space-y-5 sm:space-y-6 lg:space-y-4 mb-6">
-                  <div>
-                    <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
-                      Username
-                    </label>
-                    <input
-                      type="text"
-                      name="username"
-                      value={editUser.username}
-                      onChange={handleEditChange}
-                      disabled={actionLoading}
-                      className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
-                      minLength={3}
-                      maxLength={30}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
-                      Role
-                    </label>
-                    <select
-                      name="role"
-                      value={editUser.role}
-                      onChange={handleEditChange}
-                      disabled={actionLoading}
-                      className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
-                    >
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
-                      {user?.role?.toLowerCase() === 'superadmin' && (
-                        <option value="superadmin">SuperAdmin</option>
-                      )}
-                    </select>
-                  </div>
-
-                  <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:space-x-3">
-                    <button
-                      type="button"
-                      onClick={() => setShowEdit(false)}
-                      disabled={actionLoading}
-                      className="w-full sm:w-auto px-6 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 disabled:cursor-not-allowed disabled:opacity-50 text-sm sm:text-base lg:text-sm font-medium transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={actionLoading}
-                      className="w-full sm:w-auto px-6 py-3 sm:py-4 lg:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center text-sm sm:text-base lg:text-sm font-medium transition-colors"
-                    >
-                      {actionLoading ? <FaSpinner className="animate-spin mr-2 h-4 w-4" /> : null}
-                      Save Changes
-                    </button>
-                  </div>
-                </form>
-
-                {/* Password Change Section */}
-                <div className="border-t pt-6">
-                  <h3 className="text-base sm:text-lg lg:text-base font-semibold text-gray-800 mb-4">Change Password</h3>
-                  <form onSubmit={handleUpdatePassword} className="space-y-5 sm:space-y-6 lg:space-y-4">
+                  {/* Password Fields - Grid Layout for larger screens */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                     <div>
-                      <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
-                        New Password
+                      <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
+                        Password <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="password"
                         name="password"
-                        value={editUser.password}
-                        onChange={handleEditChange}
+                        value={newUser.password}
+                        onChange={handleInputChange}
                         disabled={actionLoading}
-                        className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
+                        className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
+                        required
                         minLength={6}
                         placeholder="Minimum 6 characters"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm sm:text-base lg:text-sm font-semibold text-gray-700 mb-2">
-                        Confirm Password
+                      <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
+                        Confirm Password <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="password"
                         name="confirmPassword"
-                        value={editUser.confirmPassword}
-                        onChange={handleEditChange}
+                        value={newUser.confirmPassword}
+                        onChange={handleInputChange}
                         disabled={actionLoading}
-                        className="w-full px-4 py-3 sm:py-4 lg:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm sm:text-base lg:text-sm transition-colors"
+                        className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
+                        required
                         minLength={6}
+                        placeholder="Confirm password"
                       />
                     </div>
+                  </div>
 
-                    <div className="flex justify-end">
-                      <button
-                        type="submit"
-                        disabled={actionLoading}
-                        className="w-full sm:w-auto px-6 py-3 sm:py-4 lg:py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center text-sm sm:text-base lg:text-sm font-medium transition-colors"
-                      >
-                        {actionLoading ? <FaSpinner className="animate-spin mr-2 h-4 w-4" /> : null}
-                        Update Password
-                      </button>
-                    </div>
-                  </form>
+                  {/* Action Buttons - Responsive Layout */}
+                  <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4 lg:pt-6">
+                    <button
+                      type="submit"
+                      disabled={actionLoading}
+                      className="flex-1 px-6 lg:px-8 py-3 lg:py-4 bg-blue-600 text-white rounded-lg lg:rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center text-sm lg:text-base font-medium transition-all duration-200 shadow-lg"
+                    >
+                      {actionLoading ? (
+                        <>
+                          <FaSpinner className="animate-spin mr-2 h-4 w-4 lg:h-5 lg:w-5" />
+                          Creating...
+                        </>
+                      ) : (
+                        'Create User'
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowAddUser(false)}
+                      disabled={actionLoading}
+                      className="flex-1 px-6 lg:px-8 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 disabled:cursor-not-allowed disabled:opacity-50 text-sm lg:text-base font-medium transition-all duration-200"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Enhanced Edit User Modal - Fully Responsive */}
+        {showEdit && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4 lg:p-6">
+            <div className="bg-white rounded-xl w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl border-0 sm:border">
+              <div className="p-4 sm:p-6 lg:p-8">
+                {/* Modal Header */}
+                <div className="flex justify-between items-center mb-6 lg:mb-8">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Edit User</h2>
+                  <button
+                    onClick={() => setShowEdit(false)}
+                    disabled={actionLoading}
+                    className="text-gray-400 hover:text-gray-600 disabled:cursor-not-allowed p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  >
+                    <FaTimes className="w-5 h-5 lg:w-6 lg:h-6" />
+                  </button>
+                </div>
+
+                {/* User Information Form */}
+                <div>
+                  <h3 className="text-lg lg:text-xl font-semibold text-gray-800 mb-4 lg:mb-6 border-b border-gray-200 pb-2">
+                    User Information
+                  </h3>
+                    
+                    <form onSubmit={handleUpdateUser} className="space-y-4 lg:space-y-6">
+                      <div>
+                        <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
+                          Username
+                        </label>
+                        <input
+                          type="text"
+                          name="username"
+                          value={editUser.username}
+                          onChange={handleEditChange}
+                          disabled={actionLoading}
+                          className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
+                          minLength={3}
+                          maxLength={30}
+                          placeholder="Enter username"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
+                          Role
+                        </label>
+                        <select
+                          name="role"
+                          value={editUser.role}
+                          onChange={handleEditChange}
+                          disabled={actionLoading}
+                          className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
+                        >
+                          <option value="user">User</option>
+                          <option value="admin">Admin</option>
+                          {user?.role?.toLowerCase() === 'superadmin' && (
+                            <option value="superadmin">SuperAdmin</option>
+                          )}
+                        </select>
+                      </div>
+
+                      <div className="pt-2">
+                        <button
+                          type="submit"
+                          disabled={actionLoading}
+                          className="w-full px-6 lg:px-8 py-3 lg:py-4 bg-blue-600 text-white rounded-lg lg:rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center text-sm lg:text-base font-medium transition-all duration-200 shadow-lg"
+                        >
+                          {actionLoading ? (
+                            <FaSpinner className="animate-spin mr-2 h-4 w-4 lg:h-5 lg:w-5" />
+                          ) : null}
+                          Save Changes
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                {/* Mobile/Tablet Close Button */}
+                <div className="lg:hidden mt-6 pt-6 border-t border-gray-200">
+                  <button
+                    onClick={() => setShowEdit(false)}
+                    disabled={actionLoading}
+                    className="w-full px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-200 disabled:cursor-not-allowed disabled:opacity-50 text-sm font-medium transition-all duration-200"
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* ✅ Enhanced Responsive Users List */}
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="p-4 sm:p-6 lg:p-4 border-b border-gray-200">
-            <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center">
-              <h2 className="text-lg sm:text-xl lg:text-lg font-bold text-gray-800">Blog Admin Users</h2>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm sm:text-base lg:text-sm text-gray-500 font-medium">
+        {/* Users List - Keep existing responsive design */}
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="p-4 sm:p-6 border-b border-gray-200">
+            <div className="flex flex-col space-y-2 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-800">Blog Admin Users</h2>
+              <div className="flex items-center justify-between sm:space-x-4">
+                <span className="text-sm text-gray-500 font-medium">
                   {Array.isArray(users) ? `${users.length} user(s) found` : ''}
                 </span>
                 <button
                   onClick={fetchUsers}
                   disabled={loading}
-                  className="hidden sm:flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
+                  className="flex items-center px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium"
                 >
-                  {loading ? <FaSpinner className="animate-spin mr-2 h-4 w-4" /> : 'Refresh'}
+                  {loading ? <FaSpinner className="animate-spin mr-2 h-4 w-4" /> : null}
+                  Refresh
                 </button>
               </div>
             </div>
           </div>
           
           {!users || !Array.isArray(users) || users.length === 0 ? (
-            <div className="p-8 sm:p-12 lg:p-8 text-center text-gray-500">
-              <FaUserShield className="mx-auto h-12 w-12 sm:h-16 sm:w-16 lg:h-12 lg:w-12 text-gray-300 mb-4" />
-              <h3 className="text-lg sm:text-xl lg:text-lg font-medium text-gray-800 mb-2">No users found</h3>
-              <p className="text-sm sm:text-base lg:text-sm text-gray-600 mb-6">
+            <div className="p-8 text-center text-gray-500">
+              <FaUserShield className="mx-auto h-12 w-12 text-gray-300 mb-4" />
+              <h3 className="text-lg font-medium text-gray-800 mb-2">No users found</h3>
+              <p className="text-sm text-gray-600 mb-6">
                 Get started by adding your first user to the system.
               </p>
               {canCreateUsers && (
                 <button
                   onClick={() => setShowAddUser(true)}
-                  className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 inline-flex items-center justify-center text-sm sm:text-base lg:text-sm font-medium transition-colors shadow-sm hover:shadow-md"
+                  className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 inline-flex items-center justify-center text-sm font-medium transition-colors shadow-sm"
                 >
                   <FaUserPlus className="mr-2 h-4 w-4" />
                   Add First User
@@ -691,7 +600,7 @@ const UserManagement = () => {
             </div>
           ) : (
             <>
-              {/* ✅ Enhanced Desktop Table View - Hidden on Mobile & Tablet */}
+              {/* Desktop Table View - Hidden on Mobile & Tablet */}
               <div className="hidden lg:block">
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200">
@@ -795,46 +704,46 @@ const UserManagement = () => {
                 </div>
               </div>
 
-              {/* ✅ Enhanced Mobile & Tablet Card View - Visible on Mobile and Tablet Only */}
+              {/* Mobile & Tablet Card View */}
               <div className="lg:hidden">
                 <div className="divide-y divide-gray-200">
                   {users.map((userItem) => (
-                    <div key={userItem._id || userItem.id} className="p-4 sm:p-6 hover:bg-gray-50 transition-colors">
+                    <div key={userItem._id || userItem.id} className="p-4 hover:bg-gray-50 transition-colors">
                       <div className="flex items-start justify-between">
-                        <div className="flex items-center flex-1 min-w-0">
-                          <div className="flex-shrink-0 h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center bg-blue-100 rounded-full">
-                            <FaUserShield className="h-6 w-6 sm:h-7 sm:w-7 text-blue-600" />
+                        <div className="flex items-start flex-1 min-w-0">
+                          <div className="flex-shrink-0 h-12 w-12 flex items-center justify-center bg-blue-100 rounded-full">
+                            <FaUserShield className="h-6 w-6 text-blue-600" />
                           </div>
                           <div className="ml-4 flex-1 min-w-0">
-                            <div className="text-base sm:text-lg font-semibold text-gray-900 truncate">
+                            <div className="text-base font-semibold text-gray-900 truncate">
                               {userItem.username}
                             </div>
-                            <div className="text-sm sm:text-base text-gray-500 truncate mb-2">
+                            <div className="text-sm text-gray-500 truncate mb-3">
                               {userItem.email || 'No email'}
                             </div>
                             
-                            {/* Enhanced Badge Layout */}
-                            <div className="flex flex-wrap gap-2 mb-2 sm:mb-3">
-                              <span className={`px-3 py-1 inline-flex text-xs sm:text-sm leading-5 font-semibold rounded-full ${
+                            {/* Badge Layout */}
+                            <div className="flex flex-wrap gap-2 mb-3">
+                              <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
                                 userItem.role === 'superadmin' ? 'bg-purple-100 text-purple-800' :
                                 userItem.role === 'admin' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
                               }`}>
                                 {userItem.role || 'user'}
                               </span>
-                              <span className={`px-3 py-1 inline-flex text-xs sm:text-sm leading-5 font-semibold rounded-full ${
+                              <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
                                 userItem.isActive !== false ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                               }`}>
                                 {userItem.isActive !== false ? 'Active' : 'Inactive'}
                               </span>
                             </div>
                             
-                            <div className="text-xs sm:text-sm text-gray-500">
+                            <div className="text-xs text-gray-500">
                               Created: {userItem.createdAt ? new Date(userItem.createdAt).toLocaleDateString() : 'N/A'}
                             </div>
                           </div>
                         </div>
 
-                        {/* Enhanced Action Buttons */}
+                        {/* Action Buttons */}
                         <div className="flex flex-col space-y-2 ml-4">
                           {canEditUsers && (
                             <button
@@ -846,7 +755,7 @@ const UserManagement = () => {
                               className="flex items-center justify-center p-3 text-blue-600 hover:text-blue-800 hover:bg-blue-50 disabled:text-gray-400 disabled:cursor-not-allowed rounded-lg transition-colors"
                               title="Edit user"
                             >
-                              <FaEdit className="h-5 w-5 sm:h-6 sm:w-6" />
+                              <FaEdit className="h-5 w-5" />
                             </button>
                           )}
                           {canDeleteUsers && (
@@ -868,9 +777,9 @@ const UserManagement = () => {
                               }
                             >
                               {actionLoading ? (
-                                <FaSpinner className="animate-spin h-5 w-5 sm:h-6 sm:w-6" />
+                                <FaSpinner className="animate-spin h-5 w-5" />
                               ) : (
-                                <FaTrash className="h-5 w-5 sm:h-6 sm:w-6" />
+                                <FaTrash className="h-5 w-5" />
                               )}
                             </button>
                           )}

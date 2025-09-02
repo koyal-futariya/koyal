@@ -16,7 +16,9 @@ const BottomMenu = () => {
   const isAdminPath = pathname && (
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/superadmin') ||
-    pathname === '/AdminLogin'
+    pathname === '/AdminLogin' ||
+    pathname === '/blog-admin' ||
+    pathname === '/blog-admin/users'
   );
 
   // Handle screen size detection

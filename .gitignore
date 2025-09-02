@@ -19,7 +19,7 @@
 
 # production
 /build
-/blogsPanel.js
+
 
 # misc
 .DS_Store

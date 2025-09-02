@@ -8,7 +8,8 @@
   height: 100%;
   z-index: -7;
   pointer-events: none; /* Prevent interaction with the animation */
-  background: rgba(0, 0, 0, 0.4);
+  background: #000000; /* Solid black background */
+  overflow: hidden;
 }
 
 /* All star layers */
@@ -19,7 +20,9 @@
   content: " ";
   position: absolute;
   background: transparent;
-  animation: animStar linear infinite; /* Base animation */
+  animation: animStar linear infinite;
+  border-radius: 50%;
+  opacity: 0.8;
 }
 
 /* Specific properties for each star layer */
@@ -458,9 +461,17 @@
 /* Keyframes for animation (no change) */
 @keyframes animStar {
   0% {
-    transform: translateY(0px);
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
   }
   100% {
-    transform: translateY(-2000px);
+    transform: translateY(-2000px) scale(1.2);
+    opacity: 0;
   }
 }

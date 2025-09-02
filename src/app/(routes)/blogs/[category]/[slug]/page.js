@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { ArrowLeft, User, Tag, Calendar, Clock, Share2 } from 'lucide-react';
+import { ArrowLeft, User, Tag, Share2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
  
@@ -122,14 +122,6 @@ export default function BlogPost({ params }) {
     );
   }
  
-  const formattedDate = new Date(blog.createdAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
- 
-  const readingTime = Math.ceil((blog.content?.split(/\s+/).length || 0) / 200);
- 
   return (
     <div className="relative w-full max-w-[1800px] mx-auto overflow-hidden bg-[#072E4F] text-white">
       {/* Back Button (hidden on mobile) */}
@@ -205,14 +197,6 @@ export default function BlogPost({ params }) {
             <div className="flex items-center gap-2">
               <User className="w-5 h-5" />
               <span>By {blog.author || 'Admin'}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              <span>{formattedDate}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5" />
-              <span>{readingTime} min read</span>
             </div>
           </div>
            
@@ -313,12 +297,7 @@ export default function BlogPost({ params }) {
               <ArrowLeft className="w-5 h-5" />
               Back to All Blogs
             </Link>
-            <Link
-              href={`/blogs?category=${encodeURIComponent(blog.category || '')}`}
-              className="inline-flex items-center gap-2 text-blue-300 hover:text-white transition-colors duration-200"
-            >
-              More in {blog.category}
-            </Link>
+            
           </div>
         </motion.div>
       </div>
