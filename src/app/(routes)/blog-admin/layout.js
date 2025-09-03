@@ -436,7 +436,7 @@ const BlogAdminLayout = ({ children }) => {
             <div className="max-w-7xl mx-auto">
               <div className="flex justify-between items-center text-sm text-gray-500">
                 <div>
-                  <p>© 2025 Blog Admin Panel. Connected to Express Backend.</p>
+                  <p>© 2025 Blog Admin Panel. </p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <span>

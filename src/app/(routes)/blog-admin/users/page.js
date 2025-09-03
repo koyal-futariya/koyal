@@ -278,6 +278,41 @@ const UserManagement = () => {
     }
   };
 
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+    if (!canEditUsers) {
+      toast.error('You do not have permission to edit users', { autoClose: 3000 });
+      return;
+    }
+    if (editUser.password !== editUser.confirmPassword) {
+      toast.error('Passwords do not match', { autoClose: 3000 });
+      return;
+    }
+    if (!editUser.password || editUser.password.length < 6) {
+      toast.error('Password must be at least 6 characters', { autoClose: 3000 });
+      return;
+    }
+    setActionLoading(true);
+    try {
+      const res = await fetchWithAuth(`/api/auth/users/${editUser.id}/password`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: editUser.password })
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || `HTTP ${res.status}: Failed to update password`);
+      }
+      const data = await res.json();
+      toast.success(data.message || 'Password updated successfully', { autoClose: 3000 });
+      setEditUser(prev => ({ ...prev, password: '', confirmPassword: '' }));
+      await fetchUsers();
+    } catch (err) {
+      toast.error(err.message || 'Failed to update password', { autoClose: 5000 });
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -487,11 +522,14 @@ const UserManagement = () => {
                   </button>
                 </div>
 
-                {/* User Information Form */}
-                <div>
-                  <h3 className="text-lg lg:text-xl font-semibold text-gray-800 mb-4 lg:mb-6 border-b border-gray-200 pb-2">
-                    User Information
-                  </h3>
+                {/* Desktop Two-Column Layout */}
+                <div className="lg:grid lg:grid-cols-2 lg:gap-8 space-y-6 lg:space-y-0">
+                  
+                  {/* Left Column - User Information */}
+                  <div className="lg:pr-4">
+                    <h3 className="text-lg lg:text-xl font-semibold text-gray-800 mb-4 lg:mb-6 border-b border-gray-200 pb-2">
+                      User Information
+                    </h3>
                     
                     <form onSubmit={handleUpdateUser} className="space-y-4 lg:space-y-6">
                       <div>
@@ -544,6 +582,61 @@ const UserManagement = () => {
                       </div>
                     </form>
                   </div>
+
+                  {/* Right Column - Password Change */}
+                  <div className="lg:pl-4 lg:border-l lg:border-gray-200">
+                    <h3 className="text-lg lg:text-xl font-semibold text-gray-800 mb-4 lg:mb-6 border-b border-gray-200 pb-2">
+                      Change Password
+                    </h3>
+                    
+                    <form onSubmit={handleUpdatePassword} className="space-y-4 lg:space-y-6">
+                      <div>
+                        <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
+                          New Password
+                        </label>
+                        <input
+                          type="password"
+                          name="password"
+                          value={editUser.password}
+                          onChange={handleEditChange}
+                          disabled={actionLoading}
+                          className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
+                          minLength={6}
+                          placeholder="Minimum 6 characters"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm lg:text-base font-semibold text-gray-700 mb-2 lg:mb-3">
+                          Confirm Password
+                        </label>
+                        <input
+                          type="password"
+                          name="confirmPassword"
+                          value={editUser.confirmPassword}
+                          onChange={handleEditChange}
+                          disabled={actionLoading}
+                          className="w-full px-4 lg:px-5 py-3 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:bg-gray-100 text-sm lg:text-base transition-all duration-200"
+                          minLength={6}
+                          placeholder="Confirm new password"
+                        />
+                      </div>
+
+                      <div className="pt-2">
+                        <button
+                          type="submit"
+                          disabled={actionLoading}
+                          className="w-full px-6 lg:px-8 py-3 lg:py-4 bg-emerald-600 text-white rounded-lg lg:rounded-xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center text-sm lg:text-base font-medium transition-all duration-200 shadow-lg"
+                        >
+                          {actionLoading ? (
+                            <FaSpinner className="animate-spin mr-2 h-4 w-4 lg:h-5 lg:w-5" />
+                          ) : null}
+                          Update Password
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
 
                 {/* Mobile/Tablet Close Button */}
                 <div className="lg:hidden mt-6 pt-6 border-t border-gray-200">

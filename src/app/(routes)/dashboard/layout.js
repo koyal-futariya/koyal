@@ -43,6 +43,20 @@ const DashboardLayout = ({ children }) => {
   const [currentPagePath, setCurrentPagePath] = useState(pathname);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false); // Track if authenticated in layout
 
+  // Handle back button press
+  useEffect(() => {
+    const handleBackButton = (e) => {
+      // If we're on the dashboard and user presses back, redirect to home
+      if (pathname === '/dashboard') {
+        e.preventDefault();
+        router.push('/');
+      }
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+    return () => window.removeEventListener('popstate', handleBackButton);
+  }, [pathname, router]);
+
   // --- Authentication Check ---
   // This layout will ONLY render if the initial check in page.js or a parent layout passes.
   // However, adding a check here is good practice for robustness.

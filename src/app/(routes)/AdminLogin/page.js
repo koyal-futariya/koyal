@@ -306,7 +306,7 @@ const AdminLogin = () => {
                 e.preventDefault();
                 handleSubmit(e, "/blog-admin");
               }}
-              disabled={dashboardLoading || dashboardLoading}
+              disabled={dashboardLoading || blogsLoading}
               className="w-4/5 h-11 rounded-full bg-blue-600 text-white text-lg font-semibold border-none outline-none cursor-pointer shadow-md hover:shadow-xl hover:bg-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
             >
               {blogsLoading ? (
