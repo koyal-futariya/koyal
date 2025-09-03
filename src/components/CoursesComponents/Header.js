@@ -30,7 +30,7 @@ const countryCodes = [
 ];
 
 // DSHeader now directly receives the 'data' prop (already processed with city placeholders replaced)
-const DSHeader = ({ data }) => {
+const DSHeader = ({ data, currentCityName, courseSlug }) => {
   const [formData, setFormData] = useState({ countryCode: "+91", contact: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusMessage, setStatusMessage] = useState({ text: "", type: "" });
@@ -142,7 +142,21 @@ const DSHeader = ({ data }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Submission failed. Please try again.");
+        // Try to extract JSON error if available, else use text
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const errData = await response.json();
+          throw new Error(errData?.message || "Submission failed. Please try again.");
+        } else {
+          const errText = await response.text();
+          throw new Error(errText || "Submission failed. Please try again.");
+        }
+      }
+
+      // Only parse JSON if server returns JSON
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        await response.json();
       }
 
       setStatusMessage({
@@ -170,6 +184,126 @@ const DSHeader = ({ data }) => {
   const handleButtonClick = () => setShowForm(true);
   const handleCloseForm = () => setShowForm(false);
 
+  // List of online cities where we need to modify the description
+  const onlineCitySlugs = new Set([
+    "delhi",
+    "kolkata",
+    "chennai",
+    "bangalore",
+    "hyderabad",
+    "ahmedabad",
+    "jaipur",
+    "lucknow",
+    "kanpur",
+    "nagpur",
+    "patna",
+    "indore",
+    "bhopal",
+    "visakhapatnam",
+    "vadodara",
+    "ludhiana",
+    "agra",
+    "nashik",
+    "rajkot",
+    "varanasi",
+    "kerala",
+    "surat",
+    "dehradun",
+    "madurai",
+    "mysore",
+    "pondicherry",
+    "ranchi",
+    "coimbatore",
+    "chandigarh",
+    "bhubaneswar",
+    "tirupati",
+    "vizag",
+    "trivandrum",
+    "jalandhar",
+    "mohali",
+    "raipur",
+    "cochin",
+    "mangalore",
+  ]);
+
+  // Function to modify description for online cities
+  const getModifiedDescription = () => {
+    if (!data?.description || !currentCityName || !courseSlug) return data?.description;
+
+    // Check if current city is in the online cities list
+    const citySlug = currentCityName.toLowerCase().replace(/\s+/g, '-');
+    if (!onlineCitySlugs.has(citySlug)) return data.description;
+
+    // Extract course name from courseSlug
+    if (courseSlug) {
+      // Try multiple approaches to extract course name
+      let courseName = courseSlug.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ');
+      
+      // Alternative course name formats - more comprehensive
+      const alternativeCourseNames = [
+        courseName,
+        courseSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+        courseSlug.toUpperCase().replace(/-/g, ' '),
+        courseSlug.replace(/-/g, '').toUpperCase(),
+        // Add specific patterns for common course types
+        courseSlug.includes('data') ? 'Data Visualization' : null,
+        courseSlug.includes('hr') ? 'HR Training' : null,
+        courseSlug.includes('sap') ? 'SAP' : null,
+        courseSlug.includes('digital') ? 'Digital Marketing' : null,
+        // Additional patterns for better detection
+        courseSlug.includes('data') && courseSlug.includes('visualization') ? 'Data Visualization Course' : null,
+        courseSlug.includes('hr') && courseSlug.includes('training') ? 'HR Training Course' : null,
+        courseSlug.includes('sap') && courseSlug.includes('fico') ? 'SAP FICO Course' : null,
+        courseSlug.includes('digital') && courseSlug.includes('marketing') ? 'Digital Marketing Course' : null
+      ].filter(Boolean); // Remove null values
+
+      // Priority rule: insert "online" only before patterns like
+      // "[Course Name] course" or "[Course Name] training"
+      for (const altCourseName of alternativeCourseNames) {
+        const escapedAlt = altCourseName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pairRegex = new RegExp(`\\b(?!online\\s)(${escapedAlt})(\\s+(course|training))\\b`, 'i');
+        if (pairRegex.test(data.description)) {
+          // Replace only the first occurrence to avoid over-insertion
+          const modified = data.description.replace(pairRegex, 'online $1$2');
+          return modified;
+        }
+      }
+
+      // Secondary rule: if description already contains a generic course phrase like
+      // "[something] course" or "[something] training" without "online", insert it there
+      const genericPairRegex = /(\b(?!online\s)[A-Za-z][A-Za-z\s]{0,50}?)(\s+(course|training))\b/i;
+      if (genericPairRegex.test(data.description) && !/\bonline\b/i.test(data.description)) {
+        return data.description.replace(genericPairRegex, 'online $1$2');
+      }
+    }
+
+    return data.description;
+  };
+
+  // Get the modified description
+  const displayDescription = getModifiedDescription();
+  
+  // Debug logging
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Header Component Debug:', {
+      currentCityName,
+      courseSlug,
+      originalDescription: data?.description,
+      modifiedDescription: displayDescription,
+      citySlug: currentCityName?.toLowerCase().replace(/\s+/g, '-'),
+      isOnlineCity: currentCityName ? onlineCitySlugs.has(currentCityName.toLowerCase().replace(/\s+/g, '-')) : false,
+      alternativeCourseNames: courseSlug ? [
+        courseSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+        courseSlug.includes('data') ? 'Data Visualization' : null,
+        courseSlug.includes('hr') ? 'HR Training' : null,
+        courseSlug.includes('sap') ? 'SAP' : null,
+        courseSlug.includes('digital') ? 'Digital Marketing' : null
+      ].filter(Boolean) : []
+    });
+  }
+
   return (
     <div className={styles.containerItDsHeader}>
       {/* Removed <Head> component here as metadata is handled by page.js */}
@@ -191,7 +325,7 @@ const DSHeader = ({ data }) => {
         <h2>
           <span className={styles.dsHeaderSpan2}>{data.subtitle}</span>
         </h2>
-        <p>{data.description}</p>
+        <p>{displayDescription}</p>
         <ul className={styles.featuresItDs}>
           {data.features.map((feature, index) => (
             <li className={styles.featuresItDsli} key={index}>

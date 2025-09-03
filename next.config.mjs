@@ -129,7 +129,7 @@ const nextConfig = {
         destination: "/hr-training-course-in-pune",
         permanent: true,
       },
-    ];
+        ];
   },
 
   // ✅ REMOVED: Invalid options that were causing errors

@@ -15,7 +15,7 @@ const OurClients = dynamic(() => import("@/components/HomePage/OurClients"));
 const PlacementSection = dynamic(
   () => import("@/components/HomePage/PlacementSection")
 );
-const OurStats = dynamic(() => import("@/components/HomePage/OurStats"));
+const AnimatedStatsSection = dynamic(() => import("@/components/HomePage/OurStats"));
 const Achievements = dynamic(
   () => import("@/components/HomePage/Achievements")
 );
@@ -237,7 +237,7 @@ export default function HomePage() {
         <OurClients />
         <Courses />
         <PlacementSection />
-        <OurStats />
+        <AnimatedStatsSection />
         <Achievements />
         <FeedbackAndReviews />
         <DemoCertificate />

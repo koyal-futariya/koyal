@@ -13,6 +13,23 @@ function truncateString(str, maxLength) {
     : truncated + "...";
 }
 
+const onlineCourseCities = [
+  "delhi", "kolkata", "chennai", "bangalore", "hyderabad", "ahmedabad", 
+  "jaipur", "lucknow", "kanpur", "nagpur", "patna", "indore", "bhopal", 
+  "visakhapatnam", "vadodara", "ludhiana", "agra", "nashik", "rajkot", 
+  "varanasi", "kerala", "surat", "dehradun", "madurai", "mysore", 
+  "pondicherry", "ranchi", "coimbatore", "chandigarh", "bhubaneswar", 
+  "tirupati", "vizag", "trivandrum", "jalandhar", "mohali", "raipur", 
+  "cochin", "mangalore"
+];
+
+// Helper: detect if the given city should use the "Online" prefix
+function isOnlineCity(citySlugOrName) {
+  if (!citySlugOrName) return false;
+  const val = String(citySlugOrName).toLowerCase();
+  return onlineCourseCities.includes(val);
+}
+
 // Strategic city name optimization
 function getOptimizedCityName(cityName) {
   const optimizations = {
@@ -41,42 +58,12 @@ function getOptimizedCourseTitle(courseTitle) {
   return optimizations[courseTitle] || courseTitle;
 }
 
-// Cities that should use "online course" instead of "course"
-const onlineCourseCities = [
-  "Delhi", "Kolkata", "Chennai", "Bangalore", "Hyderabad", "Ahmedabad", 
-  "Jaipur", "Lucknow", "Kanpur", "Nagpur", "Patna", "Indore", "Bhopal", 
-  "Visakhapatnam", "Vadodara", "Ludhiana", "Agra", "Nashik", "Rajkot", 
-  "Varanasi", "Kerala", "Surat", "Dehradun", "Madurai", "Mysore", 
-  "Pondicherry", "Ranchi", "Coimbatore", "Chandigarh", "Bhubaneswar", 
-  "Tirupati", "Vizag", "Trivandrum", "Jalandhar", "Mohali", "Cochin", "Mangalore"
-];
-
 // Smart title optimization (50-60 chars target)
-function getOptimalTitle(course, cityName, courseTitle) {
-  // Check if city should use "online course"
-  const shouldUseOnlineCourse = onlineCourseCities.includes(cityName);
-  const courseType = shouldUseOnlineCourse ? "Online Course" : "Course";
-
+function getOptimalTitle(course, cityName, courseTitle, isOnline) {
   if (course.metaTitle) {
     let processedTitle = course.metaTitle.replace(/{city}/g, cityName);
-    if (shouldUseOnlineCourse) {
-      const placeholder = "__ONLINE_COURSE__";
-      const trainingPlaceholder = "__ONLINE_TRAINING__";
-      // Protect existing occurrences of "Online Course" so they don't get doubled
-      processedTitle = processedTitle.replace(/Online\s+Course/gi, placeholder);
-      // Convert remaining "Course" occurrences
-      processedTitle = processedTitle.replace(/Course(\s+in\b)/gi, "Online Course$1");
-      processedTitle = processedTitle.replace(/\bCourse\b/gi, "Online Course");
-      // Restore placeholders
-      processedTitle = processedTitle.replace(new RegExp(placeholder, "g"), "Online Course");
-      // Final normalization guard (in case of any edge concatenations)
-      processedTitle = processedTitle.replace(/Online\s+Online\s+Course/gi, "Online Course");
-
-      // Now handle Training -> Online Training safely
-      processedTitle = processedTitle.replace(/Online\s+Training/gi, trainingPlaceholder);
-      processedTitle = processedTitle.replace(/\bTraining\b/gi, "Online Training");
-      processedTitle = processedTitle.replace(new RegExp(trainingPlaceholder, "g"), "Online Training");
-      processedTitle = processedTitle.replace(/Online\s+Online\s+Training/gi, "Online Training");
+    if (isOnline && !/^online\b/i.test(processedTitle)) {
+      processedTitle = `Online ${processedTitle}`;
     }
     return truncateString(processedTitle, 60);
   }
@@ -85,41 +72,37 @@ function getOptimalTitle(course, cityName, courseTitle) {
   const cityLength = cityName.length;
   const courseTitleLength = courseTitle.length;
   
+  const baseCourseTitle = isOnline ? `Online ${courseTitle}` : courseTitle;
+
   // Strategy 1: Try standard template
-  const standardTemplate = `${courseTitle} ${courseType} in ${cityName} | ${shouldUseOnlineCourse ? "Online Training" : "Training"}`;
+  const standardTemplate = `${baseCourseTitle} Course in ${cityName} | Training`;
   if (standardTemplate.length <= 60) {
     return standardTemplate;
   }
   
   // Strategy 2: Optimize city name
   const optimizedCity = getOptimizedCityName(cityName);
-  const cityOptimizedTemplate = `${courseTitle} ${courseType} in ${optimizedCity} | ${shouldUseOnlineCourse ? "Online Training" : "Training"}`;
+  const cityOptimizedTemplate = `${baseCourseTitle} Course in ${optimizedCity} | Training`;
   if (cityOptimizedTemplate.length <= 60) {
     return cityOptimizedTemplate;
   }
   
   // Strategy 3: Optimize both
   const optimizedCourse = getOptimizedCourseTitle(courseTitle);
-  const bothOptimizedTemplate = `${optimizedCourse} ${courseType} in ${optimizedCity} | ${shouldUseOnlineCourse ? "Online Training" : "Training"}`;
+  const baseOptimizedCourse = isOnline ? `Online ${optimizedCourse}` : optimizedCourse;
+  const bothOptimizedTemplate = `${baseOptimizedCourse} Course in ${optimizedCity} | Training`;
   if (bothOptimizedTemplate.length <= 60) {
     return bothOptimizedTemplate;
   }
   
   // Fallback: Truncate
-  return truncateString(`${courseTitle} ${courseType} in ${cityName} | ${shouldUseOnlineCourse ? "Online Training" : "Training"}`, 60);
+  return truncateString(`${baseCourseTitle} Course in ${cityName} | Training`, 60);
 }
+
 // Smart description optimization (150-160 chars target)
 function getOptimalDescription(course, cityName, courseTitle) {
-  const shouldUseOnlineCourse = onlineCourseCities.includes(cityName);
   if (course.metaDescription) {
     let processedDescription = course.metaDescription.replace(/{city}/g, cityName);
-    if (shouldUseOnlineCourse) {
-      const placeholder = "__ONLINE_TRAINING__";
-      processedDescription = processedDescription.replace(/Online\s+training/gi, placeholder);
-      processedDescription = processedDescription.replace(/\btraining\b/gi, "online training");
-      processedDescription = processedDescription.replace(new RegExp(placeholder, "g"), "Online training");
-      processedDescription = processedDescription.replace(/online\s+online\s+training/gi, "online training");
-    }
     if (processedDescription.length <= 160) {
       return processedDescription;
     }
@@ -127,7 +110,7 @@ function getOptimalDescription(course, cityName, courseTitle) {
   }
   
   // Template targeting 150-160 chars
-  const template = `Master ${courseTitle} in ${cityName}. Expert-led ${shouldUseOnlineCourse ? "online training" : "training"}, certification, real-time projects & 100% placement support. Launch your career now!`;
+  const template = `Master ${courseTitle} course in ${cityName}. Expert-led training, certification, real-time projects & 100% placement support. Launch your career now!`;
   
   if (template.length >= 150 && template.length <= 160) {
     return template;
@@ -135,7 +118,7 @@ function getOptimalDescription(course, cityName, courseTitle) {
   
   if (template.length > 160) {
     return truncateString(template, 160);
-  }
+  }s
   
   // If too short, expand slightly
   const expandedTemplate = template.replace(
@@ -160,19 +143,17 @@ export function generateDynamicMetadata(courseSlug, citySlug) {
   const courseTitle = course.title;
   const cityName = city.name;
   const hasOffice = city.hasOffice;
-
-  // Check if city should use "online course"
-  const shouldUseOnlineCourse = onlineCourseCities.includes(cityName);
-  const courseType = shouldUseOnlineCourse ? "Online Course" : "Course";
+  const isOnline = isOnlineCity(citySlug || cityName);
 
   // Generate optimized title and description
-  const finalTitle = getOptimalTitle(course, cityName, courseTitle);
+  const finalTitle = getOptimalTitle(course, cityName, courseTitle, isOnline); // SEO <title>
+  const socialTitle = getOptimalTitle(course, cityName, courseTitle, false); // Keep social titles unchanged
   const finalDescription = getOptimalDescription(course, cityName, courseTitle);
 
   // Generate strategic keywords
   const keywords = [
-    `${courseTitle} ${courseType} in ${cityName}`,
-    `${courseTitle} ${shouldUseOnlineCourse ? "Online Training" : "Training"} in ${cityName}`,
+    `${courseTitle} Course in ${cityName}`,
+    `${courseTitle} Training in ${cityName}`,
     `Best ${courseTitle} Training Institute in ${cityName}`,
     `${courseTitle} Certification in ${cityName}`,
     `${courseTitle} Classes in ${cityName}`,
@@ -193,7 +174,7 @@ export function generateDynamicMetadata(courseSlug, citySlug) {
 
   // Open Graph metadata
   const openGraph = {
-    title: finalTitle,
+    title: socialTitle,
     description: finalDescription,
     url: pageUrl,
     siteName: "Connecting Dots ERP",
@@ -202,7 +183,7 @@ export function generateDynamicMetadata(courseSlug, citySlug) {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: truncateString(`${courseTitle} ${courseType} in ${cityName} | ${shouldUseOnlineCourse ? "Online Training" : "Training"}`, 100),
+        alt: truncateString(`${courseTitle} Course in ${cityName}`, 100),
       },
     ],
     type: "website",
@@ -213,7 +194,7 @@ export function generateDynamicMetadata(courseSlug, citySlug) {
   // Twitter Card metadata
   const twitter = {
     card: "summary_large_image",
-    title: finalTitle,
+    title: socialTitle,
     description: finalDescription,
     images: [twitterImageUrl],
     site: "@CD_ERP",
@@ -308,9 +289,6 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
   const courseTitle = course.title;
   const cityName = city.name;
   const hasOffice = city.hasOffice;
-  const shouldUseOnlineCourse = onlineCourseCities.includes(cityName);
-  const courseType = shouldUseOnlineCourse ? "Online Course" : "Course";
-  const courseTypeLower = shouldUseOnlineCourse ? "online course" : "course";
 
   const processedDescription = course.description.replace(/{city}/g, cityName);
 
@@ -352,7 +330,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
       "@type": "WebPage",
       "@id": `${pageUrl}#webpage`,
       url: pageUrl,
-      name: `${courseTitle} ${courseType} in ${cityName} | Connecting Dots ERP`,
+      name: `${courseTitle} Course in ${cityName} | Connecting Dots ERP`,
       description: processedDescription,
       inLanguage: "en-US",
       isPartOf: {
@@ -367,7 +345,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
         "@id": `${pageUrl}#mainImage`,
         width: 1200,
         height: 630,
-        caption: `${courseTitle} ${courseType} in ${cityName}`,
+        caption: `${courseTitle} Course in ${cityName}`,
       },
       primaryImageOfPage: {
         "@id": `${pageUrl}#mainImage`,
@@ -396,7 +374,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
         {
           "@type": "ListItem",
           position: 3,
-          name: `${courseTitle} ${courseType} in ${cityName}`,
+          name: `${courseTitle} Course in ${cityName}`,
           item: pageUrl,
         },
       ],
@@ -434,7 +412,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
       "@context": "https://schema.org",
       "@type": "Course",
       "@id": `${pageUrl}#course`,
-      name: `${courseTitle} ${courseType} in ${cityName}`,
+      name: `${courseTitle} Course in ${cityName}`,
       description: processedDescription,
       url: pageUrl,
       provider: {
@@ -497,7 +475,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
           name: "Verified Student",
         },
         datePublished: currentDate.split("T")[0],
-        reviewBody: `The ${courseTitle} ${courseTypeLower} at Connecting Dots ERP is outstanding! The ${courseTypeLower} content is comprehensive, and the trainers are highly knowledgeable. I highly recommend it to anyone looking to build a successful career in ${courseTitle}.`,
+        reviewBody: `The ${courseTitle} course at Connecting Dots ERP is outstanding! The course content is comprehensive, and the trainers are highly knowledgeable. I highly recommend it to anyone looking to build a successful career in ${courseTitle}.`,
         reviewRating: {
           "@type": "Rating",
           ratingValue: "5",
@@ -549,8 +527,8 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "@id": `${pageUrl}#video`,
-      name: `Introduction to ${courseTitle} ${courseType} at Connecting Dots ERP`,
-      description: `Explore ${courseTitle} with Connecting Dots ERP! Gain expertise in ${course.modules ? course.modules.slice(0, 2).join(" and ") : "your chosen field"}, data management, and business process integration. Master real-world applications to drive digital transformation.`,
+      name: `Introduction to ${courseTitle} Course at Connecting Dots ERP`,
+      description: `Explore ${courseTitle} Course with Connecting Dots ERP! Gain expertise in ${course.modules ? course.modules.slice(0, 2).join(" and ") : "your chosen field"}, data management, and business process integration. Master real-world applications to drive digital transformation.`,
       thumbnailUrl: `${baseUrl}/images/video-thumbnail-${course.slug}-course-${citySlug}.jpg`,
       embedUrl: "https://www.youtube.com/embed/7YRbfuv7R3k",
       uploadDate: currentDate.split("T")[0],
@@ -564,8 +542,8 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
       "@context": "https://schema.org",
       "@type": "SpecialAnnouncement",
       "@id": `${pageUrl}#announcement`,
-      name: `${courseTitle} ${courseType} in ${cityName} - New Batch Starting Soon!`,
-      text: `Join our new batch for the ${courseTitle} ${courseTypeLower} in ${cityName}. Enroll now and kickstart your career in ${courseTitle}. The ${courseTypeLower} offers in-depth ${shouldUseOnlineCourse ? "online training" : "training"} in ${course.modules ? course.modules.slice(0, 3).join(", ") : "key concepts"}, with hands-on experience and expert guidance.`,
+      name: `${courseTitle} Course in ${cityName} - New Batch Starting Soon!`,
+      text: `Join our new batch for the ${courseTitle} Course in ${cityName}. Enroll now and kickstart your career in ${courseTitle}. The Course offers in-depth training in ${course.modules ? course.modules.slice(0, 3).join(", ") : "key concepts"}, with hands-on experience and expert guidance.`,
       datePosted: currentDate.split("T")[0],
       expires: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)
         .toISOString()
@@ -589,8 +567,8 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "@id": `${baseUrl}/${citySlug}/#localbusiness`,
-      name: `Best ${courseTitle} Training Institute in ${cityName} | ${courseTitle} ${courseType} in ${cityName} | ${courseTitle} Classes in ${cityName} | Placement`,
-      description: `Start your new journey with Connecting Dots ERP in the world of ${courseTitle} by enrolling in our ${courseTitle} ${courseTypeLower} in ${cityName}! Whether you're just starting or aiming to enhance your skills we offer a variety of ${courseTitle} courses designed to your requirements.`,
+      name: `Best ${courseTitle} Training Institute in ${cityName} | ${courseTitle} Course in ${cityName} | ${courseTitle} Classes in ${cityName} | Placement`,
+      description: `Start your new journey with Connecting Dots ERP in the world of ${courseTitle} by enrolling in our ${courseTitle} Course in ${cityName}! Whether you're just starting or aiming to enhance your skills we offer a variety of ${courseTitle} Course designed to your requirements.`,
       url: city.office.mapUrl || pageUrl,
       telephone: city.office.phone,
       priceRange: city.seoData.priceRange,
@@ -629,7 +607,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
         "@id": `${pageUrl}#locationImage`,
         width: 800,
         height: 600,
-        caption: `Connecting Dots ERP ${cityName} Branch - ${courseTitle} Training`,
+        caption: `Connecting Dots ERP ${cityName} Branch - ${courseTitle} Course Training`,
       },
       hasMap: city.office.mapUrl,
       areaServed: {
@@ -640,7 +618,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
           longitude: city.coordinates.lng.toString(),
         },
         geoRadius: "20000",
-        description: `Serving ${cityName} and surrounding areas for ${courseTitle} training.`,
+        description: `Serving ${cityName} and surrounding areas for ${courseTitle} Course training.`,
       },
       aggregateRating: {
         "@type": "AggregateRating",
@@ -656,7 +634,7 @@ export function generateDynamicJsonLd(courseSlug, citySlug) {
           name: "Verified Student",
         },
         datePublished: currentDate.split("T")[0],
-        reviewBody: `The ${courseTitle} ${courseTypeLower} at Connecting Dots ERP is outstanding! The ${courseTypeLower} content is well-structured and comprehensive, and the trainers are exceptionally skilled and knowledgeable. I highly recommend it to anyone aspiring to build a career in ${courseTitle}.`,
+        reviewBody: `The ${courseTitle} Course at Connecting Dots ERP is outstanding! The Course content is well-structured and comprehensive, and the trainers are exceptionally skilled and knowledgeable. I highly recommend it to anyone aspiring to build a career in ${courseTitle}.`,
         reviewRating: {
           "@type": "Rating",
           ratingValue: "5",

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // Organized clients by tier for better visual hierarchy
 const premiumClients = [
@@ -58,8 +58,16 @@ const MarqueeRow = ({
   shuffle = false,
   size = "normal",
 }) => {
-  const logosToUse = useMemo(() => {
-    return shuffle ? shuffleArray(logos) : logos;
+  // Hydration-safe shuffling: render deterministic order on the server,
+  // then shuffle after mount on the client to avoid SSR/CSR mismatch
+  const [logosToUse, setLogosToUse] = useState(logos);
+
+  useEffect(() => {
+    if (shuffle) {
+      setLogosToUse(shuffleArray(logos));
+    } else {
+      setLogosToUse(logos);
+    }
   }, [logos, shuffle]);
 
   // Define animation classes
@@ -105,7 +113,7 @@ const MarqueeRow = ({
               alt={`Client logo`}
               width={dimensions.width}
               height={dimensions.height}
-              className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300 rounded-xl"
+              className="object-contain transition-all duration-300 rounded-xl hover:scale-110"
               loading="lazy"
               quality={75}
             />
@@ -120,7 +128,7 @@ const MarqueeRow = ({
               alt={`Client logo`}
               width={dimensions.width}
               height={dimensions.height}
-              className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300 rounded-xl"
+              className="object-contain transition-all duration-300 rounded-xl hover:scale-110"
               loading="lazy"
               quality={75}
             />

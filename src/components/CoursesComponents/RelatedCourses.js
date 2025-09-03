@@ -138,9 +138,9 @@ const CoursesRelated = ({ data, currentCityName }) => {
   }, []);
 
   const renderRelatedCourses = useMemo(() => {
-    if (!data || !data.items || data.items.length === 0) return null; // Use 'data.items'
+    if (!data || !Array.isArray(data.items) || data.items.length === 0) return null;
 
-    const relatedCoursesToRender = data.items; // Use data.items directly
+    const relatedCoursesToRender = data.items;
     const cardsPerSlide = isMobile ? 1 : 5;
     const slides = [];
 
@@ -150,53 +150,54 @@ const CoursesRelated = ({ data, currentCityName }) => {
           <div className={styles.relatedCoursesGrid}>
             {relatedCoursesToRender
               .slice(i, i + cardsPerSlide)
-              .map((relcourse, index) => (
-                <div
-                  key={index}
-                  className={styles.relatedCourseCard}
-                  onClick={() => handleCourseClick(relcourse.name)}
-                  style={{ cursor: "pointer" }}
-                  title={`Click to view ${relcourse.name} course in ${currentCityName}`} // Helpful tooltip
-                >
-                  <div className={styles.relatedIconContainer}>
-                    {relcourse.icon.endsWith(".mp4") ? (
-                      <video
-                        src={relcourse.icon}
-                        alt={relcourse.alt}
-                        className={styles.relatedCourseIcon}
-                        loop
-                        autoPlay
-                        muted
-                      />
-                    ) : (
-                      <Image
-                        src={relcourse.icon}
-                        alt={relcourse.alt}
-                        width={100}
-                        height={100}
-                        className={styles.relatedCourseIcon}
-                      />
-                    )}
+              .map((relcourse, index) => {
+                const icon = relcourse?.icon || "";
+                const isVideo = typeof icon === "string" && icon.endsWith(".mp4");
+                return (
+                  <div
+                    key={index}
+                    className={styles.relatedCourseCard}
+                    onClick={() => handleCourseClick(relcourse.name)}
+                    style={{ cursor: "pointer" }}
+                    title={`Click to view ${relcourse.name} course in ${currentCityName}`}
+                  >
+                    <div className={styles.relatedIconContainer}>
+                      {isVideo ? (
+                        <video
+                          src={icon}
+                          className={styles.relatedCourseIcon}
+                          loop
+                          autoPlay
+                          muted
+                        />
+                      ) : (
+                        icon && (
+                          <Image
+                            src={icon}
+                            alt={relcourse?.alt || relcourse?.name || "Course"}
+                            width={100}
+                            height={100}
+                            className={styles.relatedCourseIcon}
+                          />
+                        )
+                      )}
+                    </div>
+                    <h3>{relcourse.name}</h3>
+                    {relcourse?.description && <p>{relcourse.description}</p>}
                   </div>
-                  <h3>{relcourse.name}</h3>
-                  <p>{relcourse.description}</p>
-                </div>
-              ))}
+                );
+              })}
           </div>
         </Carousel.Item>
       );
     }
 
     return slides;
-  }, [data, handleCourseClick, isMobile, currentCityName]); // Use 'data' instead of 'relatedCourses'
+  }, [data, handleCourseClick, isMobile, currentCityName]);
 
-  // Simplified loading/error handling as data is passed directly
-  if (!data) {
-    return (
-      <div className={styles.loadingContainer}>
-        No related courses data available (check masterData.js or prop passing).
-      </div>
-    );
+  // Do not render the section at all if missing/empty
+  if (!data || !Array.isArray(data.items) || data.items.length === 0) {
+    return null;
   }
   // No separate error state, as `data` would be null if there was an upstream error.
 

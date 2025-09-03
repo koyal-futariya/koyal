@@ -187,6 +187,14 @@ const Header = () => {
     } else {
       document.body.style.overflow = "";
     }
+    // Notify others (e.g., FloatingFlag) about sidebar visibility changes
+    if (typeof window !== "undefined") {
+      try {
+        window.dispatchEvent(
+          new CustomEvent("sidebar-visibility", { detail: { open: isSidebarVisible } })
+        );
+      } catch {}
+    }
     return () => {
       document.body.style.overflow = "";
     };

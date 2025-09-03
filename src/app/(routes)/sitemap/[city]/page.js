@@ -405,7 +405,7 @@ function generateCityLinks(city) {
       courses: [
         {
           name: "Data Visualisation Course",
-          slug: `/data-visualisation-course-in-${city}`,
+          slug: `/data-visualization-course-in-${city}`,
         },
         { name: "Tableau", slug: `/tableau-training-in-${city}` },
         { name: "Power BI", slug: `/power-bi-course-in-${city}` },

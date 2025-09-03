@@ -10,22 +10,35 @@ const Projects = ({ pageId, pageType }) => {
   const [projectsData, setProjectsData] = useState(null);
 
   useEffect(() => {
-    fetch('/Jsonfolder/projectsdata.json') // Path to your JSON file
-      .then((response) => response.json())
-      .then((data) => {
-        const pageData = data[pageType]?.[pageId];
+    let isMounted = true;
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('/Jsonfolder/projectsdata.json');
+        const contentType = response.headers.get('content-type') || '';
+        if (!response.ok || !contentType.includes('application/json')) {
+          // Avoid attempting to parse HTML responses as JSON
+          throw new Error(`Invalid response for projectsdata.json: ${response.status}`);
+        }
+        const data = await response.json();
+        if (!isMounted) return;
+        const pageData = data?.[pageType]?.[pageId] || null;
         setProjectsData(pageData);
-      })
-      .catch((error) => console.error('Error fetching the data:', error));
+      } catch (error) {
+        console.error('Error fetching the projects data:', error);
+        if (isMounted) setProjectsData(null);
+      }
+    };
+    fetchProjects();
+    return () => {
+      isMounted = false;
+    };
   }, [pageId, pageType]);
 
   const handleSelect = (selectedIndex) => {
     setCarouselIndex(selectedIndex);
   };
 
-  if (!projectsData) {
-    return <p>Loading...</p>;
-  }
+  if (!projectsData) return null;
 
   return (
     <div className={styles.projectsContainer}>

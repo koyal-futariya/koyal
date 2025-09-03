@@ -191,6 +191,23 @@ const CourseCityPage = async ({ params }) => {
     : null;
   const certificateData = processPlaceholders(course.certificate, city.name);
   const faqData = processPlaceholders(course.faq, city.name);
+
+  // Normalize FAQ text: replace plural "courses" with singular "course" across all courses and cities
+  const normalizeCoursesWord = (value) => {
+    if (typeof value === "string") {
+      return value.replace(/\bcourses\b/gi, "course");
+    }
+    if (Array.isArray(value)) {
+      return value.map(normalizeCoursesWord);
+    }
+    if (value && typeof value === "object") {
+      const out = {};
+      for (const k in value) out[k] = normalizeCoursesWord(value[k]);
+      return out;
+    }
+    return value;
+  };
+  const faqDataNormalized = normalizeCoursesWord(faqData);
   const relatedCoursesData = processPlaceholders(
     course.relatedCourses,
     city.name
@@ -201,6 +218,126 @@ const CourseCityPage = async ({ params }) => {
     course.descriptionContent,
     city.name
   );
+
+  // Derive normalized course name for certificate subtitle text
+  const normalizedCourseName = course?.title || course?.fullTitle || courseSlug;
+
+  // Utility: recursively inject "online" keyword into relevant phrases
+  const injectOnlinePhrases = (value) => {
+    if (typeof value === "string") {
+      const cityNameEscaped = city.name.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+
+      // Grow your career -> ensure "online" version and punctuation
+      value = value.replace(
+        new RegExp(
+          `grow\\s+your\\s+career\\s+with\\s+the\\s+best\\s+([^.]*)\\s+course\\s+in\\s+${cityNameEscaped}`,
+          "i"
+        ),
+        (m, p1) => `Grow Your Career with the online ${p1.trim()} Course in ${city.name}.`
+      );
+
+      // We offers an advanced ... course in City -> insert online
+      value = value.replace(
+        new RegExp(
+          `(We\\s+offers\\s+an\\s+advanced\\s+)([^.]*)\\s+course\\s+in\\s+${cityNameEscaped}`,
+          "i"
+        ),
+        (m, p1, p2) =>
+          /(^|\s)online(\s|$)/i.test(p2) ? m : `${p1}online ${p2} course in ${city.name}`
+      );
+
+      // Enhance your career prospects ... Dot's ... course in City -> insert online
+      value = value.replace(
+        new RegExp(
+          `(Enhance\\s+your\\s+career\\s+prospects\\s+with\\s+Connecting\\s+Dot's\\s+)([^.]*)\\s+course\\s+in\\s+${cityNameEscaped}`,
+          "i"
+        ),
+        (m, p1, p2) =>
+          /(^|\s)online(\s|$)/i.test(p2) ? m : `${p1}online ${p2} course in ${city.name}`
+      );
+
+      return value;
+    }
+    if (Array.isArray(value)) {
+      return value.map(injectOnlinePhrases);
+    }
+    if (value && typeof value === "object") {
+      const out = {};
+      for (const k in value) out[k] = injectOnlinePhrases(value[k]);
+      return out;
+    }
+    return value;
+  };
+
+  // Override Header content for ALL courses but ONLY for specified cities
+  const onlineCitySlugs = new Set([
+    "delhi",
+    "kolkata",
+    "chennai",
+    "bangalore",
+    "hyderabad",
+    "ahmedabad",
+    "jaipur",
+    "lucknow",
+    "kanpur",
+    "nagpur",
+    "patna",
+    "indore",
+    "bhopal",
+    "visakhapatnam",
+    "vadodara",
+    "ludhiana",
+    "agra",
+    "nashik",
+    "rajkot",
+    "varanasi",
+    "kerala",
+    "surat",
+    "dehradun",
+    "madurai",
+    "mysore",
+    "pondicherry",
+    "ranchi",
+    "coimbatore",
+    "chandigarh",
+    "bhubaneswar",
+    "tirupati",
+    "vizag",
+    "trivandrum",
+    "jalandhar",
+    "mohali",
+    "raipur",
+    "cochin",
+    "mangalore",
+  ]);
+
+  if (onlineCitySlugs.has(citySlug)) {
+    const courseName = normalizedCourseName;
+
+    // Title and subheading for header
+    if (headerData) {
+      headerData.title = `Online ${courseName} Course in ${city.name}`;
+      headerData.subtitle = `Get Certified with the best online ${courseName} training institute in ${city.name}`;
+      // Remove this line to let Header component handle description modification
+      // headerData.description = injectOnlinePhrases(headerData.description);
+    }
+
+
+
+    // Also adjust sub-course/description sections
+    if (descriptionContentData) {
+      const normalized = injectOnlinePhrases(descriptionContentData);
+      // overwrite the reference to ensure downstream components get updated data
+      for (const key in descriptionContentData) {
+        descriptionContentData[key] = normalized[key];
+      }
+    }
+
+    // Update Certificate subtitle to required format
+    if (certificateData && typeof certificateData === "object") {
+      certificateData.courseTitle = `Online ${normalizedCourseName} Certification Course`;
+    }
+  }
 
   // Check if this is a multi-section course (like Digital Marketing)
   const isMultiSectionCourse =
@@ -310,7 +447,7 @@ const CourseCityPage = async ({ params }) => {
 
         {/* Render Client Components */}
         <ClientOnly>
-          <DSHeader data={headerData} />
+          <DSHeader data={headerData} currentCityName={city.name} courseSlug={courseSlug} />
           <Why data={whyData} />
           {sapModData && <SapModComponent data={sapModData} />}
 
@@ -321,12 +458,12 @@ const CourseCityPage = async ({ params }) => {
           <Counselor />
 
           {/* Main description section */}
-          <Description data={descriptionContentData.main} />
+          <Description data={descriptionContentData.main} currentCityName={city.name} courseSlug={courseSlug} enableHeadingModification={true} />
 
           {/* PPC Section with scroll anchor */}
           <div id="pay-per-click" style={{ scrollMarginTop: "80px" }}>
             {descriptionContentData.ppc && (
-              <Description data={descriptionContentData.ppc} sectionIndex={0} />
+              <Description data={descriptionContentData.ppc} sectionIndex={0} currentCityName={city.name} courseSlug={courseSlug} enableHeadingModification={false} />
             )}
           </div>
 
@@ -338,7 +475,7 @@ const CourseCityPage = async ({ params }) => {
             style={{ scrollMarginTop: "80px" }}
           >
             {descriptionContentData.seo && (
-              <Description data={descriptionContentData.seo} sectionIndex={1} />
+              <Description data={descriptionContentData.seo} sectionIndex={1} currentCityName={city.name} courseSlug={courseSlug} enableHeadingModification={false} />
             )}
           </div>
 
@@ -348,7 +485,7 @@ const CourseCityPage = async ({ params }) => {
           {/* SMM Section with scroll anchor */}
           <div id="social-media-marketing" style={{ scrollMarginTop: "80px" }}>
             {descriptionContentData.smm && (
-              <Description data={descriptionContentData.smm} sectionIndex={0} />
+              <Description data={descriptionContentData.smm} sectionIndex={0} currentCityName={city.name} courseSlug={courseSlug} enableHeadingModification={false} />
             )}
           </div>
 
@@ -358,11 +495,14 @@ const CourseCityPage = async ({ params }) => {
               <Description
                 data={descriptionContentData.analytics}
                 sectionIndex={1}
+                currentCityName={city.name}
+                courseSlug={courseSlug}
+                enableHeadingModification={false}
               />
             )}
           </div>
 
-          <FAQ data={faqData} />
+          <FAQ data={faqDataNormalized} />
           <CoursesRelated
             data={relatedCoursesData}
             currentCityName={city.name}
@@ -388,7 +528,7 @@ const CourseCityPage = async ({ params }) => {
 
       {/* Render Client Components */}
       <ClientOnly>
-        <DSHeader data={headerData} />
+        <DSHeader data={headerData} currentCityName={city.name} courseSlug={courseSlug} />
         <Why data={whyData} />
 
         {/* Conditional rendering based on data availability and course type */}
@@ -412,11 +552,13 @@ const CourseCityPage = async ({ params }) => {
         <Certificate data={certificateData} />
 
         {/* Single description section for non-multi-section courses */}
-        <Description data={descriptionContentData} />
+        <Description data={descriptionContentData} currentCityName={city.name} courseSlug={courseSlug} />
 
-        <FAQ data={faqData} />
+        <FAQ data={faqDataNormalized} />
         {course.category === "hr" && <HrCard />}
-        <CoursesRelated data={relatedCoursesData} currentCityName={city.name} />
+        {relatedCoursesData && Array.isArray(relatedCoursesData.items) && relatedCoursesData.items.length > 0 && (
+          <CoursesRelated data={relatedCoursesData} currentCityName={city.name} />
+        )}
       </ClientOnly>
     </>
   );

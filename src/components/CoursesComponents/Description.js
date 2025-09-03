@@ -6,7 +6,7 @@ import React, { useEffect, useState, useRef } from "react";
 import styles from "@/styles/CoursesComponents/Description.module.css";
 import { FaCheckCircle, FaChevronRight } from "react-icons/fa";
 
-const Description = ({ data, sectionIndex = 0 }) => { // Renamed 'content' prop to 'data' for consistency
+const Description = ({ data, sectionIndex = 0, currentCityName, courseSlug, enableHeadingModification = true }) => { // Added currentCityName and courseSlug props
   // Removed: const [content, setContent] = useState(null);
   // Removed: const [error, setError] = useState("");
   // Removed: const { city } = useContext(CityContext);
@@ -51,6 +51,75 @@ const Description = ({ data, sectionIndex = 0 }) => { // Renamed 'content' prop 
   }, [isVisible]);
 
   // Removed: useEffect for data fetching and localStorage logic
+
+  // List of online cities where we need to modify the heading
+  const onlineCitySlugs = new Set([
+    "delhi",
+    "kolkata",
+    "chennai",
+    "bangalore",
+    "hyderabad",
+    "ahmedabad",
+    "jaipur",
+    "lucknow",
+    "kanpur",
+    "nagpur",
+    "patna",
+    "indore",
+    "bhopal",
+    "visakhapatnam",
+    "vadodara",
+    "ludhiana",
+    "agra",
+    "nashik",
+    "rajkot",
+    "varanasi",
+    "kerala",
+    "surat",
+    "dehradun",
+    "madurai",
+    "mysore",
+    "pondicherry",
+    "ranchi",
+    "coimbatore",
+    "chandigarh",
+    "bhubaneswar",
+    "tirupati",
+    "vizag",
+    "trivandrum",
+    "jalandhar",
+    "mohali",
+    "raipur",
+    "cochin",
+    "mangalore",
+  ]);
+
+  // Function to modify title for online cities
+  const getModifiedTitle = () => {
+    if (!enableHeadingModification) return data?.title;
+    if (!data?.title || !currentCityName || !courseSlug) return data?.title;
+
+    // Check if current city is in the online cities list
+    const citySlug = currentCityName.toLowerCase().replace(/\s+/g, '-');
+    if (!onlineCitySlugs.has(citySlug)) return data.title;
+
+    // Extract course name from the title (remove "in [city]" part)
+    const titleMatch = data.title.match(/^why choose connecting dots erp for (.+?) in .+$/i);
+    if (titleMatch) {
+      const courseName = titleMatch[1].trim();
+      return `Why Choose Us for online ${courseName} in ${currentCityName}`;
+    }
+
+    // If the pattern doesn't match, try to extract course name from courseSlug
+    if (courseSlug) {
+      const courseName = courseSlug.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ');
+      return `Why Choose Us for online ${courseName} in ${currentCityName}`;
+    }
+
+    return data.title;
+  };
 
   const applyHighlights = (text, highlights) => {
     if (!highlights || highlights.length === 0) return text;
@@ -114,6 +183,9 @@ const Description = ({ data, sectionIndex = 0 }) => { // Renamed 'content' prop 
     </ul>
   );
 
+  // Get the modified title
+  const displayTitle = getModifiedTitle();
+
   return (
     <section
       ref={descriptionRef}
@@ -128,7 +200,7 @@ const Description = ({ data, sectionIndex = 0 }) => { // Renamed 'content' prop 
       )}
 
       <div className={styles.descriptionContent}>
-        <h2 className={styles.descriptionTitle}>{data.title}</h2> {/* Use data.title */}
+        <h2 className={styles.descriptionTitle}>{displayTitle}</h2> {/* Use modified title */}
 
         {/* Paragraphs BEFORE list */}
         {paragraphsBeforeList.map(

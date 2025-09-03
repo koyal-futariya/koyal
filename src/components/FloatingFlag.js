@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -7,6 +8,8 @@ import Image from "next/image";
 // Uses a placeholder image for the "Book For DEMO" design
 export default function FloatingFlag() {
   const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
 
   // Hide on admin-like paths
   const hiddenPaths = ["/dashboard", "/superadmin", "/adminlogin", "/blogsadmin"];
@@ -15,9 +18,29 @@ export default function FloatingFlag() {
 
   useEffect(() => {
     // preload any required assets in future
+    const onSidebarVisibility = (e) => {
+      if (e?.detail && typeof e.detail.open === "boolean") {
+        setSidebarOpen(e.detail.open);
+      }
+    };
+    const onGlobalFormVisibility = (e) => {
+      if (e?.detail && typeof e.detail.open === "boolean") {
+        setFormOpen(e.detail.open);
+      }
+    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("sidebar-visibility", onSidebarVisibility);
+      window.addEventListener("global-form-visibility", onGlobalFormVisibility);
+    }
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("sidebar-visibility", onSidebarVisibility);
+        window.removeEventListener("global-form-visibility", onGlobalFormVisibility);
+      }
+    };
   }, []);
 
-  if (isHidden) return null;
+  if (isHidden || formOpen) return null;
 
   const handleClick = () => {
     // Fire a custom event that PopupForm listens to
@@ -34,63 +57,20 @@ export default function FloatingFlag() {
   const containerStyle = {
     position: "fixed",
     left: 0,
-    top: "50%",
+    top: sidebarOpen ? "58%" : "50%",
     transform: "translateY(-50%)",
     zIndex: 1500,
     cursor: "pointer",
-    overflow: "hidden",
   };
 
   const imageButtonStyle = {
     display: "block",
-    transition: "transform 0.3s ease, filter 0.3s ease",
-    position: "relative",
+    transition: "transform 0.2s ease, filter 0.2s ease",
     filter: "drop-shadow(2px 2px 8px rgba(0,0,0,0.3))",
-    transformOrigin: "left center",
   };
 
   return (
-    <>
-      <style jsx>{`        
-        @keyframes shine {
-          0% {
-            left: -100%;
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            left: 100%;
-            opacity: 0;
-          }
-        }
-        
-        .floating-flag-container::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 50%;
-          height: 100%;
-          background: linear-gradient(90deg, 
-            transparent, 
-            rgba(255, 255, 255, 0.4), 
-            rgba(255, 255, 255, 0.6), 
-            rgba(255, 255, 255, 0.4), 
-            transparent
-          );
-          animation: shine 2.5s ease-in-out infinite;
-          z-index: 1;
-          pointer-events: none;
-        }
-        
-        .floating-flag-container {
-          position: relative;
-          overflow: hidden;
-        }
-      `}</style>
-      <div style={containerStyle} aria-label="Open registration form" className="floating-flag-container">
+    <div style={containerStyle} aria-label="Open registration form">
       <button
         type="button"
         onClick={handleClick}
@@ -131,7 +111,7 @@ export default function FloatingFlag() {
         }}
       >
         <Image
-           src="/Headercarousel/Discount.avif" // Replace with your actual image path
+          src="/Headercarousel/Discount.avif" // Replace with your actual image path
           alt="Book For DEMO - Flat 5000 Rs. OFF"
           width={140}
           height={100}
@@ -160,6 +140,5 @@ export default function FloatingFlag() {
         />
       </button>
     </div>
-    </>
   );
 }

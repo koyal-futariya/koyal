@@ -52,6 +52,25 @@ const Btnform = ({ onClose, course }) => {
   const locationInputRef = useRef(null);
   const suggestionsRef = useRef(null);
 
+  // Notify FloatingFlag that form is open/closed
+  useEffect(() => {
+    // Dispatch event to hide FloatingFlag when form mounts
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("global-form-visibility", {
+        detail: { open: true }
+      }));
+    }
+
+    // Cleanup function to show FloatingFlag when form unmounts
+    return () => {
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("global-form-visibility", {
+          detail: { open: false }
+        }));
+      }
+    };
+  }, []);
+
   // Load location data
   useEffect(() => {
     const loadLocationData = () => {
@@ -262,6 +281,20 @@ const Btnform = ({ onClose, course }) => {
     }
   };
 
+  // Handle close with proper cleanup
+  const handleClose = () => {
+    // Dispatch event to show FloatingFlag before closing
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("global-form-visibility", {
+        detail: { open: false }
+      }));
+    }
+    
+    if (onClose) {
+      onClose();
+    }
+  };
+
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -299,7 +332,7 @@ const Btnform = ({ onClose, course }) => {
 
       setTimeout(() => {
         setShowThankYou(false);
-        if (onClose) onClose();
+        handleClose(); // Use the handleClose function
       }, 3000);
 
     } catch (error) {
@@ -332,7 +365,7 @@ const Btnform = ({ onClose, course }) => {
   return (
     <div className={styles.formModal}>
       <div className={styles.formContainer}>
-        <button onClick={onClose} className={styles.closeButton} aria-label="Close form">
+        <button onClick={handleClose} className={styles.closeButton} aria-label="Close form">
           <X size={18} />
         </button>
 
