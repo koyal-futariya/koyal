@@ -11,8 +11,8 @@ export default function FloatingFlag() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
 
-  // Hide on admin-like paths
-  const hiddenPaths = ["/dashboard", "/superadmin", "/adminlogin", "/blogsadmin"];
+  // Hide on admin-like paths and blogs
+  const hiddenPaths = ["/dashboard", "/superadmin", "/adminlogin", "/blogsadmin", "/blogs"];
   const isHidden = (pathname || "").toLowerCase().startsWith("/admin") ||
                    hiddenPaths.some(p => (pathname || "").toLowerCase().startsWith(p));
 
@@ -111,7 +111,7 @@ export default function FloatingFlag() {
         }}
       >
         <Image
-          src="/Headercarousel/Discount.avif" // Replace with your actual image path
+          src="/Headercarousel/discount.avif" // Replace with your actual image path
           alt="Book For DEMO - Flat 5000 Rs. OFF"
           width={140}
           height={100}
