@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaUser, FaLock, FaSpinner, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuth } from "@/context/AuthContext";
@@ -13,14 +13,35 @@ const AdminLogin = () => {
   const [error, setError] = useState(null);
   const [dashboardLoading, setDashboardLoading] = useState(false);
   const [blogsLoading, setBlogsLoading] = useState(false);
-  
+
   const router = useRouter();
   const { login } = useAuth();
 
   // API Configuration - Separate backends
-  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5002'; // Blogs backend
-  const API_BASE_URL_MAIN = process.env.NEXT_PUBLIC_BACKEND_URL_MAIN || 'http://localhost:5001'; // Dashboard backend
-  
+  const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5002"; // Blogs backend
+  const API_BASE_URL_MAIN = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001"; // Dashboard backend
+
+  // Check for existing session on component mount
+  useEffect(() => {
+    if (typeof window === "undefined") return; // Guard for SSR
+    
+    try {
+      const token = localStorage.getItem("adminToken");
+      if (!token) return;
+
+      const roleRaw = localStorage.getItem("adminRole") || "";
+      const role = String(roleRaw).toLowerCase();
+      const path = 
+        role === "superadmin" || role === "admin" 
+          ? "/superadmin/dashboard" 
+          : "/dashboard";
+
+      router.push(path);
+    } catch {
+      // Ignore storage access errors
+    }
+  }, [router]);
+
   const shouldFloatLabel = (value, isFocused) => {
     return value.length > 0 || isFocused;
   };
@@ -30,7 +51,7 @@ const AdminLogin = () => {
     try {
       const raw = await response.text();
       if (!raw) return `HTTP ${response.status}: Login failed`;
-      
+
       try {
         const jsonData = JSON.parse(raw);
         return jsonData?.message || `HTTP ${response.status}: Login failed`;
@@ -43,150 +64,179 @@ const AdminLogin = () => {
     }
   };
 
+  // DASHBOARD LOGIN implementation
+  const loginToDashboard = async () => {
+    if (!process.env.NEXT_PUBLIC_API_URL) {
+      setError("API URL is not configured.");
+      return;
+    }
+
+    const res = await fetch(`${API_BASE_URL_MAIN}/api/admin-login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      // Dashboard expects { username, password }
+      body: JSON.stringify({ username, password }),
+    });
+
+    // Parse JSON body for both success and error paths
+    let data = null;
+    try {
+      data = await res.json();
+    } catch {
+      // If body isn't JSON, fall back to status-based error extraction
+    }
+
+    if (!res.ok) {
+      const fallback = data?.message || `HTTP ${res.status}: Admin login failed`;
+      throw new Error(fallback);
+    }
+
+    if (!data?.token) {
+      throw new Error("Invalid response structure from server - missing token");
+    }
+
+    // Persist minimal admin session context
+    try {
+      localStorage.setItem("adminToken", data.token);
+      localStorage.setItem("adminRole", data.role);
+      localStorage.setItem("adminUsername", data.username || "");
+      localStorage.setItem("adminEmail", data.email || "");
+      localStorage.setItem("adminId", data.id || "");
+      localStorage.setItem("isAdminLoggedIn", "true");
+
+      // Namespaced dashboard keys (avoid collisions with blogs)
+      localStorage.setItem("dashboardToken", data.token);
+      localStorage.setItem("dashboardRole", String(data.role || "").toLowerCase());
+      localStorage.setItem(
+        "dashboardUser",
+        JSON.stringify({
+          token: data.token,
+          role: String(data.role || "user").toLowerCase(),
+          username: data.username,
+          email: data.email || "",
+          id: data.id,
+          source: "dashboard",
+          lastLogin: data.lastLogin || new Date().toISOString(),
+        })
+      );
+    } catch {
+      // If storage fails (e.g., privacy mode), proceed to redirect anyway
+    }
+
+    // Optional: update AuthContext if available
+    if (login) {
+      login({
+        token: data.token,
+        role: String(data.role || "user").toLowerCase(),
+        username: data.username,
+        email: data.email || "",
+        id: data.id,
+        source: "dashboard",
+        lastLogin: data.lastLogin || new Date().toISOString(),
+      });
+    }
+
+    // Role-based redirect: SuperAdmin/Admin -> /superadmin/dashboard, else -> /dashboard
+    const roleLower = String(data.role || "").toLowerCase();
+    const redirectPath =
+      roleLower === "superadmin" || roleLower === "admin" ? "/superadmin/dashboard" : "/dashboard";
+    router.replace(redirectPath);
+  };
+
   const handleSubmit = async (e, targetPage) => {
     e.preventDefault();
     setError(null);
-    
+
     // Validation
     if (!username.trim() || !password.trim()) {
       setError("Username and password are required");
       return;
     }
-    
+
     // Set the appropriate loading state based on target page
-    if (targetPage === '/dashboard') {
+    if (targetPage === "/dashboard") {
       setDashboardLoading(true);
-    } else if (targetPage === '/blog-admin') {
+    } else if (targetPage === "/blog-admin") {
       setBlogsLoading(true);
     }
 
     try {
-      // Choose base URL and construct API URL based on target
-      const BASE = targetPage === '/dashboard' ? API_BASE_URL_MAIN : API_BASE_URL;
-      const apiUrl = targetPage === '/dashboard' 
-        ? `${BASE}/api/admin-login` 
-        : `${BASE}/api/auth/login`;
-      
-      // Build request body based on backend expectations
-      const requestBody = targetPage === '/dashboard'
-        ? { username, password } // Dashboard backend expects username/password
-        : { loginIdentifier: username, password }; // Blogs backend expects loginIdentifier/password
-      
-      console.log(`Attempting login to: ${apiUrl}`);
-      
-      // Make the API call with better error handling
-      let response;
-      try {
-        response = await fetch(apiUrl, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(requestBody),
-          credentials: 'include' // Include cookies for session-based auth if needed
-        });
-
-        console.log('Response status:', response.status);
-        
-        // Handle non-OK responses safely
-        if (!response.ok) {
-          const errorMessage = await extractErrorMessage(response);
-          console.error('Login API error:', {
-            status: response.status,
-            statusText: response.statusText,
-            headers: Object.fromEntries(response.headers.entries()),
-            error: errorMessage
-          });
-          
-          // Provide more specific error messages for common cases
-          if (response.status === 401) {
-            throw new Error('Invalid username or password. Please try again.');
-          } else if (response.status >= 500) {
-            throw new Error('Server error. Please try again later.');
-          } else {
-            throw new Error(errorMessage || 'Login failed. Please try again.');
+      if (targetPage === "/dashboard") {
+        // If already logged in, just route based on stored role
+        if (typeof window !== "undefined") {
+          const existing = localStorage.getItem("adminToken");
+          if (existing) {
+            const role = String(localStorage.getItem("adminRole") || "").toLowerCase();
+            const path =
+              role === "superadmin" || role === "admin"
+                ? "/superadmin/dashboard"
+                : "/dashboard";
+            router.push(path);
+            return;
           }
         }
-      } catch (error) {
-        console.error('Network error during login:', error);
-        if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
-          throw new Error('Cannot connect to the server. Please check your internet connection.');
+
+        // Otherwise, run the existing dashboard login flow
+        await loginToDashboard();
+      } else if (targetPage === "/blog-admin") {
+        // BLOGS flow (unchanged)
+        const apiUrl = `${API_BASE_URL}/api/auth/login`;
+        const requestBody = { loginIdentifier: username, password };
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        });
+
+        if (!response.ok) {
+          const errorMessage = await extractErrorMessage(response);
+          throw new Error(errorMessage);
         }
-        throw error; // Re-throw for the outer catch block
-      }
 
-      const data = await response.json();
-      console.log('Login response data:', data);
-      
-      // Validate response structure (your backend returns user data at root level)
-      if (!data.token) {
-        throw new Error('Invalid response structure from server - missing token');
-      }
+        const data = await response.json();
+        if (!data.token) {
+          throw new Error("Invalid response structure from server - missing token");
+        }
 
-      const token = data.token;
+        const userData = {
+          token: data.token,
+          role: (data.role || "user").toLowerCase(),
+          username: data.username,
+          email: data.email || "",
+          id: data.id,
+          isActive: data.active !== false,
+          lastLogin: data.lastLogin || new Date().toISOString(),
+          source: "blogs",
+        };
 
-      // Extract user data directly from response (not from data.user)
-      const userData = {
-        token: token,
-        role: (data.role || 'user').toLowerCase(),
-        username: data.username,
-        email: data.email || '',
-        id: data.id, // Your backend returns 'id', not '_id'
-        isActive: data.active !== false, // Your backend uses 'active', not 'isActive'
-        lastLogin: data.lastLogin || new Date().toISOString(),
-        source: targetPage === '/dashboard' ? 'dashboard' : 'blogs'
-      };
-      
-      // Validate role based on target
-      const validRoles = targetPage === '/dashboard' 
-        ? ['superadmin', 'admin', 'editmode', 'viewmode']
-        : ['admin', 'user', 'superadmin'];
-      
-      if (!validRoles.includes(userData.role)) {
-        throw new Error(`Invalid role: ${userData.role} for this login type`);
-      }
-      
-      console.log('Storing user data:', userData);
-      
-      // Namespaced storage to prevent token collisions
-      const namespace = targetPage === '/dashboard' ? 'dashboard' : 'blog';
-      localStorage.setItem(`${namespace}Token`, token);
-      localStorage.setItem(`${namespace}Role`, userData.role);
-      localStorage.setItem(`${namespace}User`, JSON.stringify(userData));
-      
-      // Also store in generic keys for backward compatibility
-      localStorage.setItem('adminToken', token);
-      localStorage.setItem('adminRole', userData.role);
-      localStorage.setItem('adminUsername', userData.username);
-      localStorage.setItem('adminEmail', userData.email || '');  // Handle potential undefined email
-      localStorage.setItem('adminId', userData.id);
-      localStorage.setItem('isAdminLoggedIn', 'true');
-      localStorage.setItem('userData', JSON.stringify(userData));
-      
-      // Force a page reload to ensure all context is properly initialized
-      if (targetPage === '/blog-admin') {
-        window.location.href = '/blog-admin';
+        const validRoles = ["admin", "user", "superadmin"];
+        if (!validRoles.includes(userData.role)) {
+          throw new Error(`Invalid role: ${userData.role} for this login type`);
+        }
+
+        // Namespaced storage for blogs + generic keys
+        localStorage.setItem("blogsToken", userData.token);
+        localStorage.setItem("blogsRole", userData.role);
+        localStorage.setItem("blogsUser", JSON.stringify(userData));
+
+        localStorage.setItem("adminToken", userData.token);
+        localStorage.setItem("adminRole", userData.role);
+        localStorage.setItem("adminUsername", userData.username);
+        localStorage.setItem("adminEmail", userData.email || "");
+        localStorage.setItem("adminId", userData.id || "");
+        localStorage.setItem("isAdminLoggedIn", "true");
+        localStorage.setItem("userData", JSON.stringify(userData));
+
+        // Hard redirect to ensure full re-init of blog admin context
+        window.location.href = "/blog-admin";
         return;
       }
-
-      // Use AuthContext login if available
-      if (login) {
-        login(userData);
-      }
-      
-      // Redirect based on target page and user role
-      const redirectPath = targetPage || (userData.role === 'superadmin' ? '/superadmin/dashboard' : '/dashboard');
-      if (redirectPath) {
-        console.log('Redirecting to:', redirectPath);
-        router.replace(redirectPath);
-      }
-      
     } catch (err) {
-      console.error("Login error:", err);
-      setError(err.message || "An error occurred during login");
+      setError(err?.message || "An error occurred during login");
     } finally {
-      // Reset loading states
       setDashboardLoading(false);
       setBlogsLoading(false);
     }
@@ -194,7 +244,7 @@ const AdminLogin = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(e, '/dashboard');
+    handleSubmit(e, "/dashboard");
   };
 
   return (
@@ -306,7 +356,7 @@ const AdminLogin = () => {
                 e.preventDefault();
                 handleSubmit(e, "/blog-admin");
               }}
-              disabled={dashboardLoading || blogsLoading}
+              disabled={blogsLoading || dashboardLoading}
               className="w-4/5 h-11 rounded-full bg-blue-600 text-white text-lg font-semibold border-none outline-none cursor-pointer shadow-md hover:shadow-xl hover:bg-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
             >
               {blogsLoading ? (
@@ -326,7 +376,13 @@ const AdminLogin = () => {
             <p>Permissions are managed inside the system</p>
           </div>
 
-          
+          {/* Connection Status (Development Only) */}
+          {process.env.NODE_ENV === "development" && (
+            <div className="mt-2 text-xs text-yellow-200 opacity-50 text-center">
+              <div>Dashboard API: {API_BASE_URL_MAIN}</div>
+              <div>Blogs API: {API_BASE_URL}</div>
+            </div>
+          )}
         </form>
       </div>
     </section>

@@ -43,47 +43,25 @@ const DashboardLayout = ({ children }) => {
   const [currentPagePath, setCurrentPagePath] = useState(pathname);
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false); // Track if authenticated in layout
 
-  // Handle back button press
-  useEffect(() => {
-    const handleBackButton = (e) => {
-      // If we're on the dashboard and user presses back, redirect to home
-      if (pathname === '/dashboard') {
-        e.preventDefault();
-        router.push('/');
-      }
-    };
-
-    window.addEventListener('popstate', handleBackButton);
-    return () => window.removeEventListener('popstate', handleBackButton);
-  }, [pathname, router]);
-
   // --- Authentication Check ---
   // This layout will ONLY render if the initial check in page.js or a parent layout passes.
   // However, adding a check here is good practice for robustness.
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
     const role = localStorage.getItem("adminRole");
-    const adminId = localStorage.getItem("adminId");
-    
-    // Get user data from localStorage if available
-    const userData = JSON.parse(localStorage.getItem('userData') || 'null');
-    
-    // Use role from userData if available, otherwise fallback to role from localStorage
-    const effectiveRole = (userData?.role || role || '').toLowerCase();
-    
-    console.log("DashboardLayout: Running authentication check.", {
-      hasToken: !!token,
-      adminId,
-      role,
-      effectiveRole,
-      userData: !!userData
-    });
-    
-    // Check if authenticated and has a valid role
-    const allowedRoles = ['viewmode', 'editmode', 'admin', 'superadmin'];
-    const isAuthenticated = token && adminId && allowedRoles.includes(effectiveRole);
-    
-    if (!isAuthenticated) {
+    const adminId = localStorage.getItem("adminId"); // Need adminId for logging
+
+    console.log("DashboardLayout: Running authentication check useEffect.");
+
+    // Assuming 'ViewMode' and 'EditMode' might also land here, adjust roles as needed
+    if (
+      !token ||
+      !adminId ||
+      (role !== "ViewMode" &&
+        role !== "EditMode" &&
+        role !== "Admin" &&
+        role !== "SuperAdmin")
+    ) {
       console.log(
         "DashboardLayout: User not authenticated or role restricted, redirecting."
       );
@@ -152,7 +130,7 @@ const DashboardLayout = ({ children }) => {
   const logActivityEvent = async (action, page, details) => {
     const adminId = localStorage.getItem("adminId");
     const adminToken = localStorage.getItem("adminToken");
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL ;
 
     console.log(
       `DashboardLayout: Attempting to log activity: ${action} on ${page}`,

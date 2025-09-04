@@ -81,38 +81,30 @@ const Dashboard = () => {
 
   const fetchSettings = async () => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL_MAIN || "http://localhost:5001";
+      const apiUrl = process.env.___NEXT_PUBLIC_API_URL || "";
       if (!apiUrl) {
-        console.error("NEXT_PUBLIC_BACKEND_URL_MAIN is not defined");
+        console.error("NEXT_PUBLIC_API_URL is not defined for settings");
         setRestrictLeadEditing(false);
         return;
       }
-      
-      console.log("Fetching settings from:", `${apiUrl}/api/settings`);
-      const response = await fetchWithAuth(`${apiUrl}/api/settings`);
+      const response = await fetchWithAuth(
+        `${apiUrl}/api/settings/restrictLeadEditing`
+      );
 
       if (response.ok) {
-        const settings = await response.json();
-        // Find the restrictLeadEditing setting
-        const restrictSetting = settings.find(s => s.key === 'restrictLeadEditing');
-        const shouldRestrict = Boolean(restrictSetting?.value);
-        console.log("Restrict lead editing setting:", shouldRestrict);
-        setRestrictLeadEditing(shouldRestrict);
-      } else if (response.status === 403 || response.status === 401) {
-        console.error("Authentication error fetching settings");
-        // Clear auth and redirect to login
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminRole');
-        localStorage.removeItem('adminId');
-        router.push('/AdminLogin');
+        const data = await response.json();
+        setRestrictLeadEditing(Boolean(data?.value));
       } else {
-        console.error("Error fetching settings:", response.status);
-        // Default to false if settings can't be loaded
+        const errorText = await response.text();
+        console.error(
+          `Error fetching setting "restrictLeadEditing":`,
+          response.status,
+          errorText
+        );
         setRestrictLeadEditing(false);
       }
     } catch (error) {
-      console.error("Error in fetchSettings:", error);
-      // Default to false if there's an error
+      console.error("Error fetching settings:", error);
       setRestrictLeadEditing(false);
     }
   };
@@ -133,30 +125,31 @@ const Dashboard = () => {
       setLoading(true);
       setError(null);
 
-      const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL_MAIN || "http://localhost:5001";
+      const apiUrl = process.env._NEXT_PUBLIC_API_URL  || "";
       if (!apiUrl) {
-        console.error("NEXT_PUBLIC_BACKEND_URL_MAIN is not defined");
+        console.error("NEXT_PUBLIC_API_URL is not defined for leads");
         setError("API URL is not configured.");
         setLoading(false);
         return;
       }
 
-      const currentAdminId = localStorage.getItem("adminId");
+      const currentAdminId =
+        typeof localStorage !== "undefined"
+          ? localStorage.getItem("adminId")
+          : null;
       const queryParams = new URLSearchParams();
 
       if (
         restrictLeadEditing &&
-        userRole !== "superadmin" && // Make sure to use lowercase for consistency
-        userRole !== "admin" &&
+        userRole !== "SuperAdmin" &&
+        userRole !== "Admin" &&
         currentAdminId
       ) {
         queryParams.append("assignedTo", currentAdminId);
       }
 
-      console.log("Fetching leads from:", `${apiUrl}/api/leads?${queryParams.toString()}`);
-      
       const response = await fetchWithAuth(
-        `${apiUrl}/api/leads?${queryParams.toString()}`
+        `${apiUrl}/api/leads?populate=assignedTo&${queryParams.toString()}`
       );
 
       if (!response.ok) {
@@ -164,16 +157,9 @@ const Dashboard = () => {
         try {
           const errorData = await response.json();
           errorMsg = errorData.message || errorMsg;
-          
-          if (response.status === 403 || response.status === 401) {
-            // Handle unauthorized/forbidden
-            console.error("Authentication error:", errorMsg);
-            // Clear auth data and redirect to login
-            localStorage.removeItem('adminToken');
-            localStorage.removeItem('adminRole');
-            localStorage.removeItem('adminId');
-            router.push('/AdminLogin');
-            return;
+          if (response.status === 403 && errorData.restricted) {
+            errorMsg =
+              "Access restricted: You can only view leads assigned to you.";
           }
         } catch (jsonError) {
           console.error("Failed to parse error response body:", jsonError);
@@ -182,14 +168,11 @@ const Dashboard = () => {
       }
 
       const data = await response.json();
-      
-      // The server returns an array of leads
       if (Array.isArray(data)) {
         setLeads(data);
         setCurrentPage(1);
         setSelectedLeads([]);
         setSelectAll(false);
-        console.log(`Fetched ${data.length} leads`);
       } else {
         console.error("API did not return an array for leads:", data);
         setLeads([]);
@@ -330,7 +313,7 @@ const Dashboard = () => {
 
     try {
       setDeleteLoading(true);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const apiUrl = process.env._NEXT_PUBLIC_BACKEND_URL_MAIN  || "";
       if (!apiUrl) {
         throw new Error("API URL is not configured.");
       }
@@ -385,7 +368,7 @@ const Dashboard = () => {
     setError(null);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+      const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL_MAIN  || "";
       if (!apiUrl) {
         throw new Error("API URL is not configured.");
       }
