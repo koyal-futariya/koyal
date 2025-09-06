@@ -14,7 +14,24 @@ const AnimatedLogo = dynamic(() => import("../AnimatedLogo"), {
 });
 
 // Custom component definitions
-const Navbar = ({ expand, className, children, ref }) => (
+const Navbar = ({ expand, className, children, ref }) => {
+  const pathname = usePathname();
+  
+  // Hide navbar on blog admin pages
+  if (
+    pathname &&
+    (pathname.startsWith('/blog-admin') ||
+      pathname === '/AdminLogin' ||
+      pathname.startsWith('/AdminLogin/') ||
+      pathname === '/superadmin/dashboard' ||
+      pathname.startsWith('/superadmin') ||
+      pathname === '/dashboard' ||
+      pathname.startsWith('/dashboard/'))
+  ) {
+    return null;
+  }
+  
+  return (
   <nav
     className={`${styles.navbar} ${
       expand
@@ -27,7 +44,8 @@ const Navbar = ({ expand, className, children, ref }) => (
   >
     {children}
   </nav>
-);
+  );
+};
 
 const Container = ({ fluid, className, children }) => (
   <div
@@ -186,14 +204,6 @@ const Header = () => {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-    }
-    // Notify others (e.g., FloatingFlag) about sidebar visibility changes
-    if (typeof window !== "undefined") {
-      try {
-        window.dispatchEvent(
-          new CustomEvent("sidebar-visibility", { detail: { open: isSidebarVisible } })
-        );
-      } catch {}
     }
     return () => {
       document.body.style.overflow = "";

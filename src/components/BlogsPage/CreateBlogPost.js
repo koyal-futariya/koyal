@@ -26,7 +26,7 @@ const statusOptions = ['None', 'Trending', 'Featured', "Editor's Pick", 'Recomme
 // Shared Tailwind utility presets for consistent inputs/labels/help
 const fieldBase =
   'w-full rounded-xl border border-gray-200 bg-white/80 text-gray-900 placeholder-gray-400 ' +
-  'ring-1 ring-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 ' +
+  'ring-1 ring-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 ' +
   'disabled:opacity-60 disabled:cursor-not-allowed transition-shadow';
 
 const labelBase = 'block text-sm font-semibold text-gray-800 mb-2';
@@ -317,7 +317,7 @@ export default function CreateBlogPost({
             urlSlug: '',
             content: '',
             category: '',
-            subcategory: 'Article',
+            subcategory: 'Blogs',
             authorName: '',
             status: 'None',
             blogImage: null
@@ -347,25 +347,15 @@ export default function CreateBlogPost({
   };
 
   const categories = [
-    'Technology',
-    'Business',
-    'Marketing',
-    'Development',
-    'Design',
-    'Analytics',
-    'AI/ML',
-    'Cloud Computing',
-    'Lifestyle',
-    'Health',
-    'Travel',
-    'Food'
+    "SAP", "IT", "AI", "Data Science", 
+    "Data Analytics", "HR", "Digital Marketing", "Cloud Computing"
   ];
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading blog data...</p>
         </div>
       </div>
@@ -404,7 +394,7 @@ export default function CreateBlogPost({
                 <div className="group">
                   <label className={labelBase}>
                     <span className="inline-flex items-center">
-                      <Hash className="w-4 h-4 mr-2 text-purple-600" />
+                      <Hash className="w-4 h-4 mr-2 text-blue-600" />
                       Blog Title
                     </span>
                   </label>
@@ -447,7 +437,7 @@ export default function CreateBlogPost({
                 {/* Content */}
                 <div className="group">
                   <label className={labelBase}>Content</label>
-                  <div className="rounded-xl border border-gray-200 bg-white/80 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-purple-600 focus-within:ring-offset-2 transition-shadow">
+                  <div className="rounded-xl border border-gray-200 bg-white/80 ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2 transition-shadow">
                     <div className="bg-gray-50 px-3 md:px-4 py-2 border-b border-gray-200 flex flex-wrap gap-1 md:gap-2">
                       <button type="button" className="px-2 py-1 text-gray-700 hover:bg-gray-200 rounded font-bold">
                         B
@@ -525,7 +515,7 @@ export default function CreateBlogPost({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className={`${labelBase} inline-flex items-center`}>
-                      <User className="w-4 h-4 mr-2 text-purple-600" />
+                      <User className="w-4 h-4 mr-2 text-blue-600" />
                       Author Name
                     </label>
                     <input
@@ -563,13 +553,13 @@ export default function CreateBlogPost({
                 {/* Blog Image Upload */}
                 <div className="mb-2">
                   <label className={`${labelBase} inline-flex items-center`}>
-                    <Camera className="w-4 h-4 mr-2 text-purple-600" />
+                    <Camera className="w-4 h-4 mr-2 text-blue-600" />
                     Blog Image
                   </label>
                   <div
                     className={`relative w-full min-h-[220px] rounded-xl p-4 flex items-center justify-center bg-white shadow-sm
-                    border-2 border-dashed ${dragActive ? 'border-purple-500 bg-purple-50' : 'border-gray-200'}
-                    ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-purple-600 focus-within:ring-offset-2
+                    border-2 border-dashed ${dragActive ? 'border-bluee-500 bg-blue-50' : 'border-gray-200'}
+                    ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-blue-600 focus-within:ring-offset-2
                     transition-all`}
                     onDragEnter={handleDrag}
                     onDragLeave={handleDrag}
@@ -603,7 +593,7 @@ export default function CreateBlogPost({
                         <p className="text-gray-700 mb-2">
                           {isEditMode ? 'Upload new image or keep existing' : 'Drag & drop your image here, or'}
                         </p>
-                        <label className="cursor-pointer inline-flex items-center justify-center rounded-lg px-3 py-2 bg-purple-600 text-white font-medium hover:bg-purple-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2">
+                        <label className="cursor-pointer inline-flex items-center justify-center rounded-lg px-3 py-2 bg-bluee-600 text-white font-medium hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2">
                           Browse
                           <input
                             type="file"
@@ -625,7 +615,7 @@ export default function CreateBlogPost({
                     type="submit"
                     disabled={isSubmitting}
                     className={`flex-1 ${
-                      isEditMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-purple-600 hover:bg-purple-700'
+                      isEditMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-600 hover:bg-blue-700'
                     } text-white font-semibold py-3 px-6 rounded-xl transition-colors duration-200 disabled:opacity-70`}
                   >
                     {isSubmitting ? (
@@ -687,7 +677,7 @@ export default function CreateBlogPost({
                       type="submit"
                       disabled={isSubmitting}
                       className={`flex-1 ${
-                        isEditMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-purple-600 hover:bg-purple-700'
+                        isEditMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-bluee-600 hover:bg-blue-700'
                       } text-white font-semibold py-3 px-4 rounded-xl transition-colors disabled:opacity-70`}
                     >
                       {isSubmitting ? 'Saving...' : isEditMode ? 'Update' : 'Publish'}
@@ -703,7 +693,7 @@ export default function CreateBlogPost({
             <aside className="col-span-12 lg:col-span-5">
               <div className="bg-white/95 backdrop-blur rounded-2xl shadow-lg border border-gray-100 p-4 md:p-6 lg:p-8 lg:sticky lg:top-6">
                 <div className="flex items-center mb-6">
-                  <Eye className="w-5 h-5 mr-2 text-purple-600" />
+                  <Eye className="w-5 h-5 mr-2 text-blue-600" />
                   <h3 className="text-lg font-semibold text-gray-800">Preview</h3>
                 </div>
 
@@ -736,7 +726,7 @@ export default function CreateBlogPost({
 
                   <div className="flex gap-2 mb-3 flex-wrap">
                     {formData.category && (
-                      <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">
+                      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">
                         {formData.category}
                       </span>
                     )}

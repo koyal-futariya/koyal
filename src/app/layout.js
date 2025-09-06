@@ -1,9 +1,9 @@
 // src/app/layout.js - Fixed to prevent JavaScript errors
-
+ 
 import { Lato, Rubik } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-
+ 
 // Static imports for components that are part of the main layout
 import Navbar from "@/components/Common/Navbar";
 import Footer from "@/components/Common/Footer";
@@ -11,10 +11,11 @@ import CallAdvisorsStrip from "@/components/Common/CallAdvisorsStrip";
 import Marquee from "@/components/Common/Marquee";
 import ServerPing from "@/components/ServerPing";
 import FloatingFlag from "@/components/FloatingFlag";
-
+ 
 // This wrapper will contain all our client-side logic, like Context Providers
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
-
+import { AuthProvider } from "@/context/AuthContext";
+ 
 // --- Font Setup ---
 const lato = Lato({
   weight: ["400", "700"],
@@ -22,19 +23,19 @@ const lato = Lato({
   display: "swap",
   variable: "--font-lato",
 });
-
+ 
 const rubik = Rubik({
   weight: ["300", "500"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-rubik",
 });
-
+ 
 // --- Constants ---
 const GTM_ID = "GTM-MB68QM2V";
 const FB_PIXEL_ID = "3414178115554916";
 const AHREFS_KEY = "h5nofTpYPf65FI8/61ypeA";
-
+ 
 // --- SITE-WIDE METADATA ---
 export const metadata = {
   title: {
@@ -46,7 +47,7 @@ export const metadata = {
     google: "KRKFsO9AAW2a8qImif8Wj4uzzjmWGA0R6o7IZFJcmPo",
     other: {
       "ahrefs-site-verification":
-        "f3b13167d2161bfb1fc945b8ecb8c0e6855cf9394e9e96e12104db099fbbcab0",
+        "f8316addb64ba929396fa44744a07ac8705f09f8d48618610323b4b8b1e89147",
     },
   },
   manifest: "/site.webmanifest",
@@ -55,15 +56,15 @@ export const metadata = {
     appleTouchIcon: "/apple-touch-icon.png",
   },
 };
-
+ 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${lato.variable} ${rubik.variable}`}>
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#1a365d" />
         <meta name="mobile-web-app-capable" content="yes" />
-
+ 
         {/* GTM Head Script - Critical for GTM to work properly */}
         <Script
           id="gtm-head"
@@ -79,36 +80,34 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body
-        className={`body bg-black ${lato.className} ${rubik.className}`}
-        suppressHydrationWarning={true}
-      >
-        {/* GTM noscript fallback - Required for users with JavaScript disabled */}
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-
+      <body className={`${lato.variable} ${rubik.variable} font-sans bg-white text-gray-800 min-h-screen flex flex-col`}>
+        <AuthProvider>
+          {/* GTM noscript fallback - Required for users with JavaScript disabled */}
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+ 
         {/* Server Ping Component - Will ping servers on app load */}
         <ServerPing />
-
+ 
         {/* Server-Side Rendered Components */}
         <CallAdvisorsStrip />
         <Marquee />
         <Navbar />
-
+ 
         {/* The ClientLayoutWrapper contains the CityProvider and wraps the children */}
         <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
-
+ 
         <Footer />
-
+ 
         {/* Global floating trigger */}
         <FloatingFlag />
-
+ 
         {/* Facebook Pixel */}
         <Script
           id="facebook-pixel"
@@ -127,7 +126,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-
+ 
         {/* Ahrefs Analytics */}
         <Script
           id="ahrefs-analytics"
@@ -153,6 +152,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+          </AuthProvider>
       </body>
     </html>
   );

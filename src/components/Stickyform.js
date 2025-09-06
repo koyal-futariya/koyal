@@ -48,7 +48,7 @@ function Stickyform() {
   const pathname = usePathname(); // usePathname is a hook
 
   // List of paths where the form should be hidden (should be constant or state)
-  const hiddenPaths = ['/dashboard', '/superadmin', '/AdminLogin']; // Added AdminLogin as per your logic
+  const hiddenPaths = ['/dashboard', '/superadmin', '/AdminLogin','/blog-admin','/blog-admin/users']; // Added AdminLogin as per your logic
 
   // Check if current path is an admin path (derived from pathname)
   const isAdminPath = pathname && hiddenPaths.some(path => pathname.startsWith(path));

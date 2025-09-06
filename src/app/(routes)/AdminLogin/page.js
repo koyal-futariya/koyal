@@ -4,11 +4,93 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaUser, FaLock, FaSpinner, FaEye, FaEyeSlash } from "react-icons/fa";
 
+// Standalone helper for Blogs login
+async function loginToBlogs({ username, password, API_BASE_URL }) {
+  // 1) Build endpoint and request body
+  const apiUrl = `${API_BASE_URL}/api/auth/login`;
+  const requestBody = {
+    loginIdentifier: username, // username or email supported by blogs API
+    password,
+  };
+
+  // 2) POST to blogs backend
+  const response = await fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  // 3) Unified error extraction
+  async function extractErrorMessage(res) {
+    try {
+      const raw = await res.text();
+      if (!raw) return `HTTP ${res.status}: Login failed`;
+      try {
+        const json = JSON.parse(raw);
+        return json?.message || `HTTP ${res.status}: Login failed`;
+      } catch {
+        return raw.length > 100 ? `HTTP ${res.status}: Login failed` : raw;
+      }
+    } catch {
+      return `HTTP ${res.status}: Login failed`;
+    }
+  }
+  if (!response.ok) {
+    const errorMessage = await extractErrorMessage(response);
+    throw new Error(errorMessage);
+  }
+
+  // 4) Parse success JSON and validate shape
+  const data = await response.json();
+  if (!data?.token) {
+    throw new Error("Invalid response structure from server - missing token");
+  }
+  const userData = {
+    token: data.token,
+    role: String(data.role || "user").toLowerCase(),
+    username: data.username,
+    email: data.email || "",
+    id: data.id,
+    isActive: data.active !== false,
+    lastLogin: data.lastLogin || new Date().toISOString(),
+    source: "blogs",
+  };
+  const validRoles = ["admin", "user", "superadmin"];
+  if (!validRoles.includes(userData.role)) {
+    throw new Error(`Invalid role: ${userData.role} for this login type`);
+  }
+
+  // 5) Persist session (namespaced + generic keys)
+  try {
+    // Namespaced for blogs
+    localStorage.setItem("blogsToken", userData.token);
+    localStorage.setItem("blogsRole", userData.role);
+    localStorage.setItem("blogsUser", JSON.stringify(userData));
+    // Generic/admin compatibility keys
+    localStorage.setItem("adminToken", userData.token);
+    localStorage.setItem("adminRole", userData.role);
+    localStorage.setItem("adminUsername", userData.username || "");
+    localStorage.setItem("adminEmail", userData.email || "");
+    localStorage.setItem("adminId", userData.id || "");
+    localStorage.setItem("isAdminLoggedIn", "true");
+    localStorage.setItem("userData", JSON.stringify(userData));
+  } catch {
+    // Storage can fail in private mode; continue to redirect
+  }
+
+  // 6) Hard redirect to ensure full re-init of blog admin context
+  window.location.href = "/blog-admin";
+}
+
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [dashboardLoading, setDashboardLoading] = useState(false);
+  const [blogsLoading, setBlogsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,7 +112,7 @@ const AdminLogin = () => {
         if (role === "SuperAdmin" || role === "Admin") {
           router.push("/superadmin/dashboard");
         } else {
-          router.push("/dashboard");
+          router.push("/");
         }
       }
     }
@@ -38,7 +120,7 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e, targetPage) => {
     e.preventDefault();
-    setLoading(true);
+    setDashboardLoading(true);
     setError(null);
 
     try {
@@ -46,7 +128,7 @@ const AdminLogin = () => {
       if (!apiBaseUrl) {
         console.error("NEXT_PUBLIC_API_URL is not defined");
         setError("API URL is not configured.");
-        setLoading(false);
+        setDashboardLoading(false);
         return;
       }
 
@@ -69,10 +151,8 @@ const AdminLogin = () => {
 
         if (data.role === "SuperAdmin" || data.role === "Admin") {
           router.push("/superadmin/dashboard");
-        } else if (targetPage.startsWith("http")) {
-          window.location.href = targetPage;
         } else {
-          router.push("/dashboard");
+          router.push("/");
         }
       } else {
         setError(data.message || "Admin login failed");
@@ -82,8 +162,28 @@ const AdminLogin = () => {
       setError("Server error. Please try again.");
     }
 
-    setLoading(false);
+    setDashboardLoading(false);
   };
+
+  // Dedicated Blogs login handler
+  async function handleSubmitToBlogs(e) {
+    e.preventDefault(); // prevent form submit
+    setBlogsLoading(true);
+    setError(null);
+    
+    try {
+      await loginToBlogs({
+        username,
+        password,
+        API_BASE_URL:
+          process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5002",
+      });
+      // No code runs after a hard redirect
+    } catch (err) {
+      setError(err?.message || "An error occurred during login");
+      setBlogsLoading(false);
+    }
+  }
 
   return (
     <section
@@ -93,10 +193,7 @@ const AdminLogin = () => {
       }}
     >
       <div className="relative w-full max-w-sm md:max-w-md bg-transparent backdrop-filter backdrop-blur-md border border-wheat text-yellow-100 flex flex-col justify-center items-center text-center rounded-3xl p-6 md:p-8 min-h-[400px]">
-        <form
-          onSubmit={(e) => handleSubmit(e, "/dashboard")}
-          className="w-full"
-        >
+        <form onSubmit={(e) => handleSubmit(e, "/")} className="w-full">
           {/* Heading */}
           <h2 className="text-2xl font-bold text-center mb-6 text-yellow-100 text-shadow-sm">
             Admin Log-In
@@ -175,11 +272,11 @@ const AdminLogin = () => {
             {/* Dashboard Login Button */}
             <button
               type="button"
-              onClick={(e) => handleSubmit(e, "/dashboard")}
-              disabled={loading}
+              onClick={(e) => handleSubmit(e, "/")}
+              disabled={dashboardLoading}
               className="w-4/5 h-11 rounded-full bg-orange-700 text-white text-lg font-semibold border-none outline-none cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-300 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
             >
-              {loading ? (
+              {dashboardLoading ? (
                 <>
                   <FaSpinner className="animate-spin mr-2" />
                   Logging In...
@@ -189,16 +286,14 @@ const AdminLogin = () => {
               )}
             </button>
 
-            {/* Blogs Login Button */}
+            {/* Blogs Login Button (updated with separate loading) */}
             <button
               type="button"
-              onClick={(e) =>
-                handleSubmit(e, "https://blog.connectingdotserp.com/")
-              }
-              disabled={loading}
+              onClick={handleSubmitToBlogs}
+              disabled={blogsLoading}
               className="w-4/5 h-11 rounded-full bg-orange-700 text-white text-lg font-semibold border-none outline-none cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-300 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center"
             >
-              {loading ? (
+              {blogsLoading ? (
                 <>
                   <FaSpinner className="animate-spin mr-2" />
                   Logging In...
