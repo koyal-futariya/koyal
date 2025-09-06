@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { FaPlus, FaEdit, FaTrash, FaSearch, FaSpinner, FaExclamationTriangle, FaBlog, FaUser, FaEye, FaTimes, FaSync, FaFilter } from "react-icons/fa";
 import { useAuth } from "@/context/AuthContext";
 import { useBlogPermission } from "@/utils/blogAuth";
@@ -13,6 +14,7 @@ const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5002';
 
 const BlogsAdminPanel = () => {
   const { user, isAuthenticated } = useAuth();
+  const router = useRouter();
   const canCreate = true;
   const canEdit = true;
   const canDelete = true;
@@ -29,7 +31,10 @@ const BlogsAdminPanel = () => {
   const [hasMore, setHasMore] = useState(true);
   const [totalBlogs, setTotalBlogs] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
-  const [showFilters, setShowFilters] = useState(false); // New state for mobile filter toggle
+  const [showFilters, setShowFilters] = useState(false);
+  
+  // New state for logout confirmation
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   
   // Enhanced stats state
   const [stats, setStats] = useState({
@@ -40,12 +45,90 @@ const BlogsAdminPanel = () => {
   });
 
   const categories = [
-    "Technology", "Business", "Marketing", "Development", 
-    "Design", "Analytics", "AI/ML", "Cloud Computing",
-    "Lifestyle", "Health", "Travel", "Food"
+    "SAP", "IT", "AI", "Data Science", 
+    "Data Analytics", "HR", "Digital Marketing", "Cloud Computing"
   ];
 
   const statuses = ["None", "Trending", "Featured", "Editor's Pick", "Recommended"];
+
+  // Prevent back navigation and force logout confirmation
+  useEffect(() => {
+    let isNavigating = false;
+
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+
+    const handlePopState = (e) => {
+      if (!isNavigating) {
+        // Push current state back to prevent navigation
+        window.history.pushState(null, '', window.location.href);
+        setShowLogoutConfirm(true);
+      }
+    };
+
+    const handleKeyDown = (e) => {
+      // Prevent F5, Ctrl+R, Ctrl+F5
+      if (e.key === 'F5' || (e.ctrlKey && e.key === 'r') || (e.ctrlKey && e.key === 'R')) {
+        e.preventDefault();
+        setShowLogoutConfirm(true);
+      }
+      
+      // Prevent Alt+Left (back), Alt+Right (forward)
+      if (e.altKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        e.preventDefault();
+        setShowLogoutConfirm(true);
+      }
+    };
+
+    // Push initial state to history
+    window.history.pushState(null, '', window.location.href);
+
+    // Add event listeners
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup function
+    return () => {
+      isNavigating = true;
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  // Logout confirmation functions
+  const handleLogoutConfirm = () => {
+    try {
+      // Clear all tokens and auth data
+      localStorage.removeItem('blogToken');
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userData');
+      
+      // Clear any other stored data
+      sessionStorage.clear();
+      
+      // If you have an AuthContext logout function, call it
+      if (typeof window !== 'undefined' && window.logoutUser) {
+        window.logoutUser();
+      }
+      
+      // Redirect to login page
+      window.location.replace('/AdminLogin');
+      
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Force redirect even if there's an error
+      window.location.replace('/AdminLogin');
+    }
+  };
+
+  const handleStayOnPage = () => {
+    setShowLogoutConfirm(false);
+  };
 
   // Calculate stats for all blogs
   const calculateBlogStats = (blogsData) => {
@@ -523,6 +606,48 @@ const BlogsAdminPanel = () => {
   return (
     <ProtectedPage requiredRoles={['admin', 'superadmin', 'user']} pageTitle="Blog Management">
       <div className="space-y-4 sm:space-y-6 p-4 sm:p-0">
+        {/* Logout Confirmation Modal */}
+        {showLogoutConfirm && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[60] p-4">
+            <div className="bg-white rounded-xl max-w-md w-full shadow-2xl border border-gray-200">
+              <div className="p-6 text-center">
+                {/* Warning Icon */}
+                <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
+                  <FaExclamationTriangle className="h-8 w-8 text-red-600" />
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Leave Admin Panel?
+                </h3>
+                
+                {/* Message */}
+                <p className="text-gray-600 mb-6 text-sm">
+                  You're trying to navigate away from the admin panel. For security reasons, 
+                  you must logout to leave this page. Do you want to logout now?
+                </p>
+                
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <button
+                    onClick={handleStayOnPage}
+                    className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors font-medium text-sm"
+                  >
+                    Stay on Page
+                  </button>
+                  <button
+                    onClick={handleLogoutConfirm}
+                    className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-medium text-sm flex items-center justify-center gap-2"
+                  >
+                    <FaUser className="w-4 h-4" />
+                    Logout & Leave
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Create/Edit Blog Post Modal */}
         {showCreateModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
@@ -585,6 +710,16 @@ const BlogsAdminPanel = () => {
                   }
                 </p>
               </div>
+              
+              {/* Add Logout Button */}
+              <button
+                onClick={() => setShowLogoutConfirm(true)}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors text-sm font-medium mt-3 sm:mt-0 self-center sm:self-auto"
+              >
+                <FaUser />
+                <span className="hidden sm:inline">Logout</span>
+                <span className="sm:hidden">Exit</span>
+              </button>
             </div>
             
             {/* Enhanced Stats Cards */}

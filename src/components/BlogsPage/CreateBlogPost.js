@@ -317,7 +317,7 @@ export default function CreateBlogPost({
             urlSlug: '',
             content: '',
             category: '',
-            subcategory: 'Article',
+            subcategory: 'Blogs',
             authorName: '',
             status: 'None',
             blogImage: null
@@ -347,18 +347,8 @@ export default function CreateBlogPost({
   };
 
   const categories = [
-    'Technology',
-    'Business',
-    'Marketing',
-    'Development',
-    'Design',
-    'Analytics',
-    'AI/ML',
-    'Cloud Computing',
-    'Lifestyle',
-    'Health',
-    'Travel',
-    'Food'
+    "SAP", "IT", "AI", "Data Science", 
+    "Data Analytics", "HR", "Digital Marketing", "Cloud Computing"
   ];
 
   if (isLoading) {

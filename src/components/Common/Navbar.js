@@ -18,7 +18,16 @@ const Navbar = ({ expand, className, children, ref }) => {
   const pathname = usePathname();
   
   // Hide navbar on blog admin pages
-  if (pathname && pathname.startsWith('/blog-admin')) {
+  if (
+    pathname &&
+    (pathname.startsWith('/blog-admin') ||
+      pathname === '/AdminLogin' ||
+      pathname.startsWith('/AdminLogin/') ||
+      pathname === '/superadmin/dashboard' ||
+      pathname.startsWith('/superadmin') ||
+      pathname === '/dashboard' ||
+      pathname.startsWith('/dashboard/'))
+  ) {
     return null;
   }
   
