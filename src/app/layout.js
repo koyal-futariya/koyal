@@ -106,7 +106,7 @@ export default function RootLayout({ children }) {
         <Footer />
  
         {/* Global floating trigger */}
-        <FloatingFlag />
+        {/* <FloatingFlag /> */}
  
         {/* Facebook Pixel */}
         <Script
