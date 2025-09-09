@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { FaBookOpen, FaWhatsapp, FaStar, FaPhoneAlt, FaFileAlt } from "react-icons/fa";
-import ChatbotIcon from "@/components/ChatbotIcon";
 import styles from "@/styles/BottomMenu.module.css";
 import { usePathname } from "next/navigation";
 
@@ -31,23 +30,8 @@ const BottomMenu = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Handle Tawk chat toggle
-  const toggleChat = useCallback(() => {
-    if (typeof window !== "undefined" && window.Tawk_API) {
-      window.Tawk_API.toggle();
-    }
-  }, []);
-
-  // Menu items configuration
+  // Menu items configuration (removed chatbot item)
   const menuItems = [
-    {
-      id: "chatbot",
-      href: "#", // Changed from the Tawk.to embed URL to "#"
-      icon: <ChatbotIcon onClick={toggleChat} />,
-      label: "Chat",
-      color: "#7B61FF",
-      isChatbot: true // Add this flag to identify the chatbot item
-    },
     {
       id: "whatsapp",
       href: "https://wa.me/+919004002958",
@@ -91,12 +75,6 @@ const BottomMenu = () => {
               key={item.id}
               className={`${styles.menuItem} ${activeItem === item.id ? styles.active : ''}`}
               onClick={(e) => {
-                // For chatbot, prevent default navigation and let the ChatbotIcon handle the click
-                if (item.isChatbot) {
-                  e.preventDefault();
-                  return; // Let the ChatbotIcon's onClick handle it
-                }
-                
                 if (item.onClick) {
                   e.preventDefault();
                   item.onClick();

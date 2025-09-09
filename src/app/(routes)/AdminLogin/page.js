@@ -112,7 +112,7 @@ const AdminLogin = () => {
         if (role === "SuperAdmin" || role === "Admin") {
           router.push("/superadmin/dashboard");
         } else {
-          router.push("/");
+          router.push("/dashboard");
         }
       }
     }
@@ -151,8 +151,10 @@ const AdminLogin = () => {
 
         if (data.role === "SuperAdmin" || data.role === "Admin") {
           router.push("/superadmin/dashboard");
+        } else if (targetPage.startsWith("http")) {
+          window.location.href = targetPage;
         } else {
-          router.push("/");
+          router.push("/dashboard");
         }
       } else {
         setError(data.message || "Admin login failed");
@@ -162,8 +164,8 @@ const AdminLogin = () => {
       setError("Server error. Please try again.");
     }
 
-    setDashboardLoading(false);
   };
+
 
   // Dedicated Blogs login handler
   async function handleSubmitToBlogs(e) {
@@ -186,13 +188,17 @@ const AdminLogin = () => {
   }
 
   return (
+    <>
+    
+    
     <section
       className="flex justify-center items-center min-h-screen w-full bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url('https://img.freepik.com/premium-vector/background-night-mountains-whimsical-cartoon-illustration-night-mountains_198565-8267.jpg')`,
       }}
     >
-      <div className="relative w-full max-w-sm md:max-w-md bg-transparent backdrop-filter backdrop-blur-md border border-wheat text-yellow-100 flex flex-col justify-center items-center text-center rounded-3xl p-6 md:p-8 min-h-[400px]">
+
+ <div className="relative w-full max-w-sm md:max-w-md bg-transparent backdrop-filter backdrop-blur-md border border-wheat text-yellow-100 flex flex-col justify-center items-center text-center rounded-3xl p-6 md:p-8 min-h-[400px]">
         <form onSubmit={(e) => handleSubmit(e, "/")} className="w-full">
           {/* Heading */}
           <h2 className="text-2xl font-bold text-center mb-6 text-yellow-100 text-shadow-sm">
@@ -306,6 +312,7 @@ const AdminLogin = () => {
         </form>
       </div>
     </section>
+    </>
   );
 };
 

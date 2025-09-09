@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, CheckCircle, XCircle, Brain, Zap, Trophy } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { BackgroundBeamsWithCollision } from '"@/components/ui/background-beams-with-collision';
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import Link from "next/link";
 const QuizCompo = ({ onReady }) => {
   const quizQuestions = [
@@ -158,7 +158,7 @@ const QuizCompo = ({ onReady }) => {
 
   return (
     <BackgroundBeamsWithCollision className="min-h-[520px] md:min-h-screen relative overflow-hidden">
-    <div className="container mx-auto px-4 sm:px-2 md:px-8 lg:px-12 py-4 sm:py-8 md:py-16 min-h-[520px] md:min-h-[80vh] flex flex-col justify-center">
+    <div className="container mx-auto px-4 sm:px-2 md:px-8 lg:px-12 py-4 sm:py-8 md:py-16 pt-8 sm:pt-12 lg:pt-16 min-h-[520px] md:min-h-[80vh] flex flex-col justify-center">
       {/* Progress Bar */}
       <div className="h-1 bg-gray-200 relative overflow-hidden flex-shrink-0">
         <div 

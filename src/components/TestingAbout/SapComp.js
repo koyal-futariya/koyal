@@ -311,7 +311,7 @@ const SAPAdoptionRings = () => {
 
   return (
     <div 
-      className="min-h-[700px] max-w-[1800px] mx-auto p-4 md:p-8 relative overflow-hidden"
+      className="min-h-screen p-4 md:p-8 relative overflow-hidden"
       style={{
         background: isMobile ? '#ffffff' : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
       }}

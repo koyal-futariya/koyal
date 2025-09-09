@@ -1,20 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Organized clients by tier for better visual hierarchy
 const premiumClients = [
+  "Accenture.avif",
+  "wipro.avif",
+  "infosys.avif",
+  "google.avif",
+  "microsoft.avif",
+  "cognizant.avif",
+  "tcs.avif",
+  "amdocs.avif",
   "ibm.avif",
   "paytm.avif",
   "swiggy.avif",
   "dream11.avif",
   "hdfc.avif",
-  "godrej.avif",
+  "God.avif",
   "bharatpe.avif",
   "pizza-hut.avif",
   "cummins.avif",
-  "BAJAJ.avif",
 ];
 
 const enterpriseClients = [
@@ -22,11 +29,12 @@ const enterpriseClients = [
   "volkswagon.avif",
   "jindal.avif",
   "john-deere.avif",
-  "BOSTON.avif",
+  "bostonbyte.avif",
   "sharechat.avif",
   "leapfinance.avif",
   "moneytap.avif",
   "whitehat.avif",
+  "BAJAJ.avif",
 ];
 
 const growingClients = [
@@ -56,10 +64,7 @@ const MarqueeRow = ({
   direction = "left",
   speed = "normal",
   shuffle = false,
-  size = "normal",
 }) => {
-  // Hydration-safe shuffling: render deterministic order on the server,
-  // then shuffle after mount on the client to avoid SSR/CSR mismatch
   const [logosToUse, setLogosToUse] = useState(logos);
 
   useEffect(() => {
@@ -70,7 +75,6 @@ const MarqueeRow = ({
     }
   }, [logos, shuffle]);
 
-  // Define animation classes
   const getAnimationClass = () => {
     const baseAnimation =
       direction === "right" ? "animate-marquee-reverse" : "animate-marquee";
@@ -83,22 +87,6 @@ const MarqueeRow = ({
     return `${baseAnimation} [animation-duration:${speedMultiplier}]`;
   };
 
-  // Define size dimensions for width and height
-  const getSizeDimensions = () => {
-    switch (size) {
-      case "small":
-        return { width: 80, height: 20 };
-      case "normal":
-        return { width: 90, height: 40 };
-      case "large":
-        return { width: 100, height: 60 };
-      default:
-        return { width: 120, height: 60 };
-    }
-  };
-
-  const dimensions = getSizeDimensions();
-
   return (
     <div className="relative overflow-hidden">
       <div
@@ -107,13 +95,28 @@ const MarqueeRow = ({
       >
         {/* First set */}
         {logosToUse.map((logo, index) => (
-          <div key={`first-${index}`} className="flex-shrink-0 group">
+          <div 
+            key={`first-${index}`} 
+            className="flex-shrink-0 group"
+            style={{
+              width: '120px',
+              height: '100px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'white',
+              borderRadius: '12px',
+              padding: '4px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              transition: 'transform 0.3s ease'
+            }}
+          >
             <Image
               src={`/Ourclients/${logo}`}
               alt={`Client logo`}
-              width={dimensions.width}
-              height={dimensions.height}
-              className="object-contain transition-all duration-300 rounded-xl hover:scale-110"
+              width={140}
+              height={120}
+              className="object-contain max-w-full max-h-full group-hover:scale-110 transition-transform duration-300"
               loading="lazy"
               quality={75}
             />
@@ -122,13 +125,28 @@ const MarqueeRow = ({
 
         {/* Second set for seamless loop */}
         {logosToUse.map((logo, index) => (
-          <div key={`second-${index}`} className="flex-shrink-0 group">
+          <div 
+            key={`second-${index}`} 
+            className="flex-shrink-0 group"
+            style={{
+              width: '120px',
+              height: '100px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'white',
+              borderRadius: '12px',
+              padding: '4px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              transition: 'transform 0.3s ease'
+            }}
+          >
             <Image
               src={`/Ourclients/${logo}`}
               alt={`Client logo`}
-              width={dimensions.width}
-              height={dimensions.height}
-              className="object-contain transition-all duration-300 rounded-xl hover:scale-110"
+              width={120}
+              height={100}
+              className="object-contain max-w-full max-h-full group-hover:scale-110 transition-transform duration-300"
               loading="lazy"
               quality={75}
             />
@@ -188,7 +206,7 @@ const OurClients = () => {
         </div>
 
         {/* Client Marquees */}
-        <div className="space-y-2 sm:space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {/* First Row - Premium Clients */}
           <div className="relative">
             <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-gray-900 to-transparent z-10"></div>
@@ -197,7 +215,6 @@ const OurClients = () => {
               logos={premiumClients}
               direction="left"
               speed="slow"
-              size="large"
               shuffle={true}
             />
           </div>
@@ -210,7 +227,6 @@ const OurClients = () => {
               logos={enterpriseClients}
               direction="right"
               speed="normal"
-              size="normal"
               shuffle={false}
             />
           </div>
@@ -223,7 +239,6 @@ const OurClients = () => {
               logos={growingClients}
               direction="left"
               speed="fast"
-              size="small"
               shuffle={true}
             />
           </div>

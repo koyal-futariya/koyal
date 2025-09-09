@@ -75,13 +75,6 @@ const fetchWithAuth = async (url, options = {}) => {
       throw new Error("Session expired. Please login again.");
     }
 
-    // Handle authorization errors  
-    if (response.status === 403) {
-      console.log('❌ Authorization failed - insufficient permissions');
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || "Access denied. You don't have permission to perform this action.");
-    }
-
     // Handle other client errors
     if (response.status >= 400 && response.status < 500) {
       let errorMessage = `Request failed with status ${response.status}`;
@@ -101,7 +94,6 @@ const fetchWithAuth = async (url, options = {}) => {
         }
       }
       
-      throw new Error(errorMessage);
     }
 
     // Handle server errors

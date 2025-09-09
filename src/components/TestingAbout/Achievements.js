@@ -153,7 +153,7 @@ const AchievementsSection = () => {
 
   return (
     <section 
-      className="py-10 sm:py-16 lg:py-20 overflow-hidden relative max-w-[1800px] mx-auto"
+      className="py-10 sm:py-16 lg:py-20 overflow-hidden relative"
       style={{
         background: isMobile ? '#ffffff' : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
       }}

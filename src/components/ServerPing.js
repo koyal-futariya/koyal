@@ -3,29 +3,42 @@ import { useEffect } from 'react';
 
 export default function ServerPing() {
   useEffect(() => {
-    // Ping main server
-    const pingServer = async () => {
+    // Helper to safely fetch JSON without throwing on HTML/error pages
+    const fetchJsonSafe = async (url, label) => {
+      if (!url || typeof url !== 'string' || url.startsWith('undefined')) {
+        console.warn(`[ServerPing] Skipping ${label}: invalid URL ->`, url);
+        return;
+      }
+
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ping`);
-        const data = await response.json();
-        console.log("Main server status:", data);
-      } catch (error) {
-        console.error("Main server ping failed:", error);
+        const res = await fetch(url);
+        const contentType = res.headers.get('content-type') || '';
+
+        if (!res.ok) {
+          const text = await res.text().catch(() => '');
+          console.warn(`[ServerPing] ${label} responded with ${res.status}. Body preview:`, text.slice(0, 200));
+          return;
+        }
+
+        if (contentType.includes('application/json')) {
+          const data = await res.json();
+          console.log(`[ServerPing] ${label} OK:`, data);
+        } else {
+          const text = await res.text();
+          console.warn(`[ServerPing] ${label} non-JSON response (content-type: ${contentType}). Body preview:`, text.slice(0, 200));
+        }
+      } catch (err) {
+        console.error(`[ServerPing] ${label} request failed:`, err);
       }
     };
 
+    // Ping main server
+    const pingServer = () =>
+      fetchJsonSafe(`${process.env.NEXT_PUBLIC_API_URL}/api/ping`, 'Main server');
+
     // Ping blogs server
-    const pingBlogsServer = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL_BLOG}/api/blogs/ping`
-        );
-        const data = await response.json();
-        console.log("Blogs server status:", data);
-      } catch (error) {
-        console.error("Blogs server ping failed:", error);
-      }
-    };
+    const pingBlogsServer = () =>
+      fetchJsonSafe(`${process.env.NEXT_PUBLIC_API_URL_BLOG}/api/blogs/ping`, 'Blogs server');
 
     // Execute both pings
     pingServer();

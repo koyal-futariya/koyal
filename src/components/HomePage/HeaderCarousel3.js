@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { BackgroundBeamsWithCollision } from '"@/components/ui/background-beams-with-collision';
-import { AnimatedBeamDemo } from './magicui/beam';
-
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import { AnimatedBeamDemo } from "../magicui/beam";
 const CareerMentorsComponent = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [animationState, setAnimationState] = useState('stacked'); // 'stacked', 'expanding', 'complete'

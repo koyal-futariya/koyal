@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, memo } from 'react';
 import LogoCarousel from './LogoCarousel';
-import BackgroundBeamsWithCollision from "@/components/ui/background-beams-with-collision";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 // Memoized company logo component
 const CompanyLogos = memo(() => (
   <div className="mt-6 sm:mt-8 flex justify-center">
@@ -42,6 +42,8 @@ const CareerHeroSlide = () => {
     // Redirect to # (placeholder)
     window.location.href = '#';
   };
+
+ 
 
   return (
     <BackgroundBeamsWithCollision className="min-h-[520px] md:min-h-screen relative overflow-hidden">

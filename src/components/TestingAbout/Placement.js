@@ -262,7 +262,7 @@ const SAPCompassDial = () => {
   };
 
   return (
-    <div className="min-h-[700px] max-w-[1800px] mx-auto text-white p-4 md:p-8 relative">
+    <div className="min-h-screen text-white p-4 md:p-8 relative">
       <BackgroundAnimation />
       {/* Header */}
       <div className="text-center mb-8 relative z-10">

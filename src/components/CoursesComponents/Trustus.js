@@ -12,7 +12,7 @@ const TrustUs = () => {
     "firstcry.avif", "genius.avif", "gns(1).avif", "God.avif", "hdfc.avif",
     "homelane.avif", "Ibmm.avif", "intelliswift.avif", "iss.avif", "jindal.avif",
     "john.avif", "Kelly (1).avif", "Koh.avif", "leapfinance.avif",
-    "moneytap.avif", "monginis.avif", "Na (1).avif"
+    "moneytap.avif", "monginis.avif", "wipro.avif"
   ];
  
  

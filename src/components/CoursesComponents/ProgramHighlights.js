@@ -425,11 +425,9 @@ setTimeout(() => {
               </div>
 
               {/* Logo Container - Appears after all cards animate out */}
-              <div className={`absolute inset-0 flex items-center justify-center ${
+              <div className={`absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-800${
                 instantHideLogo ? '' : 'transition-all duration-500 ease-in-out'
               } ${showLogo ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                <div className="flex flex-col items-center justify-center space-y-4">
-                  <div className="w-[350px] h-[180px] rounded-2xl shadow-xl flex items-center justify-center p-4">
 
                 <Image
                  src="/Navbar/Connecting Logo New.png"  
@@ -439,8 +437,6 @@ setTimeout(() => {
                  />
 
                   </div>
-                </div>
-              </div>
             </div>
           </div>
 

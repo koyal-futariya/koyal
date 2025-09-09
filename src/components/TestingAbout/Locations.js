@@ -267,10 +267,10 @@ const InteractiveMap = ({
 
   return (
     <div
-      className={`relative  bg-gray-900 rounded-2xl overflow-hidden ${className}`}
+      className={`relative bg-gray-900 rounded-2xl overflow-hidden ${className}`}
     >
       {(isLoading || !leafletLoaded) && (
-        <div className="absolute  inset-0 bg-gray-900 flex items-center justify-center z-10">
+        <div className="absolute inset-0 bg-gray-900 flex items-center justify-center z-10">
           <div className="text-center text-white">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mb-2 mx-auto"></div>
             <p className="text-sm">Loading map...</p>
@@ -540,7 +540,7 @@ const OurBranch = () => {
   };
 
   return (
-    <div className="min-h-[700px] relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
       <BackgroundAnimation />
       {/* Background Elements */}
       <div className="absolute inset-0 z-10">
@@ -635,17 +635,7 @@ const OurBranch = () => {
         </div>
 
         {/* Bottom CTA Section */}
-        <div className="mt-8 sm:mt-12 lg:mt-16 text-center">
-          <p className="text-gray-400 text-xs sm:text-sm">
-            <span className="hidden lg:inline">
-              Click on map markers or location cards to explore our offices in
-              detail
-            </span>
-            <span className="lg:hidden">
-              Tap on location boxes or map markers to explore our offices
-            </span>
-          </p>
-        </div>
+        
       </div>
 
       <style jsx>{`

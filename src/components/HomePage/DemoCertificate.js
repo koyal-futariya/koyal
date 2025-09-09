@@ -35,7 +35,7 @@ const DemoCertificate = () => {
         <div className="absolute -top-32 -right-32 w-40 h-40 sm:w-64 sm:h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-2xl opacity-40"></div>
         <div className="absolute -bottom-32 -left-32 w-40 h-40 sm:w-64 sm:h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40"></div>
       </div>
-      
+     
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-10">

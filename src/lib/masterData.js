@@ -272,7 +272,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP FICO CERTIFICATION",
       alt: "sap-fico-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Connecting Dots ERP Certification holds immense value in elevating your expertise and setting you on the path to a successful career as an SAP FICO professional. Our SAP FICO certification program goes beyond theoretical knowledge, combining hands-on practical sessions with real-world scenarios. ",
       description:
@@ -526,7 +526,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP Training Certificate",
       alt: "sap-training-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Connecting Dots SAP Certification Course in {city} is designed to enhance your expertise in SAP systems and set you on the path to a successful career in ERP. Our program goes beyond theoretical learning, offering hands-on practical sessions and real-world scenarios across various SAP modules.",
       description:
@@ -984,7 +984,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP ABAP CERTIFICATION",
       alt: "sap-abap-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Master SAP ABAP (Advanced Business Application Programming) with our Advanced SAP ABAP certification. This program equips you with the skills to develop customized applications on the SAP platform",
       description:
@@ -1435,7 +1435,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP ARIBA CERTIFICATION",
       alt: "sap-ariba-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Connecting Dots ERP Certification holds immense value in elevating your expertise and setting you on the path to a successful career as an SAP Ariba professional. Our SAP Ariba certification program goes beyond theoretical knowledge, combining hands-on practical sessions with real-world scenarios.",
       description:
@@ -1896,7 +1896,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP BASIS CERTIFICATION",
       alt: "sap-basis-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "SAP BASIS is the core technical foundation of SAP systems, and our certification covers all aspects of system administration. Learn to install, configure, and maintain SAP systems, ensuring optimal performance.",
       description:
@@ -2356,7 +2356,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP BW/BI CERTIFICATION",
       alt: "sap-bwbi-certification-from-connecting-dots-erp", // Corrected alt
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "With our SAP BW/BI certification, you'll acquire the skills to work with Business Warehouse and Business Intelligence tools",
       description:
@@ -2812,7 +2812,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP EWM CERTIFICATION",
       alt: "sap-ewm-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Our SAP EWM (Extended Warehouse Management) certification focuses on optimizing warehouse operations.",
       description:
@@ -3275,7 +3275,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP S/4 HANA CERTIFICATION",
       alt: "sap-s/4-hana-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Our SAP S/4 HANA certification Course offers a deep dive into in-memory database technology. Learn how to leverage SAP S/4 HANA to process massive data volumes in real-time and support business-critical applications.",
       description:
@@ -3734,7 +3734,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP HR/HCM CERTIFICATION",
       alt: "sap-hrhcm-certification-from-connecting-dots-erp", // Corrected alt
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Our SAP HR/HCM (Human Capital Management) certification covers all aspects of workforce management. Learn how to handle payroll, time management, recruitment, and employee data, ensuring businesses can manage their workforce effectively.",
       description:
@@ -4191,7 +4191,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP MM CERTIFICATION",
       alt: "sap-mm-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "SAP MM (Materials Management) certification offers in-depth training on procurement and inventory management processes.",
       description:
@@ -4648,7 +4648,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP PM CERTIFICATION",
       alt: "sap-pm-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Our SAP PM (Plant Maintenance) certification trains you to manage the upkeep and maintenance of enterprise equipment.",
       description:
@@ -5104,7 +5104,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP PP CERTIFICATION",
       alt: "sap-pp-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "SAP PP (Production Planning) certification gives you the knowledge to plan and manage manufacturing processes.",
       description:
@@ -5562,7 +5562,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP PS CERTIFICATION",
       alt: "sap-ps-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "SAP PS (Project Systems) certification provides you with the tools to manage projects from start to finish.",
       description:
@@ -6019,7 +6019,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP QM CERTIFICATION",
       alt: "sap-qm-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "With our SAP QM (Quality Management) certification, you'll gain expertise in maintaining quality across production processes. Learn to implement quality control measures, conduct inspections, and ensure product compliance.",
       description:
@@ -6479,7 +6479,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP SCM CERTIFICATION",
       alt: "sap-scm-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "With our SAP SCM (Supply Chain Management) certification, you’ll gain expertise in optimizing end-to-end supply chain processes.",
       description:
@@ -6939,7 +6939,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP SD CERTIFICATION",
       alt: "sap-sd-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Become an expert in sales and distribution with our SAP SD certification. You'll learn to manage sales orders, shipping, billing, and customer relationships, ensuring efficient sales processes.",
       description:
@@ -7398,7 +7398,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SAP SUCCESSFACTOR CERTIFICATION",
       alt: "sap-successfactor-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Our SAP SuccessFactors certification is designed for professionals looking to excel in human resource management in the cloud.",
       description:
@@ -7663,7 +7663,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "IT Training Certificate",
       alt: "software-course-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Connecting Dots Software Certification Course in {city} is designed to provide you with in-depth knowledge and hands-on experience in key software development technologies. Our comprehensive program covers programming languages, development frameworks, and industry best practices, equipping you with the skills to build, test, and deploy software solutions.",
       description:
@@ -8217,7 +8217,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Business Analytics Certificate",
       alt: "business-analytics-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Masters in Business Analytics Certification at Connecting Dots ERP focuses on turning data into actionable business insights.",
       description:
@@ -8735,7 +8735,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Data Analytics Certificate",
       alt: "data-analytics-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Masters in Data Analytics Certification at Connecting Dots ERP offers advanced training in data processing, statistical analysis, and reporting.",
       description:
@@ -9256,7 +9256,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Data Science Certificate",
       alt: "data-science-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Data Science Certification at Connecting Dots ERP is designed to provide in-depth knowledge of data analysis, machine learning, and big data. This program equips you with skills in Python, R, SQL, and data visualization tools.",
       description:
@@ -9786,7 +9786,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Full-Stack Certificate",
       alt: "full-stack-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Full Stack Training Certification provides comprehensive skills in front-end and back-end web development.",
       description:
@@ -10312,7 +10312,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Artificial Intelligence Certificate",
       alt: "artificial-intelligence-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Chat GPT & AI Certification at Connecting Dots ERP offers cutting-edge training in AI-powered conversational systems.",
       description:
@@ -10839,7 +10839,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Java Certificate",
       alt: "java-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The JAVA Certification Course at Connecting Dots ERP is tailored for those looking to master the Java programming language.",
       description:
@@ -11366,7 +11366,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "MERN-Stack Certificate",
       alt: "mern-stack-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The MERN Stack Certification at Connecting Dots ERP provides specialized training in MongoDB, Express.js, React, and Node.js.",
       description:
@@ -11888,7 +11888,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Python Certificate",
       alt: "python-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Python Certification at Connecting Dots ERP equips you with versatile skills in one of the most popular programming languages.",
       description:
@@ -12410,7 +12410,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Salesforce Certificate",
       alt: "salesforce-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Salesforce Training Certification at Connecting Dots ERP is designed to make you proficient in managing and configuring Salesforce CRM.",
       description:
@@ -12933,7 +12933,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "UI/UX Certificate",
       alt: "uiux-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "With the UI/UX Design Certification at Connecting Dots ERP, you will master the principles of user-centered design, from wireframing to usability testing.",
       description:
@@ -13361,7 +13361,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Data Visualization Training Certificate",
       alt: "data-visualization-course-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Learn advance about advance topics and industrial tools with the Certification of Data Visualization Course in {city}. It empowers you to transform complex data into clear, actionable insights. Our program blends theoretical concepts with hands-on training, focusing on popular tools like Tableau, Power BI, and Excel.",
       description:
@@ -13906,7 +13906,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "PowerBI Certificate",
       alt: "power-bi-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Power BI Certification at Connecting Dots ERP trains you in Microsoft's leading business intelligence tool.",
       description:
@@ -14425,7 +14425,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "SQL Certificate",
       alt: "sql-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "At Connecting Dots ERP the SQL Certification covers the fundamentals of database management and querying.",
       description:
@@ -14946,7 +14946,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Tableau Certificate",
       alt: "tableau-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Tableau Certification at Connecting Dots ERP offers in-depth training in data visualization and dashboard creation.",
       description:
@@ -15340,7 +15340,7 @@ export const coursesData = {
     certificate: {
       courseTitle: "Digital Marketing Certificate",
       alt: "digital-marketing-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Digital Marketing Certification at Connecting Dots ERP equips you with the essential skills to excel in the dynamic world of online marketing. Learn to create impactful campaigns, analyze performance metrics, and master strategies across platforms like SEO, social media, and email marketing.",
       description:
@@ -15902,7 +15902,7 @@ modulesData: {
     certificate: {
       courseTitle: "HR Training Certificate",
       alt: "hr-course-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "Master the art of Human resources with HR Certification Course in {city} is designed to equip you with the essential skills and knowledge needed to excel in Human Resources. Our comprehensive program combines theoretical learning with hands-on practical sessions, focusing on real-world HR scenarios.",
       description:
@@ -16295,7 +16295,7 @@ modulesData: {
     certificate: {
       courseTitle: "Core HR Certificate",
       alt: "hr-core-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The Core HR Certification at Connecting Dots ERP focuses on the essentials of human resources, including policies, employee management, and labor laws",
       description:
@@ -16661,7 +16661,7 @@ modulesData: {
     certificate: {
       courseTitle: "HR Generalist Certificate",
       alt: "hr-generalist-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "At Connecting Dots ERP, the HR Generalist Certification covers all key HR functions, from recruitment to payroll management.",
       description:
@@ -17027,7 +17027,7 @@ modulesData: {
     certificate: {
       courseTitle: "HR Analytics Certificate",
       alt: "hr-analytics-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The HR Analytics Certification at Connecting Dots ERP focuses on using data to optimize HR processes. Learn to analyse workforce metrics, improve recruitment strategies, and enhance employee performance.",
       description:
@@ -17391,7 +17391,7 @@ modulesData: {
     certificate: {
       courseTitle: "HR Management Certificate",
       alt: "hr-management-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "The HR Management Certification at Connecting Dots ERP offers advanced training in strategic HR practices, such as workforce planning, talent management, and leadership development.",
       description:
@@ -17860,7 +17860,7 @@ modulesData: {
     certificate: {
       courseTitle: "HR Payroll Certificate",
       alt: "hr-payroll-certification-from-connecting-dots-erp",
-      image: "/Certificate/Certificate-1.avif",
+      image: "/Certificate/Certificate.avif",
       completionText:
         "At Connecting Dots ERP, the HR Payroll Certification teaches you the intricacies of payroll management.",
       description:

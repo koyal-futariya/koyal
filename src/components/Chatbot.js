@@ -10,7 +10,7 @@ const Chatbot = () => {
   const pathname = usePathname();
 
   const toggleChat = useCallback(() => {
-    if (typeof window !== "undefined" && window.Tawk_API) {
+    if (typeof window !== "undefined" && window.Tawk_API && window.Tawk_API.toggle) {
       window.Tawk_API.toggle();
     }
   }, []);
@@ -24,17 +24,28 @@ const Chatbot = () => {
     handleResize(); // Initial check
 
     const hideTawkDefaults = () => {
-      if (window.Tawk_API) {
+      if (window.Tawk_API && typeof window.Tawk_API.hideWidget === 'function') {
         window.Tawk_API.hideWidget();
       }
     };
 
+    // Wait for Tawk.to to be fully loaded using the onLoad callback
     const checkTawkLoaded = setInterval(() => {
-      if (window.Tawk_API) {
-        hideTawkDefaults();
+      if (window.Tawk_API && window.Tawk_API.onLoad) {
+        window.Tawk_API.onLoad = function() {
+          // Hide the default widget once it's fully loaded
+          if (typeof window.Tawk_API.hideWidget === 'function') {
+            window.Tawk_API.hideWidget();
+          }
+        };
         clearInterval(checkTawkLoaded);
       }
-    }, 500);
+    }, 100);
+
+    // Fallback timeout to clear interval
+    setTimeout(() => {
+      clearInterval(checkTawkLoaded);
+    }, 10000);
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -58,8 +69,13 @@ const Chatbot = () => {
         src="https://embed.tawk.to/65d9cf218d261e1b5f64d05b/1hndd28n8"
         strategy="lazyOnload"
         onLoad={() => {
+          // Set up the onLoad callback to hide widget when fully ready
           if (window.Tawk_API) {
-            window.Tawk_API.hideWidget();
+            window.Tawk_API.onLoad = function() {
+              if (typeof window.Tawk_API.hideWidget === 'function') {
+                window.Tawk_API.hideWidget();
+              }
+            };
           }
         }}
       />
