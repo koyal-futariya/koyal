@@ -231,6 +231,23 @@ const PopupForm = ({ onSubmitData }) => {
     return () => clearTimeout(showTimer);
   }, [pathname]);
 
+  // Allow other components to open this popup via a custom window event
+  useEffect(() => {
+    const handleOpenEvent = () => {
+      try {
+        // Remove manual close blocker if present
+        document.body.classList.remove(styles.popupClosedManually);
+      } catch (e) {}
+      setIsVisible(true);
+    };
+
+    // Use a custom event name that's unlikely to collide
+    window.addEventListener("open-popup-form", handleOpenEvent);
+    return () => {
+      window.removeEventListener("open-popup-form", handleOpenEvent);
+    };
+  }, []);
+
   useEffect(() => {
     if (isVisible) {
       document.body.classList.add(styles.noScroll);
@@ -649,19 +666,7 @@ const PopupForm = ({ onSubmitData }) => {
   return (
     <div className={styles.popupFormOverlay} onClick={handleOverlayClick}>
       <div className={styles.popupFormContainer} onClick={handleFormClick}>
-        {/* Video Background */}
-        {/* <video
-          className={styles.videoBackground}
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/bg/bg13.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video> */}
-
-        <div className={styles.videoBackground}></div>
+        {/* Static background handled via CSS (see .popupFormContainer) */}
 
         {/* Enhanced lightning border effect */}
         <div className={styles.lightningBorder}>
@@ -695,216 +700,227 @@ const PopupForm = ({ onSubmitData }) => {
           </svg>
         </button>
 
-        <div className={styles.headerContainer}>
-          <img
-            src="/Navbar/Connecting Logo.avif"
-            alt="Connecting Dots ERP Logo"
-            className={styles.logo}
-          />
-          <h2>Register Now!</h2>
-        </div>
-
-        {statusMessage.text && (
-          <div
-            id="popup-status"
-            className={`${styles.statusMessage} ${styles[statusMessage.type]}`}
-            role={statusMessage.type === "error" ? "alert" : "status"}
-            aria-live="polite"
-          >
-            {statusMessage.text}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} noValidate>
-          <input
-            type="text"
-            placeholder="Name*"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            maxLength="50"
-            disabled={isSubmitting}
-            aria-describedby="popup-status"
-          />
-          <input
-            type="email"
-            placeholder="E-mail*"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={isSubmitting}
-            aria-describedby="popup-status"
-          />
-          <input
-            type="tel"
-            inputMode="numeric"
-            placeholder="Mobile Number*"
-            value={mobile}
-            onChange={(e) => {
-              const value = e.target.value.replace(/\D/g, "");
-              if (value.length <= 10) {
-                setMobile(value);
-              }
-            }}
-            required
-            pattern="\d{10}"
-            maxLength="10"
-            disabled={isSubmitting}
-            aria-describedby="popup-status"
-          />
-
-          {/* Course Select Dropdown */}
-          <select
-            value={course}
-            onChange={(e) => setCourse(e.target.value)}
-            required
-            disabled={isSubmitting}
-            aria-describedby="popup-status"
-            className={styles.courseSelect}
-          >
-            {courseOptions.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-                disabled={option.disabled}
-              >
-                {option.label}
-              </option>
-            ))}
-          </select>
-
-          {/* Enhanced Location Input with Comprehensive Suggestions */}
-          <div className={styles.locationContainer}>
-            <input
-              ref={locationInputRef}
-              type="text"
-              placeholder={
-                isLoadingCities ? "Loading locations..." : "Add your Location*"
-              }
-              value={location}
-              onChange={handleLocationChange}
-              onKeyDown={handleLocationKeyDown}
-              onFocus={() => {
-                if (location.length > 0 && filteredSuggestions.length > 0) {
-                  setShowSuggestions(true);
-                }
-              }}
-              required
-              maxLength="100"
-              disabled={isSubmitting || isLoadingCities}
-              aria-describedby="popup-status"
-              autoComplete="off"
+        <div className={styles.popupContent}>
+          <div className={styles.leftPane} aria-hidden="true">
+            <img
+              src="https://res.cloudinary.com/dujw4np0d/image/upload/v1758084084/Artboard_1_copy_4GANPATI__hea_1_bnhcs1.avif"
+              alt="Learning with Connecting Dots"
+              className={styles.sideImage}
             />
+          </div>
+          <div className={styles.rightPane}>
+            <div >
+              <img
+                src="/logo.avif"
+                alt="Connecting Dots ERP Logo"
+                
+              />  
+             <h2 className="text-blue-600 font-bold text-center">Register Now!</h2>
+             </div>
 
-            {/* Loading indicator for cities */}
-            {isLoadingCities && (
-              <div className={styles.loadingIndicator}>
-                <span className={styles.loadingSpinner}></span>
+            {statusMessage.text && (
+              <div
+                id="popup-status"
+                className={`${styles.statusMessage} ${styles[statusMessage.type]}`}
+                role={statusMessage.type === "error" ? "alert" : "status"}
+                aria-live="polite"
+              >
+                {statusMessage.text}
               </div>
             )}
 
-            {/* Enhanced Suggestions Dropdown */}
-            {showSuggestions &&
-              filteredSuggestions.length > 0 &&
-              !isLoadingCities && (
-                <div
-                  ref={suggestionsRef}
-                  className={styles.suggestionsDropdown}
-                >
-                  {filteredSuggestions.slice(0, 10).map((suggestion, index) => {
-                    // Determine the type of location for better icons
-                    const isInternational =
-                      suggestion.includes(", US") ||
-                      suggestion.includes(", UK") ||
-                      suggestion.includes(", CA") ||
-                      suggestion.includes(", AU") ||
-                      suggestion.includes(", DE") ||
-                      suggestion.includes(", FR") ||
-                      suggestion.includes(", SG") ||
-                      suggestion.includes(", AE") ||
-                      suggestion.includes(", JP");
-                    const isSpecial = [
-                      "Remote",
-                      "Work from Home",
-                      "Multiple Locations",
-                      "Willing to Relocate",
-                    ].includes(suggestion);
-
-                    return (
-                      <div
-                        key={`${suggestion}-${index}`}
-                        className={`${styles.suggestionItem} ${
-                          index === activeSuggestion
-                            ? styles.suggestionActive
-                            : ""
-                        }`}
-                        onClick={() => handleSuggestionClick(suggestion)}
-                        onMouseEnter={() => setActiveSuggestion(index)}
-                      >
-                        <span className={styles.suggestionIcon}>
-                          {isSpecial ? "💼" : isInternational ? "🌍" : "📍"}
-                        </span>
-                        <span className={styles.suggestionText}>
-                          {suggestion}
-                        </span>
-                      </div>
-                    );
-                  })}
-                  {filteredSuggestions.length > 10 && (
-                    <div className={styles.suggestionMore}>
-                      +{filteredSuggestions.length - 10} more locations...
-                    </div>
-                  )}
-                  {filteredSuggestions.length === 0 && location.length > 0 && (
-                    <div className={styles.suggestionEmpty}>
-                      No suggestions found. You can still type your custom
-                      location.
-                    </div>
-                  )}
-                </div>
-              )}
-          </div>
-
-          <div className={styles.termsCheckbox}>
-            <span>
+            <form onSubmit={handleSubmit} noValidate>
               <input
-                type="checkbox"
-                id="popup-terms"
-                checked={isChecked}
-                onChange={(e) => setIsChecked(e.target.checked)}
+                type="text"
+                placeholder="Name*"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                maxLength="50"
+                disabled={isSubmitting}
+                aria-describedby="popup-status"
+              />
+              <input
+                type="email"
+                placeholder="E-mail*"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isSubmitting}
                 aria-describedby="popup-status"
               />
-            </span>
-            <label htmlFor="popup-terms">
-              I hereby accept the{" "}
-              <a href="/terms" target="_blank" rel="noopener noreferrer">
-                terms and conditions
-              </a>{" "}
-              and
-              <a href="/privacy" target="_blank" rel="noopener noreferrer">
-                {" "}
-                privacy policy
-              </a>{" "}
-              of Connecting Dots ERP.
-            </label>
+              <input
+                type="tel"
+                inputMode="numeric"
+                placeholder="Mobile Number*"
+                value={mobile}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "");
+                  if (value.length <= 10) {
+                    setMobile(value);
+                  }
+                }}
+                required
+                pattern="\d{10}"
+                maxLength="10"
+                disabled={isSubmitting}
+                aria-describedby="popup-status"
+              />
+
+              {/* Course Select Dropdown */}
+              <select
+                value={course}
+                onChange={(e) => setCourse(e.target.value)}
+                required
+                disabled={isSubmitting}
+                aria-describedby="popup-status"
+                className={styles.courseSelect}
+              >
+                {courseOptions.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                    disabled={option.disabled}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+
+              {/* Enhanced Location Input with Comprehensive Suggestions */}
+              <div className={styles.locationContainer}>
+                <input
+                  ref={locationInputRef}
+                  type="text"
+                  placeholder={
+                    isLoadingCities ? "Loading locations..." : "Add your Location*"
+                  }
+                  value={location}
+                  onChange={handleLocationChange}
+                  onKeyDown={handleLocationKeyDown}
+                  onFocus={() => {
+                    if (location.length > 0 && filteredSuggestions.length > 0) {
+                      setShowSuggestions(true);
+                    }
+                  }}
+                  required
+                  maxLength="100"
+                  disabled={isSubmitting || isLoadingCities}
+                  aria-describedby="popup-status"
+                  autoComplete="off"
+                />
+
+                {/* Loading indicator for cities */}
+                {isLoadingCities && (
+                  <div className={styles.loadingIndicator}>
+                    <span className={styles.loadingSpinner}></span>
+                  </div>
+                )}
+
+                {/* Enhanced Suggestions Dropdown */}
+                {showSuggestions &&
+                  filteredSuggestions.length > 0 &&
+                  !isLoadingCities && (
+                    <div
+                      ref={suggestionsRef}
+                      className={styles.suggestionsDropdown}
+                    >
+                      {filteredSuggestions.slice(0, 10).map((suggestion, index) => {
+                        // Determine the type of location for better icons
+                        const isInternational =
+                          suggestion.includes(", US") ||
+                          suggestion.includes(", UK") ||
+                          suggestion.includes(", CA") ||
+                          suggestion.includes(", AU") ||
+                          suggestion.includes(", DE") ||
+                          suggestion.includes(", FR") ||
+                          suggestion.includes(", SG") ||
+                          suggestion.includes(", AE") ||
+                          suggestion.includes(", JP");
+                        const isSpecial = [
+                          "Remote",
+                          "Work from Home",
+                          "Multiple Locations",
+                          "Willing to Relocate",
+                        ].includes(suggestion);
+
+                        return (
+                          <div
+                            key={`${suggestion}-${index}`}
+                            className={`${styles.suggestionItem} ${
+                              index === activeSuggestion
+                                ? styles.suggestionActive
+                                : ""
+                            }`}
+                            onClick={() => handleSuggestionClick(suggestion)}
+                            onMouseEnter={() => setActiveSuggestion(index)}
+                          >
+                            <span className={styles.suggestionIcon}>
+                              {isSpecial ? "💼" : isInternational ? "🌍" : "📍"}
+                            </span>
+                            <span className={styles.suggestionText}>
+                              {suggestion}
+                            </span>
+                          </div>
+                        );
+                      })}
+                      {filteredSuggestions.length > 10 && (
+                        <div className={styles.suggestionMore}>
+                          +{filteredSuggestions.length - 10} more locations...
+                        </div>
+                      )}
+                      {filteredSuggestions.length === 0 && location.length > 0 && (
+                        <div className={styles.suggestionEmpty}>
+                          No suggestions found. You can still type your custom
+                          location.
+                        </div>
+                      )}
+                    </div>
+                  )}
+              </div>
+
+              <div className={styles.termsCheckbox}>
+                <span>
+                  <input
+                    type="checkbox"
+                    id="popup-terms"
+                    checked={isChecked}
+                    onChange={(e) => setIsChecked(e.target.checked)}
+                    required
+                    disabled={isSubmitting}
+                    aria-describedby="popup-status"
+                  />
+                </span>
+                <label htmlFor="popup-terms">
+                  I hereby accept the{" "}
+                  <a href="/terms" target="_blank" rel="noopener noreferrer">
+                    terms and conditions
+                  </a>{" "}
+                  and
+                  <a href="/privacy" target="_blank" rel="noopener noreferrer">
+                    {" "}
+                    privacy policy
+                  </a>{" "}
+                  of Connecting Dots ERP.
+                </label>
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting || isLoadingCities}
+                className={isSubmitting ? styles.submitting : ""}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className={styles.buttonText}>Registering</span>
+                    <span className={styles.buttonLoader}></span>
+                  </>
+                ) : (
+                  "Register"
+                )}
+              </button>
+            </form>
           </div>
-          <button
-            type="submit"
-            disabled={isSubmitting || isLoadingCities}
-            className={isSubmitting ? styles.submitting : ""}
-          >
-            {isSubmitting ? (
-              <>
-                <span className={styles.buttonText}>Registering</span>
-                <span className={styles.buttonLoader}></span>
-              </>
-            ) : (
-              "Register"
-            )}
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
